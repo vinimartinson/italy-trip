@@ -1,0 +1,1052 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>De Roma aos Alpes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ---------- Region palettes ---------- */
+:root, [data-theme="night"] {
+  --bg: #1B2433; --bg2: #253247; --ink: #F2E9DC; --muted: rgba(242,233,220,.68);
+  --accent: #E9B97F; --sea: #131A26; --land: #34445C; --land2: #273449; --swiss: #2E3D54;
+  --route: #F7EBDD; --water: #1A2333;
+}
+[data-theme="rome"] {
+  --bg: #6B2A1D; --bg2: #84372A; --ink: #FBEDE0; --muted: rgba(251,237,224,.72);
+  --accent: #F3B782; --sea: #4A1C13; --land: #94493A; --land2: #7B3A2C; --swiss: #874132;
+  --route: #FFF1E2; --water: #5A2418;
+}
+[data-theme="dolo"] {
+  --bg: #1F2D3B; --bg2: #2A3D50; --ink: #EEF3F7; --muted: rgba(238,243,247,.7);
+  --accent: #A9D0EA; --sea: #152029; --land: #3A5068; --land2: #2D3F53; --swiss: #34495F;
+  --route: #F6FAFD; --water: #1A2834;
+}
+[data-theme="lake"] {
+  --bg: #143C37; --bg2: #1D4F48; --ink: #EDF4EA; --muted: rgba(237,244,234,.72);
+  --accent: #C4DEA3; --sea: #0E2C28; --land: #2F665C; --land2: #24544C; --swiss: #2A5D54;
+  --route: #F4FAEF; --water: #123733;
+}
+:root {
+  --serif: "Bodoni Moda", "Bodoni 72", "Bodoni MT", Didot, "Libre Bodoni", Georgia, serif;
+  --sans: "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  --ease: cubic-bezier(.7, 0, .2, 1);
+  --nav-h: 72px;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  overflow: hidden; background: var(--bg); color: var(--ink);
+  font: 400 1.0625rem/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  transition: background-color .9s var(--ease), color .9s var(--ease);
+}
+img { max-width: 100%; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3, p, ol, ul, figure { margin: 0; }
+
+/* ---------- Deck + slides ---------- */
+.deck { position: fixed; inset: 0; touch-action: pan-y; }
+.slide {
+  position: absolute; inset: 0; overflow: hidden;
+  background: transparent; color: var(--ink);
+  opacity: 0; visibility: hidden; transform: translateX(5%);
+  transition: opacity .6s var(--ease), transform .9s var(--ease), visibility 0s linear .9s;
+}
+.slide.is-before { transform: translateX(-5%); }
+.slide.is-active {
+  opacity: 1; visibility: visible; transform: none;
+  transition: opacity .7s var(--ease) .1s, transform .9s var(--ease), visibility 0s;
+}
+
+/* ---------- Image with fallback ---------- */
+.shot { position: relative; overflow: hidden; background: var(--bg2); }
+.shot .ph {
+  position: absolute; inset: 0; display: grid; place-items: center; padding: 1.5rem; text-align: center;
+  background:
+    radial-gradient(120% 80% at 20% 10%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 60%),
+    linear-gradient(160deg, var(--bg2), var(--sea));
+  font: italic 500 clamp(1.8rem, 5vw, 3.6rem)/1 var(--serif); color: var(--ink);
+}
+.shot .ph::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 38%;
+  background: no-repeat bottom/100% 100% url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100' preserveAspectRatio='none'%3E%3Cpath d='M0 100 L0 70 L60 35 L95 58 L150 12 L205 60 L240 42 L300 75 L345 30 L400 62 L400 100Z' fill='%23000' fill-opacity='.18'/%3E%3C/svg%3E");
+}
+.shot img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity .8s ease;
+}
+.shot.loaded img { opacity: 1; }
+.shot.failed img { display: none; }
+.shot figcaption {
+  position: absolute; right: .6rem; top: .5rem; z-index: 2;
+  font-size: .68rem; line-height: 1.2; color: rgba(255,255,255,.82);
+  text-shadow: 0 1px 3px rgba(0,0,0,.6); max-width: 70%; text-align: right;
+}
+.shot.failed figcaption { display: none; }
+.title-slide.is-active .shot img, .closing.is-active .shot img, .slide.is-active .day-media .shot.on img { animation: kb 16s cubic-bezier(.2,.6,.3,1) forwards; }
+@keyframes kb { from { transform: scale(1.09); } to { transform: scale(1); } }
+
+/* ---------- Title slide ---------- */
+.title-slide .strips { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; background: var(--bg); }
+.title-slide .strip { position: relative; }
+.title-slide .strip .shot { position: absolute; inset: 0; }
+.title-slide .strip::after {
+  content: ""; position: absolute; inset: 0; mix-blend-mode: multiply; opacity: .55; pointer-events: none;
+}
+.title-slide .strip:nth-child(1)::after { background: #8A3420; }
+.title-slide .strip:nth-child(2)::after { background: #2A4560; }
+.title-slide .strip:nth-child(3)::after { background: #1F5A50; }
+.title-slide .veil {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(20,10,8,.15) 0%, rgba(20,10,8,.05) 35%, rgba(20,10,8,.78) 100%);
+}
+.title-copy {
+  position: absolute; left: 0; right: 0; bottom: calc(var(--nav-h) + 4vh);
+  padding: 0 clamp(20px, 6vw, 96px); color: #FFF5EA;
+}
+.title-copy .kicker { font: italic 400 clamp(1.1rem, 2vw, 1.5rem)/1.2 var(--serif); opacity: .9; }
+.title-copy h1 {
+  font: 400 clamp(3.4rem, 11.5vw, 10.5rem)/.86 var(--serif); letter-spacing: -.02em;
+  font-variation-settings: "opsz" 96; margin: .15em 0 .2em;
+}
+.title-copy h1 em { font-style: italic; font-weight: 400; display: block; padding-left: .55em; }
+.title-copy .dates { font-size: clamp(1rem, 1.6vw, 1.25rem); font-weight: 500; }
+.title-copy .route {
+  margin-top: 1.1rem; display: flex; flex-wrap: wrap; gap: .2rem .6rem; align-items: baseline;
+  font: 400 clamp(1.05rem, 2.2vw, 1.7rem)/1.3 var(--serif);
+}
+.title-copy .route i { font-style: normal; opacity: .6; font-family: var(--sans); font-size: .8em; }
+.title-copy .hint { margin-top: 1.6rem; font-size: .9rem; opacity: .75; }
+
+/* ---------- Overview slide ---------- */
+.overview {
+  display: grid; grid-template-columns: minmax(300px, 0.8fr) minmax(0, 1.2fr);
+  grid-template-rows: auto 1fr; grid-template-areas: "head map" "body map";
+}
+.ov-head { grid-area: head; padding: clamp(28px, 7vh, 80px) clamp(20px, 4vw, 64px) 1.4rem; display: grid; gap: 1rem; }
+.ov-body { grid-area: body; padding: 0 clamp(20px, 4vw, 64px) calc(var(--nav-h) + 24px); display: flex; flex-direction: column; gap: 1.2rem; overflow-y: auto; min-height: 0; }
+.ov-head h2 { font: 400 clamp(2.6rem, 5.4vw, 4.8rem)/.95 var(--serif); letter-spacing: -.015em; }
+.ov-head .lede { color: var(--muted); max-width: 30ch; font-size: 1.1rem; }
+.legend { display: flex; gap: 1.4rem; flex-wrap: wrap; font-size: .95rem; }
+.legend span { display: inline-flex; align-items: center; gap: .55rem; }
+.legend svg { width: 44px; height: 12px; }
+.legs { list-style: none; padding: 0; display: grid; gap: .1rem; }
+.leg-btn {
+  width: 100%; display: grid; grid-template-columns: 1.8rem 1fr auto; gap: .6rem; align-items: baseline; text-align: left;
+  padding: .42rem .5rem; border: 0; border-radius: 8px; background: none; cursor: pointer;
+  transition: background-color .3s, color .3s, opacity .3s; color: var(--muted); opacity: .75;
+}
+.leg-btn:hover { background: color-mix(in srgb, var(--ink) 6%, transparent); }
+.leg-btn b { font: italic 500 1.05rem/1 var(--serif); color: var(--accent); }
+.leg-btn .t { font-size: .88rem; white-space: nowrap; }
+.legs li.done .leg-btn { color: var(--ink); opacity: 1; }
+.legs li.on .leg-btn { background: color-mix(in srgb, var(--ink) 11%, transparent); color: var(--ink); opacity: 1; }
+.ov-hint { font: italic 400 1.15rem/1.35 var(--serif); color: var(--accent); }
+.replay {
+  align-self: flex-start; background: none; border: 1px solid color-mix(in srgb, var(--ink) 35%, transparent);
+  padding: .5rem 1rem; border-radius: 999px; cursor: pointer; font-size: .92rem;
+}
+.replay:hover { border-color: var(--ink); }
+.ov-map { grid-area: map; position: relative; margin: 2vh 2vw calc(var(--nav-h) + 8px) 0; min-height: 0; border-radius: 16px; overflow: hidden; background: var(--sea); }
+.mapbox { position: absolute; inset: 0; }
+.mapbox svg { width: 100%; height: 100%; display: block; }
+
+/* ---------- Day slide ---------- */
+.day { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); }
+.day-media { position: relative; overflow: hidden; background: var(--bg2); }
+.day-media .shot { position: absolute; inset: 0; opacity: 0; transition: opacity 1.1s ease; }
+.day-media .shot.on { opacity: 1; }
+.gallery { cursor: pointer; }
+.gdots { position: absolute; left: .7rem; top: .6rem; z-index: 3; display: flex; gap: 2px; }
+.gdot { width: 26px; height: 26px; border: 0; padding: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+.gdot::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.5); box-shadow: 0 0 4px rgba(0,0,0,.45); transition: background-color .3s, transform .3s; }
+.gdot.on::before { background: #fff; transform: scale(1.25); }
+.day-info {
+  display: flex; flex-direction: column; gap: clamp(.8rem, 2vh, 1.4rem);
+  padding: clamp(20px, 5vh, 56px) clamp(20px, 4vw, 60px) calc(var(--nav-h) + 16px);
+  min-height: 0; overflow-y: auto;
+}
+.day-head { display: grid; grid-template-columns: auto 1fr; column-gap: 1.1rem; align-items: end; }
+.day-num {
+  grid-row: span 2; font: 400 clamp(5rem, 10vw, 9rem)/.78 var(--serif);
+  font-variation-settings: "opsz" 96; letter-spacing: -.04em; color: var(--accent);
+}
+.day-week { font: italic 400 clamp(1.05rem, 1.6vw, 1.35rem)/1.15 var(--serif); }
+.day-count { font-size: .85rem; color: var(--muted); align-self: start; padding-top: .2rem; }
+.day-place { font: 500 clamp(2.1rem, 4vw, 3.6rem)/1 var(--serif); letter-spacing: -.01em; margin-top: .9rem; }
+.day-sub { color: var(--muted); font-size: 1.08rem; margin-top: .35rem; max-width: 40ch; }
+
+.timeline { list-style: none; padding: 0; position: relative; }
+.timeline::before {
+  content: ""; position: absolute; left: 4.6rem; top: .7rem; bottom: .7rem; width: 1px;
+  background: color-mix(in srgb, var(--ink) 28%, transparent);
+}
+.timeline li { display: grid; grid-template-columns: 4.1rem 1fr; gap: 1.1rem; padding: .32rem 0; position: relative; }
+.timeline li::before {
+  content: ""; position: absolute; left: calc(4.6rem - 4px); top: .78rem; width: 9px; height: 9px;
+  border-radius: 50%; background: var(--bg); border: 1.5px solid var(--accent);
+}
+.timeline time {
+  font: italic 500 1.12rem/1.35 var(--serif); color: var(--accent); text-align: right;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.timeline span { line-height: 1.4; padding-left: .2rem; }
+.timeline .em { font-weight: 600; }
+
+.facts { display: flex; flex-wrap: wrap; gap: .5rem; }
+.facts span {
+  display: inline-flex; align-items: center; gap: .45rem; font-size: .88rem;
+  padding: .3rem .75rem; border-radius: 999px; background: color-mix(in srgb, var(--ink) 9%, transparent);
+}
+.facts svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+
+.minimap { flex: 1 1 200px; min-height: 180px; position: relative; border-radius: 14px; overflow: hidden; background: var(--sea); }
+.minimap figcaption {
+  position: absolute; left: .8rem; top: .6rem; font-size: .8rem; color: var(--muted);
+  background: color-mix(in srgb, var(--sea) 70%, transparent); padding: .15rem .5rem; border-radius: 6px;
+}
+
+/* ---------- Practical slide ---------- */
+.practical { overflow-y: auto; }
+.pr-wrap { padding: clamp(28px, 6vh, 72px) clamp(20px, 5vw, 80px) calc(var(--nav-h) + 32px); max-width: 1400px; margin: 0 auto; }
+.pr-wrap h2 { font: 400 clamp(2.6rem, 5.4vw, 4.8rem)/.95 var(--serif); letter-spacing: -.015em; }
+.pr-wrap .lede { color: var(--muted); font-size: 1.1rem; margin-top: .6rem; }
+.climate { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3px; margin: 2rem 0 2.2rem; border-radius: 14px; overflow: hidden; }
+.climate div { padding: 1rem 1.1rem; }
+.climate div:nth-child(1) { background: #7E3324; color: #FBEDE0; }
+.climate div:nth-child(2) { background: #2A3D50; color: #EEF3F7; }
+.climate div:nth-child(3) { background: #1D4F48; color: #EDF4EA; }
+.climate div:nth-child(4) { background: var(--bg2); }
+.climate b { display: block; font: 400 clamp(1.6rem, 2.6vw, 2.2rem)/1.05 var(--serif); font-variant-numeric: lining-nums; }
+.climate small { font-size: .88rem; opacity: .82; }
+.pr-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 3rem); }
+.pr-cols h3 { font: italic 500 1.5rem/1.1 var(--serif); color: var(--accent); margin-bottom: .9rem; }
+.pr-cols ul { list-style: none; padding: 0; display: grid; gap: .55rem; }
+.checks li { display: grid; grid-template-columns: 1.3rem 1fr; gap: .5rem; }
+.checks li::before { content: ""; width: .8rem; height: .45rem; margin-top: .42rem; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(-45deg); }
+.times li { display: grid; grid-template-columns: 1fr auto; gap: .8rem; padding-bottom: .5rem; border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
+.times li span { display: inline-flex; align-items: center; gap: .55rem; }
+.times svg { width: 26px; height: 10px; flex: none; }
+.times b { font: italic 500 1.05rem/1.4 var(--serif); font-variant-numeric: lining-nums; white-space: nowrap; }
+.pack li { padding-left: 1rem; position: relative; }
+.pack li::before { content: ""; position: absolute; left: 0; top: .62rem; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+
+/* ---------- Closing ---------- */
+.closing .shot { position: absolute; inset: 0; }
+.closing .veil { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(40,14,8,.35), rgba(40,14,8,.85) 75%); }
+.cl-copy {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center;
+  padding: 4vh clamp(20px, 7vw, 110px) calc(var(--nav-h) + 4vh); color: #FFF3E6; overflow-y: auto;
+}
+.cl-copy h2 { font: italic 400 clamp(3.6rem, 13vw, 11rem)/.9 var(--serif); letter-spacing: -.02em; font-variation-settings: "opsz" 96; }
+.cl-copy p { font-size: clamp(1.1rem, 2vw, 1.45rem); max-width: 34ch; margin-top: 1.2rem; }
+.cl-copy .again {
+  margin-top: 2rem; align-self: flex-start; cursor: pointer; border: 0; border-radius: 999px;
+  background: #FFF3E6; color: #5A2116; padding: .75rem 1.4rem; font-weight: 600;
+}
+
+/* ---------- Navigation ---------- */
+.nav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: clamp(.6rem, 2vw, 1.4rem);
+  padding: 10px clamp(12px, 3vw, 32px) calc(10px + env(safe-area-inset-bottom, 0px));
+  pointer-events: none;
+}
+.nav > * { pointer-events: auto; }
+.nav-btn {
+  width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+  border: 1px solid rgba(255,255,255,.28); background: rgba(10,10,14,.32);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: #fff;
+  transition: background-color .2s, opacity .2s, transform .15s;
+}
+.nav-btn:hover { background: rgba(10,10,14,.5); }
+.nav-btn:active { transform: scale(.94); }
+.nav-btn[disabled] { opacity: .3; cursor: default; }
+.nav-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.progress { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.progress-label {
+  font-size: .82rem; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.55); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  display: flex; justify-content: space-between; gap: 1rem;
+}
+.progress-label .n { font-variant-numeric: tabular-nums; opacity: .8; }
+.segs { display: flex; gap: 4px; }
+.seg {
+  flex: 1; height: 16px; padding: 6px 0; border: 0; background: none; cursor: pointer; position: relative;
+}
+.seg::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 4px; border-radius: 2px;
+  background: var(--c); opacity: .35; transition: opacity .3s, transform .3s;
+}
+.seg.done::before { opacity: .85; }
+.seg.cur::before { opacity: 1; transform: scaleY(1.6); box-shadow: 0 0 0 1px rgba(255,255,255,.6); }
+
+/* ---------- Map SVG styling ---------- */
+.map text { font-family: var(--sans); }
+.map .country { font-family: var(--serif); font-style: italic; fill: var(--ink); opacity: .32; }
+.map .sea-label { font-family: var(--serif); font-style: italic; fill: var(--ink); opacity: .3; }
+.map .stop circle { fill: var(--bg); stroke: var(--ink); transition: opacity .4s, fill .4s; }
+.map .stop text { fill: var(--ink); paint-order: stroke; stroke: var(--sea); stroke-linejoin: round; font-weight: 600; }
+.map .stop { opacity: .45; transition: opacity .5s; }
+.map .stop.lit { opacity: 1; }
+.map .stop.lit circle { fill: var(--accent); }
+.map .stop.minor text { font-weight: 500; }
+.map .veh { transition: opacity .3s; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  :root { --nav-h: 76px; }
+  body { font-size: 1rem; }
+  .overview, .day { display: block; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .ov-head { padding-bottom: 1rem; }
+  .ov-map { height: min(96vw, 60svh); margin: 0 16px 1.2rem; }
+  .ov-body { overflow: visible; }
+  .day-media { height: 42svh; }
+  .day-info { overflow: visible; padding-top: 22px; }
+  .day-num { font-size: clamp(4.6rem, 22vw, 6.5rem); }
+  .minimap { flex: none; aspect-ratio: 4 / 3; min-height: 0; }
+  .timeline::before { left: 3.9rem; }
+  .timeline li { grid-template-columns: 3.4rem 1fr; gap: 1rem; }
+  .timeline li::before { left: calc(3.9rem - 4px); }
+  .climate { grid-template-columns: 1fr 1fr; }
+  .pr-cols { grid-template-columns: 1fr; }
+  .title-copy .hint { display: none; }
+  .nav::before {
+    content: ""; position: absolute; inset: -28px 0 0; z-index: -1; pointer-events: none;
+    background: linear-gradient(180deg, transparent, var(--bg) 45%);
+    transition: background .9s var(--ease);
+  }
+}
+@media (max-height: 760px) and (min-width: 861px) {
+  .day-num { font-size: clamp(4rem, 8vw, 6.5rem); }
+  .day-place { margin-top: .4rem; font-size: clamp(1.9rem, 3.2vw, 2.8rem); }
+  .timeline li { padding: .18rem 0; }
+  .day-info { gap: .7rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body, .slide, .slide.is-active, .slide.is-before { transition: opacity .25s linear, visibility 0s; transform: none !important; }
+  .title-slide.is-active .shot img, .closing.is-active .shot img, .slide.is-active .day-media .shot.on img { animation: none; }
+  .shot img { transition: none; }
+}
+</style>
+</head>
+<body data-theme="rome">
+
+<main class="deck" id="deck" aria-live="polite">
+
+  <!-- 1. Title -->
+  <section class="slide title-slide" data-theme="rome" data-label="Início" aria-label="De Roma aos Alpes">
+    <div class="strips">
+      <div class="strip"><figure class="shot kb" data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg/1280px-Colosseum_in_Rome%2C_Italy_-_April_2007.jpg" data-alt="Coliseu iluminado à noite" data-name="Roma"></figure></div>
+      <div class="strip"><figure class="shot kb" data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/1_dolomites_santa_magdalena_2024_val_di_funes.jpg/1280px-1_dolomites_santa_magdalena_2024_val_di_funes.jpg" data-alt="Picos das Dolomitas sobre a Val di Funes" data-name="Dolomitas"></figure></div>
+      <div class="strip"><figure class="shot kb" data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Lakefront_Lugano_2022.jpg/1280px-Lakefront_Lugano_2022.jpg" data-alt="Bancos vermelhos na orla de Lugano" data-name="Lagos"></figure></div>
+    </div>
+    <div class="veil"></div>
+    <div class="title-copy">
+      <p class="kicker">Viagem em família</p>
+      <h1>De Roma <em>aos Alpes</em></h1>
+      <p class="dates">19 a 25 de novembro de 2026</p>
+      <p class="route"><span>Roma</span><i>→</i><span>Dolomitas</span><i>→</i><span>Lugano</span><i>→</i><span>Lago di Como</span><i>→</i><span>Roma</span></p>
+      <p class="hint">Use as setas do teclado, deslize ou toque nos botões para avançar.</p>
+    </div>
+  </section>
+
+  <!-- 2. Overview -->
+  <section class="slide overview" data-theme="night" data-label="O roteiro" aria-label="O roteiro no mapa">
+      <div class="ov-head">
+        <h2>O roteiro</h2>
+        <p class="lede">Sete dias, dois países e quase 2.000 km entre trilhos e estradas de montanha.</p>
+      </div>
+      <div class="ov-map" id="ovMap"></div>
+      <div class="ov-body">
+        <div class="legend">
+          <span><svg viewBox="0 0 44 12" aria-hidden="true"><line x1="2" y1="6" x2="42" y2="6" stroke="var(--accent)" stroke-width="3.2" stroke-linecap="round"/></svg>Trem</span>
+          <span><svg viewBox="0 0 44 12" aria-hidden="true"><line x1="2" y1="6" x2="42" y2="6" stroke="var(--route)" stroke-width="2.6" stroke-dasharray="6 5" stroke-linecap="round"/></svg>Carro</span>
+        </div>
+        <ol class="legs" id="ovLegs"></ol>
+        <p class="ov-hint" id="ovHint" aria-live="polite"></p>
+        <button class="replay" type="button" id="replay">Recomeçar o trajeto</button>
+      </div>
+  </section>
+
+  <!-- Day slides are generated from DAYS below -->
+
+  <!-- Practical -->
+  <section class="slide practical" data-theme="night" data-label="Bom saber" aria-label="Informações práticas">
+    <div class="pr-wrap">
+      <h2>Bom saber</h2>
+      <p class="lede">O essencial para curtir o fim de novembro sem sustos: frio, dias curtos e montanha.</p>
+      <div class="climate">
+        <div><b>7 a 15 °C</b><small>Roma, dias frescos e chuva possível</small></div>
+        <div><b>−5 a 5 °C</b><small>Dolomitas, pode nevar</small></div>
+        <div><b>3 a 10 °C</b><small>Lugano e Como, úmido e frio</small></div>
+        <div><b>16h30</b><small>Já escurece por volta desse horário</small></div>
+      </div>
+      <div class="pr-cols">
+        <div>
+          <h3>Reservado com antecedência</h3>
+          <ul class="checks">
+            <li>Coliseu, Fórum e Palatino, com horário marcado (qui, 13h30)</li>
+            <li>Museus Vaticanos e Capela Sistina (sex, 8h)</li>
+            <li>Trem Roma → Bolzano (sáb de manhã)</li>
+            <li>Carro alugado: retirada em Bolzano, devolução em Milão</li>
+            <li>Trem de alta velocidade Milão → Roma (ter, 15h)</li>
+            <li>Hotéis em Roma, Ortisei e Lugano</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Tempos de viagem</h3>
+          <ul class="times" id="times"></ul>
+        </div>
+        <div>
+          <h3>Na mala</h3>
+          <ul class="pack">
+            <li>Casaco quente e impermeável, com camadas por baixo</li>
+            <li>Gorro, luvas e cachecol para as montanhas</li>
+            <li>Bota com sola antiderrapante para neve e gelo</li>
+            <li>Tênis confortável para as ruas de pedra de Roma</li>
+            <li>Ombros e joelhos cobertos para entrar no Vaticano</li>
+            <li>Guarda-chuva pequeno e óculos de sol (a neve reflete)</li>
+            <li>Carregador portátil: o dia acaba cedo e o celular trabalha muito</li>
+            <li>Adaptador de tomada (a Suíça usa um padrão diferente da Itália)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing -->
+  <section class="slide closing" data-theme="rome" data-label="Arrivederci" aria-label="Encerramento">
+    <figure class="shot kb" data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Colosseum_of_Rome%2C_Italy.jpg/1280px-Colosseum_of_Rome%2C_Italy.jpg" data-alt="Coliseu ao entardecer" data-name="Até breve"></figure>
+    <div class="veil"></div>
+    <div class="cl-copy">
+      <h2>Arrivederci!</h2>
+      <p>Sete dias, dois países, uma família. Agora é só fazer as malas e contar os dias.</p>
+      <button class="again" type="button" id="again">Ver desde o começo</button>
+
+    </div>
+  </section>
+</main>
+
+<nav class="nav" aria-label="Navegação dos slides">
+  <button class="nav-btn" id="prev" type="button" aria-label="Slide anterior">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+  </button>
+  <div class="progress">
+    <div class="progress-label"><span id="plabel"></span><span class="n" id="pnum"></span></div>
+    <div class="segs" id="segs"></div>
+  </div>
+  <button class="nav-btn" id="next" type="button" aria-label="Próximo slide">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
+</nav>
+
+<script>
+(() => {
+"use strict";
+const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)");
+const NS = "http://www.w3.org/2000/svg";
+
+/* =========================================================
+   Geography (lat, lon) — simplified by hand
+   ========================================================= */
+const ITALY = [
+  [43.79,7.53],[44.13,7.67],[44.20,7.20],[44.42,6.88],[44.66,6.96],[44.93,6.72],[45.12,6.63],[45.25,7.13],
+  [45.68,6.88],[45.83,6.87],[45.92,7.04],[45.87,7.17],[45.98,7.55],[45.93,7.87],[46.15,8.10],[46.25,8.10],
+  [46.25,8.45],[46.12,8.60],[46.10,8.72],[46.00,8.80],[45.97,8.86],[45.92,8.92],[45.87,8.98],[45.83,9.03],
+  [45.92,9.07],[46.00,9.05],[46.10,9.13],[46.25,9.25],[46.50,9.33],[46.42,9.45],[46.33,9.52],[46.30,9.70],
+  [46.35,9.98],[46.23,10.15],[46.40,10.10],[46.47,10.03],[46.63,10.15],[46.55,10.30],[46.62,10.45],[46.85,10.47],
+  [46.77,11.00],[47.00,11.51],[47.09,12.18],[46.70,12.45],[46.60,13.00],[46.52,13.71],[46.30,13.40],[46.18,13.65],
+  [45.94,13.62],[45.80,13.60],[45.60,13.83],[45.65,13.77],[45.78,13.53],[45.68,13.38],[45.60,12.88],[45.40,12.35],
+  [45.22,12.28],[44.95,12.53],[44.42,12.28],[44.06,12.57],[43.91,12.91],[43.62,13.52],[43.55,13.62],[42.95,13.88],
+  [42.46,14.21],[42.11,14.71],[42.00,15.00],[41.92,15.50],[41.93,15.88],[41.88,16.18],[41.70,16.05],[41.63,15.92],
+  [41.32,16.29],[41.13,16.87],[40.95,17.30],[40.64,17.94],[40.15,18.49],[39.80,18.36],[40.06,17.99],[40.25,17.89],
+  [40.47,17.23],[40.37,16.85],[39.75,16.50],[39.60,16.62],[39.40,17.15],[39.08,17.13],[38.90,17.10],[38.69,16.55],
+  [38.40,16.40],[38.24,16.26],[37.92,16.06],[38.11,15.65],[38.25,15.72],[38.62,15.83],[38.73,16.16],[38.90,16.20],
+  [39.36,16.03],[39.81,15.79],[40.07,15.63],[40.03,15.28],[40.35,14.99],[40.67,14.77],[40.62,14.48],[40.57,14.33],
+  [40.63,14.38],[40.83,14.25],[40.82,14.10],[41.02,13.95],[41.21,13.57],[41.28,13.25],[41.22,13.05],[41.45,12.62],
+  [41.77,12.22],[42.09,11.80],[42.40,11.10],[42.70,10.95],[42.93,10.50],[43.25,10.55],[43.55,10.30],[43.70,10.27],
+  [43.87,10.24],[44.10,9.83],[44.27,9.40],[44.41,8.93],[44.30,8.48],[44.05,8.22],[43.88,8.03]
+];
+const SICILY = [[37.80,12.43],[38.13,12.50],[38.12,13.36],[38.03,14.00],[38.13,15.00],[38.27,15.65],[37.85,15.29],[37.50,15.09],[37.07,15.30],[36.65,15.08],[36.78,14.50],[37.06,14.25],[37.28,13.58],[37.60,12.60]];
+const SARDINIA = [[40.94,8.22],[41.25,9.17],[41.05,9.55],[40.60,9.65],[40.08,9.73],[39.60,9.60],[39.15,9.55],[39.20,9.10],[38.87,8.65],[39.10,8.40],[39.75,8.45],[40.30,8.38],[40.60,8.17]];
+const CORSICA = [[42.98,9.40],[42.70,9.45],[42.10,9.53],[41.60,9.30],[41.38,9.15],[41.60,8.80],[41.92,8.60],[42.30,8.60],[42.57,8.75],[42.70,9.30]];
+const ELBA = [[42.80,10.10],[42.85,10.45],[42.72,10.42],[42.73,10.10]];
+const SWISS = [
+  [46.20,6.14],[46.40,6.80],[46.12,6.86],[45.92,7.04],[45.87,7.17],[45.98,7.55],[45.93,7.87],[46.15,8.10],[46.25,8.10],
+  [46.25,8.45],[46.12,8.60],[46.10,8.72],[46.00,8.80],[45.97,8.86],[45.92,8.92],[45.87,8.98],[45.83,9.03],[45.92,9.07],
+  [46.00,9.05],[46.10,9.13],[46.25,9.25],[46.50,9.33],[46.42,9.45],[46.33,9.52],[46.30,9.70],[46.35,9.98],[46.23,10.15],
+  [46.40,10.10],[46.47,10.03],[46.63,10.15],[46.55,10.30],[46.62,10.45],[46.85,10.47],[46.95,10.40],[47.05,9.60],
+  [47.50,9.55],[47.68,8.60],[47.58,7.60],[47.40,6.90],[46.95,6.45],[46.60,6.10]
+];
+const NEIGHBORS = [
+  [43.40,4.50],[43.20,5.40],[43.10,6.20],[43.55,6.90],[43.79,7.53],[45.60,13.83],[45.45,13.60],[45.10,13.60],
+  [44.80,13.90],[45.20,14.30],[44.90,14.80],[44.30,15.20],[43.60,15.90],[43.50,16.50],[43.00,17.40],[42.60,18.10],
+  [42.40,18.60],[42.00,19.10],[41.80,19.40],[41.30,19.50],[41.00,21.00],[48.50,21.00],[48.50,4.50]
+];
+const LAKES = {
+  garda:   [[45.44,10.69],[45.47,10.73],[45.57,10.71],[45.76,10.81],[45.88,10.84],[45.80,10.78],[45.60,10.52],[45.46,10.54]],
+  como:    [[45.81,9.08],[45.98,9.26],[46.14,9.37],[45.98,9.26],[45.85,9.39]],
+  lugano:  [[45.97,8.86],[45.99,8.93],[46.00,8.96],[45.98,9.00],[46.04,9.13],[45.98,9.00],[45.90,8.98]],
+  maggiore:[[46.17,8.80],[46.00,8.74],[45.88,8.54],[45.76,8.56]]
+};
+const TIBER = [[41.94,12.466],[41.927,12.469],[41.9195,12.4675],[41.9165,12.4705],[41.9115,12.4745],[41.906,12.474],[41.9035,12.472],[41.9017,12.4663],[41.8995,12.4645],[41.8955,12.4655],[41.8925,12.4705],[41.8905,12.4735],[41.8907,12.4775],[41.8887,12.4795],[41.8845,12.477],[41.8805,12.4735],[41.875,12.468],[41.86,12.47]];
+
+const P = {
+  roma:[41.90,12.50,"Roma"], vaticano:[41.90,12.45,"Vaticano"], bolzano:[46.50,11.35,"Bolzano"],
+  carezza:[46.41,11.57,"Lago di Carezza"], ortisei:[46.57,11.67,"Ortisei"], funes:[46.64,11.72,"Val di Funes"],
+  corvara:[46.55,11.87,"Corvara"], sirmione:[45.49,10.61,"Sirmione"], lugano:[46.00,8.95,"Lugano"],
+  como:[45.81,9.08,"Como"], milano:[45.46,9.19,"Milão"], fiumicino:[41.80,12.25,"Fiumicino"],
+  gardena:[46.55,11.81,"Passo Gardena"], pordoi:[46.488,11.813,"Passo Pordoi"], sella:[46.508,11.758,"Passo Sella"],
+  monti:[41.8955,12.4935,"Monti"], colosseo:[41.8902,12.4922,"Coliseu"], foro:[41.8925,12.4853,"Fórum Romano"],
+  trevi:[41.9009,12.4833,"Fontana di Trevi"], pantheon:[41.8986,12.4769,"Panteão"], navona:[41.8992,12.4731,"Piazza Navona"],
+  musei:[41.9065,12.4536,"Museus Vaticanos"], sanpietro:[41.9022,12.4539,"São Pedro"], prati:[41.9068,12.4625,"Prati"],
+  castel:[41.9031,12.4663,"Castel Sant'Angelo"], campo:[41.8956,12.4722,"Campo de' Fiori"], trastevere:[41.8894,12.4703,"Trastevere"]
+};
+
+const LEGS = {
+  "roma-bolzano":     { mode:"train", from:"roma", to:"bolzano", via:[[43.77,11.25],[44.49,11.34],[45.44,10.99],[46.07,11.12]] },
+  "bolzano-carezza":  { mode:"car", from:"bolzano", to:"carezza", via:[[46.46,11.46]] },
+  "carezza-ortisei":  { mode:"car", from:"carezza", to:"ortisei", via:[[46.49,11.60]] },
+  "ortisei-funes":    { mode:"car", from:"ortisei", to:"funes", via:[[46.62,11.59],[46.65,11.66]] },
+  "funes-gardena":    { mode:"car", from:"funes", to:"gardena", via:[[46.60,11.66],[46.56,11.75]] },
+  "gardena-corvara":  { mode:"car", from:"gardena", to:"corvara", via:[[46.56,11.84]] },
+  "corvara-pordoi":   { mode:"car", from:"corvara", to:"pordoi", via:[[46.52,11.875],[46.495,11.86]] },
+  "pordoi-sella":     { mode:"car", from:"pordoi", to:"sella", via:[[46.495,11.78]] },
+  "sella-ortisei":    { mode:"car", from:"sella", to:"ortisei", via:[[46.55,11.74]] },
+  "ortisei-sirmione": { mode:"car", from:"ortisei", to:"sirmione", via:[[46.53,11.52],[46.44,11.32],[46.07,11.12],[45.70,10.95],[45.53,10.72]] },
+  "sirmione-lugano":  { mode:"car", from:"sirmione", to:"lugano", via:[[45.54,10.22],[45.68,9.67],[45.86,9.04]] },
+  "lugano-como":      { mode:"car", from:"lugano", to:"como", via:[[45.90,9.02]] },
+  "como-milano":      { mode:"car", from:"como", to:"milano", via:[[45.64,9.16]] },
+  "milano-roma":      { mode:"train", from:"milano", to:"roma", via:[[44.80,10.33],[44.45,11.47],[43.73,11.40],[42.72,12.24]] },
+  "roma-fiumicino":   { mode:"train", from:"roma", to:"fiumicino", via:[[41.87,12.46],[41.83,12.36]] },
+  "w-monti-colosseo": { mode:"walk", from:"monti", to:"colosseo", via:[] },
+  "w-colosseo-foro":  { mode:"walk", from:"colosseo", to:"foro", via:[] },
+  "w-foro-trevi":     { mode:"walk", from:"foro", to:"trevi", via:[[41.8965,12.4835]] },
+  "w-trevi-pantheon": { mode:"walk", from:"trevi", to:"pantheon", via:[] },
+  "w-pantheon-navona":{ mode:"walk", from:"pantheon", to:"navona", via:[] },
+  "w-musei-sanpietro":{ mode:"walk", from:"musei", to:"sanpietro", via:[[41.9045,12.4555]] },
+  "w-sanpietro-prati":{ mode:"walk", from:"sanpietro", to:"prati", via:[[41.9045,12.459]] },
+  "w-prati-castel":   { mode:"walk", from:"prati", to:"castel", via:[] },
+  "w-castel-campo":   { mode:"walk", from:"castel", to:"campo", via:[[41.9008,12.4675]] },
+  "w-campo-trastevere":{ mode:"walk", from:"campo", to:"trastevere", via:[[41.8925,12.4705]] }
+};
+const TRIP = ["roma-bolzano","bolzano-carezza","carezza-ortisei","ortisei-funes","funes-gardena","gardena-corvara",
+  "corvara-pordoi","pordoi-sella","sella-ortisei","ortisei-sirmione","sirmione-lugano","lugano-como","como-milano","milano-roma"];
+
+/* =========================================================
+   Projection + path helpers
+   ========================================================= */
+const LON0 = 6, LAT0 = 47.6, KX = 74.3, KY = 100;
+const X = lon => (lon - LON0) * KX;
+const Y = lat => (LAT0 - lat) * KY;
+const pr = ([lat, lon]) => [X(lon), Y(lat)];
+const f = n => Math.round(n * 100) / 100;
+const poly = pts => "M" + pts.map(p => pr(p).map(f).join(",")).join("L") + "Z";
+const line = pts => "M" + pts.map(p => pr(p).map(f).join(",")).join("L");
+function smooth(pts) {
+  const q = pts.map(pr);
+  if (q.length < 3) return "M" + q.map(p => p.map(f).join(",")).join("L");
+  let d = `M${f(q[0][0])},${f(q[0][1])}`;
+  for (let i = 0; i < q.length - 1; i++) {
+    const p0 = q[i - 1] || q[i], p1 = q[i], p2 = q[i + 1], p3 = q[i + 2] || p2;
+    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
+    const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+    d += `C${f(c1[0])},${f(c1[1])} ${f(c2[0])},${f(c2[1])} ${f(p2[0])},${f(p2[1])}`;
+  }
+  return d;
+}
+const legPts = id => { const L = LEGS[id]; return [P[L.from], ...L.via, P[L.to]].map(p => [p[0], p[1]]); };
+const legD = id => smooth(legPts(id));
+const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+/* =========================================================
+   Map builder
+   ========================================================= */
+let mapSeq = 0;
+function buildMap(cfg) {
+  const id = "m" + (++mapSeq);
+  const pad = cfg.pad ?? 0.18;
+  // Base bounds come from the day's legs and stops; the viewBox is widened to the container's shape.
+  let pts = [];
+  (cfg.legs || []).forEach(l => pts.push(...legPts(l)));
+  (cfg.stops || []).forEach(s => pts.push(P[s.k]));
+  if (cfg.bounds) pts = cfg.bounds;
+  const xs = pts.map(p => X(p[1])), ys = pts.map(p => Y(p[0]));
+  let bx1 = Math.min(...xs), bx2 = Math.max(...xs), by1 = Math.min(...ys), by2 = Math.max(...ys);
+  const bw0 = Math.max(bx2 - bx1, 1), bh0 = Math.max(by2 - by1, 1);
+  bx1 -= bw0 * pad; bx2 += bw0 * pad; by1 -= bh0 * pad; by2 += bh0 * pad;
+
+  const host = document.createElement("div");
+  host.className = "mapbox";
+  let el, legEls = [], veh, icons, state = "idle", raf = 0, token = 0, lastSize = "";
+
+  function svgFor(aspect, dispW) {
+    let x1 = bx1, y1 = by1, w = bx2 - bx1, h = by2 - by1;
+    if (w / h < aspect) { const nw = h * aspect; x1 -= (nw - w) / 2; w = nw; }
+    else { const nh = w / aspect; y1 -= (nh - h) / 2; h = nh; }
+    const s = w / dispW;                          // map units per screen pixel
+    const showCountries = s > 0.25;
+    const lw = { coast: .8 * s, train: 3.4 * s, car: 2.6 * s, walk: 3.4 * s };
+    const dash = { train: "none", car: `${f(7 * s)} ${f(5 * s)}`, walk: `${f(.01 * s)} ${f(6.5 * s)}` };
+    const col = { train: "var(--accent)", car: "var(--route)", walk: "var(--accent)" };
+
+    let svg = `<svg class="map" xmlns="${NS}" viewBox="${f(x1)} ${f(y1)} ${f(w)} ${f(h)}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${cfg.label || "Mapa"}">`;
+    svg += `<rect x="-2000" y="-2000" width="6000" height="6000" fill="var(--sea)"/>`;
+    svg += `<path d="${poly(NEIGHBORS)}" fill="var(--land2)"/>`;
+    svg += `<path d="${poly(SWISS)}" fill="var(--swiss)" stroke="var(--ink)" stroke-opacity=".4" stroke-width="${f(.8 * s)}" stroke-dasharray="${f(3 * s)} ${f(2.5 * s)}"/>`;
+    [ITALY, SICILY, SARDINIA, CORSICA, ELBA].forEach((g, i) => {
+      svg += `<path d="${poly(g)}" fill="${i === 3 ? "var(--land2)" : "var(--land)"}" stroke="var(--ink)" stroke-opacity=".28" stroke-width="${f(lw.coast)}" stroke-linejoin="round"/>`;
+    });
+    svg += `<path d="${poly(LAKES.garda)}" fill="var(--water)"/>`;
+    ["como","lugano","maggiore"].forEach(k => {
+      svg += `<path d="${line(LAKES[k])}" fill="none" stroke="var(--water)" stroke-width="${f(Math.min(Math.max(2.6 * s, 2.2), 4))}" stroke-linecap="round" stroke-linejoin="round"/>`;
+    });
+    if (cfg.tiber) svg += `<path d="${smooth(TIBER)}" fill="none" stroke="var(--water)" stroke-width="${f(Math.min(10 * s, .9))}" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+    if (showCountries) {
+      const fs = 15 * s;
+      [["Itália", 43.3, 12.4, 1.5], ["Suíça", 46.78, 8.15, 1], ["Áustria", 47.3, 12.6, 1], ["França", 43.95, 6.9, .9], ["Eslovênia", 46.15, 14.4, .85]]
+        .forEach(([t, la, lo, k]) => svg += `<text class="country" x="${f(X(lo))}" y="${f(Y(la))}" font-size="${f(fs * k)}" text-anchor="middle">${t}</text>`);
+      svg += `<text class="sea-label" x="${f(X(11.2))}" y="${f(Y(41.1))}" font-size="${f(12 * s)}" text-anchor="middle">Mar Tirreno</text>`;
+      svg += `<text class="sea-label" x="${f(X(14.6))}" y="${f(Y(43.35))}" font-size="${f(12 * s)}" text-anchor="middle" transform="rotate(-38 ${f(X(14.6))} ${f(Y(43.35))})">Mar Adriático</text>`;
+    }
+    if (cfg.context !== false) {
+      TRIP.forEach(l => {
+        const m = LEGS[l].mode;
+        svg += `<path d="${legD(l)}" fill="none" stroke="${col[m]}" stroke-opacity=".22" stroke-width="${f(lw[m] * .8)}" stroke-dasharray="${dash[m]}" stroke-linecap="round"/>`;
+      });
+    }
+    svg += `<defs>`;
+    (cfg.legs || []).forEach((l, i) => {
+      svg += `<mask id="${id}-k${i}" maskUnits="userSpaceOnUse" x="-2000" y="-2000" width="6000" height="6000"><path class="mk" d="${legD(l)}" fill="none" stroke="#fff" stroke-width="${f(16 * s)}" stroke-linecap="round"/></mask>`;
+    });
+    svg += `</defs>`;
+    (cfg.legs || []).forEach((l, i) => {
+      const m = LEGS[l].mode;
+      svg += `<g mask="url(#${id}-k${i})"><path class="ln" data-i="${i}" d="${legD(l)}" fill="none" stroke="${col[m]}" stroke-width="${f(lw[m])}" stroke-dasharray="${dash[m]}" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+    });
+    (cfg.stops || []).forEach(st => {
+      const [la, lo, name] = P[st.k];
+      const x = X(lo), y = Y(la);
+      const r = (st.minor ? 3.4 : 4.8) * s, fs = (st.minor ? 11.5 : 13.5) * s;
+      const dx = (st.dx ?? 8) * s, dy = (st.dy ?? 4) * s;
+      svg += `<g class="stop${st.minor ? " minor" : ""}" data-k="${st.k}"><circle cx="${f(x)}" cy="${f(y)}" r="${f(r)}" stroke-width="${f(1.4 * s)}"/>`;
+      if (st.label !== false) svg += `<text x="${f(x + dx)}" y="${f(y + dy)}" font-size="${f(fs)}" text-anchor="${st.a || "start"}" stroke-width="${f(3.2 * s)}">${st.name || name}</text>`;
+      svg += `</g>`;
+    });
+    svg += `<g class="veh" opacity="0"><g transform="scale(${f(s * .95)})">
+      <circle r="12" fill="var(--bg)" stroke="var(--accent)" stroke-width="1.6"/>
+      <g class="ic-train" fill="var(--ink)"><rect x="-5" y="-7" width="10" height="11" rx="3"/><rect x="-3.4" y="-5.2" width="6.8" height="3.6" rx="1" fill="var(--bg)"/><circle cx="-2.4" cy="1.4" r="1" fill="var(--bg)"/><circle cx="2.4" cy="1.4" r="1" fill="var(--bg)"/><path d="M-4 7.2 L-2.4 4.6 M4 7.2 L2.4 4.6" stroke="var(--ink)" stroke-width="1.3" stroke-linecap="round"/></g>
+      <g class="ic-car" fill="var(--ink)"><path d="M-7.5 3 V-.2 Q-7.3 -1.6 -5.6 -1.9 L-3.6 -5.2 Q-3.2 -5.8 -2.4 -5.8 H2.6 Q3.4 -5.8 3.8 -5.2 L5.8 -1.9 Q7.4 -1.6 7.5 -.2 V3 Z"/><path d="M-2.6 -4.4 H2.6 L4 -1.9 H-4 Z" fill="var(--bg)"/><circle cx="-4.2" cy="3.4" r="2.2"/><circle cx="4.2" cy="3.4" r="2.2"/></g>
+      <g class="ic-walk"><circle r="4.5" fill="var(--ink)"/><circle r="2" fill="var(--accent)"/></g>
+    </g></g></svg>`;
+    return svg;
+  }
+
+  function render() {
+    const r = host.getBoundingClientRect();
+    const W0 = r.width || cfg.dispW || 460, H0 = r.height || W0 * 0.75;
+    lastSize = `${Math.round(W0)}x${Math.round(H0)}`;
+    host.innerHTML = svgFor(W0 / H0, W0);
+    el = host.firstElementChild;
+    legEls = (cfg.legs || []).map((l, i) => ({
+      id: l, mode: LEGS[l].mode, mk: el.querySelector(`#${id}-k${i} .mk`), len: 0
+    }));
+    veh = el.querySelector(".veh");
+    icons = { train: el.querySelector(".ic-train"), car: el.querySelector(".ic-car"), walk: el.querySelector(".ic-walk") };
+  }
+  const stopEl = k => el.querySelector(`.stop[data-k="${k}"]`);
+  function ensure() { if (!el || !host.isConnected) render(); }
+  function measure() {
+    legEls.forEach(L => { if (!L.len) { L.len = L.mk.getTotalLength(); L.mk.style.strokeDasharray = `${L.len} ${L.len}`; } });
+  }
+  function setIcon(mode) { Object.entries(icons).forEach(([k, g]) => g.style.display = k === mode ? "" : "none"); }
+  function placeVeh(L, t) {
+    const p = L.mk.getPointAtLength(L.len * t);
+    veh.setAttribute("transform", `translate(${f(p.x)},${f(p.y)})`);
+  }
+  function reset() {
+    cancelAnimationFrame(raf); token++; state = "idle";
+    ensure(); measure();
+    legEls.forEach(L => L.mk.style.strokeDashoffset = L.len);
+    el.querySelectorAll(".stop").forEach(n => n.classList.remove("lit"));
+    veh.setAttribute("opacity", "0");
+    if (cfg.onLeg) cfg.onLeg(-1);
+  }
+  function finish() {
+    cancelAnimationFrame(raf); token++; state = "done";
+    ensure(); measure();
+    legEls.forEach(L => L.mk.style.strokeDashoffset = 0);
+    el.querySelectorAll(".stop").forEach(n => n.classList.add("lit"));
+    const last = legEls[legEls.length - 1];
+    if (last) { setIcon(last.mode); placeVeh(last, 1); veh.setAttribute("opacity", "1"); }
+    if (cfg.onLeg) cfg.onLeg(-2);
+  }
+  // Draw legs [0, k) instantly; park the vehicle where the trip currently stands.
+  function showUpTo(k) {
+    cancelAnimationFrame(raf); token++;
+    ensure(); measure();
+    state = k >= legEls.length ? "done" : (k > 0 ? "partial" : "idle");
+    legEls.forEach((L, i) => L.mk.style.strokeDashoffset = i < k ? 0 : L.len);
+    el.querySelectorAll(".stop").forEach(n => n.classList.remove("lit"));
+    if (!legEls.length) return;
+    const first = stopEl(LEGS[legEls[0].id].from); if (first) first.classList.add("lit");
+    legEls.slice(0, k).forEach(L => { const to = stopEl(LEGS[L.id].to); if (to) to.classList.add("lit"); });
+    const L = k > 0 ? legEls[k - 1] : legEls[0];
+    setIcon(L.mode); placeVeh(L, k > 0 ? 1 : 0); veh.setAttribute("opacity", "1");
+  }
+  // Animate legs [a, b) one after another, within roughly `budget` ms.
+  function run(a, b, budget, minD, delay = 0) {
+    showUpTo(a);
+    if (REDUCED.matches || a >= b) { showUpTo(b); return; }
+    state = "playing";
+    const my = token, part = legEls.slice(a, b);
+    const total = part.reduce((s, L) => s + L.len, 0);
+    const durs = part.map(L => Math.max(minD, budget * L.len / total));
+    let i = 0, t0 = 0;
+    const step = now => {
+      if (my !== token) return;
+      const L = part[i];
+      if (!t0) { t0 = now; setIcon(L.mode); veh.setAttribute("opacity", "1"); }
+      const t = Math.min(1, (now - t0) / durs[i]);
+      const e = ease(t);
+      L.mk.style.strokeDashoffset = L.len * (1 - e);
+      placeVeh(L, e);
+      if (t >= 1) {
+        const to = stopEl(LEGS[L.id].to); if (to) to.classList.add("lit");
+        i++; t0 = 0;
+        if (i >= part.length) { state = b >= legEls.length ? "done" : "partial"; return; }
+      }
+      raf = requestAnimationFrame(step);
+    };
+    setTimeout(() => { if (my === token) raf = requestAnimationFrame(step); }, delay);
+  }
+  function play(delay = 0) {
+    render();
+    if (REDUCED.matches || !legEls.length) { finish(); return; }
+    run(0, legEls.length, cfg.duration || 3200, cfg.minLeg || 320, delay);
+  }
+  // Re-fit when the container changes shape (rotation, window resize).
+  if ("ResizeObserver" in window) {
+    new ResizeObserver(() => {
+      const r = host.getBoundingClientRect();
+      if (!r.width || `${Math.round(r.width)}x${Math.round(r.height)}` === lastSize) return;
+      const was = state;
+      cancelAnimationFrame(raf); token++;
+      render();
+      if (cfg.onResize) cfg.onResize();
+      else if (was === "idle") reset(); else finish();
+    }).observe(host);
+  }
+  return { el: host, play, reset, finish, showUpTo, run };
+}
+
+/* =========================================================
+   Image with guaranteed fallback
+   ========================================================= */
+function hydrateShot(fig) {
+  if (fig.dataset.ready) return;
+  fig.dataset.ready = "1";
+  const ph = document.createElement("div");
+  ph.className = "ph"; ph.textContent = fig.dataset.name || "";
+  fig.prepend(ph);
+  if (!fig.dataset.src) { fig.classList.add("failed"); return; }
+  const img = new Image();
+  img.alt = fig.dataset.alt || fig.dataset.name || "";
+  img.decoding = "async";
+  img.referrerPolicy = "no-referrer";
+  img.addEventListener("load", () => { if (img.naturalWidth > 0) fig.classList.add("loaded"); else fig.classList.add("failed"); });
+  img.addEventListener("error", () => fig.classList.add("failed"));
+  img.src = fig.dataset.src;
+  fig.appendChild(img);
+  if (fig.dataset.credit) {
+    const c = document.createElement("figcaption"); c.textContent = fig.dataset.credit; fig.appendChild(c);
+  }
+  // A stalled request should never leave a blank panel: the gradient is already visible underneath.
+}
+
+/* =========================================================
+   Days
+   ========================================================= */
+const W = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
+const DAYS = [
+  { theme:"rome", n:"19", week:"Quinta-feira", place:"Roma", sub:"Chegada à Cidade Eterna e o primeiro encontro com o Coliseu.",
+    shots:[{ src:W+"5/53/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg/1280px-Colosseum_in_Rome%2C_Italy_-_April_2007.jpg", alt:"Coliseu iluminado no fim da tarde", name:"Coliseu", credit:"Foto: Diliff, CC BY-SA 2.5" },
+      { src:W+"e/ee/Colosseum_and_Via_Sacra_%28Rome%29.jpg/1280px-Colosseum_and_Via_Sacra_%28Rome%29.jpg", alt:"Coliseu visto da Via Sacra, no Fórum Romano", name:"Fórum Romano", credit:"Foto: Livioandronico2013, CC BY-SA 4.0" }],
+    plan:[["9h","Pouso em Fiumicino, trem até o centro e malas no hotel"],["12h30","Almoço no bairro de Monti"],["13h30","Coliseu, Fórum Romano e Monte Palatino",1],["17h","Passeio a pé: Fontana di Trevi, Panteão e Piazza Navona"],["19h30","Jantar e cama cedo"]],
+    facts:["7 a 15 °C","pôr do sol 16h43"], mapNote:"A pé pelo centro histórico",
+    map:{ legs:["w-monti-colosseo","w-colosseo-foro","w-foro-trevi","w-trevi-pantheon","w-pantheon-navona"], tiber:true, context:false, pad:.28,
+      stops:[{k:"monti",dx:8,dy:-6},{k:"colosseo",dx:8,dy:12},{k:"foro",dx:-8,dy:14,a:"end"},{k:"trevi",dx:8,dy:-6},{k:"pantheon",dx:4,dy:16},{k:"navona",dx:-8,dy:-6,a:"end"}] } },
+  { theme:"rome", n:"20", week:"Sexta-feira", place:"Vaticano e Roma", sub:"Michelangelo de manhã, Trastevere à noite.",
+    shots:[{ src:W+"f/f5/Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg/1280px-Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg", alt:"Fachada da Basílica de São Pedro", name:"São Pedro", credit:"Foto: Alvesgaspar, CC BY-SA 4.0" },
+      { src:W+"3/3c/01_St_Peter%27s_Basilica_Facade.jpg/1280px-01_St_Peter%27s_Basilica_Facade.jpg", alt:"Praça e fachada da Basílica de São Pedro", name:"Praça São Pedro", credit:"Foto: NateBergin, CC BY 4.0" }],
+    plan:[["8h","Museus Vaticanos e Capela Sistina",1],["11h30","Basílica de São Pedro"],["13h30","Almoço em Prati"],["15h","Castel Sant'Angelo e caminhada até Campo de' Fiori"],["19h","Noite em Trastevere"]],
+    facts:["7 a 15 °C","pôr do sol 16h42"], mapNote:"A pé, do Vaticano a Trastevere",
+    map:{ legs:["w-musei-sanpietro","w-sanpietro-prati","w-prati-castel","w-castel-campo","w-campo-trastevere"], tiber:true, context:false, pad:.25,
+      stops:[{k:"musei",dx:-8,dy:-6,a:"end"},{k:"sanpietro",dx:-8,dy:14,a:"end"},{k:"prati",dx:6,dy:-8},{k:"castel",dx:8,dy:4},{k:"campo",dx:8,dy:4},{k:"trastevere",dx:-8,dy:12,a:"end"}] } },
+  { theme:"dolo", n:"21", week:"Sábado", place:"Rumo às Dolomitas", sub:"Atravessamos a Itália de trem e subimos as montanhas de carro.",
+    shots:[{ src:W+"3/3a/Lago_di_Carezza_and_Latemar%2C_Carezza%2C_Trentino-Alto_Adige%2C_Italy%2C_2025_October.jpg/1280px-Lago_di_Carezza_and_Latemar%2C_Carezza%2C_Trentino-Alto_Adige%2C_Italy%2C_2025_October.jpg", alt:"Águas verdes do Lago di Carezza com o maciço do Latemar", name:"Lago di Carezza", credit:"Foto: Ximonic (Simo Räsänen), CC BY-SA 4.0" },
+      { src:W+"5/54/Karersee_HDR.jpg/1280px-Karersee_HDR.jpg", alt:"Lago di Carezza com o Latemar ao fundo", name:"Lago di Carezza", credit:"Foto: Afrank99, CC BY-SA 3.0" },
+      { src:W+"4/4c/Lake_Carezza%2C_view_heading_West_02.jpg/1280px-Lake_Carezza%2C_view_heading_West_02.jpg", alt:"Floresta refletida no Lago di Carezza", name:"Lago di Carezza", credit:"Foto: Marco Ober, CC BY-SA 4.0" }],
+    plan:[["Manhã","Trem de Roma a Bolzano, cerca de 4h30 vendo a paisagem mudar",1],["13h30","Pegamos o carro em Bolzano"],["15h","Lago di Carezza no pôr do sol"],["18h","Chegada em Ortisei, na Val Gardena"]],
+    facts:["−3 a 6 °C","pôr do sol 16h39"], mapNote:"Trem até Bolzano, depois carro",
+    map:{ legs:["roma-bolzano","bolzano-carezza","carezza-ortisei"], pad:.12, duration:3600,
+      stops:[{k:"roma",dx:8,dy:5},{k:"bolzano",dx:-8,dy:2,a:"end"},{k:"carezza",dx:8,dy:14,minor:true,name:"Carezza"},{k:"ortisei",dx:8,dy:-6}] } },
+  { theme:"dolo", n:"22", week:"Domingo", place:"Dolomitas", sub:"Igrejinhas, passos de montanha e a volta completa no maciço do Sella.",
+    shots:[{ src:W+"9/9c/1_dolomites_santa_magdalena_2024_val_di_funes.jpg/1280px-1_dolomites_santa_magdalena_2024_val_di_funes.jpg", alt:"Igreja de Santa Maddalena diante dos picos das Odle", name:"Val di Funes", credit:"Foto: Chensiyuan, CC BY-SA 4.0" },
+      { src:W+"e/e3/Val_di_Funes_and_Gruppo_delle_Odle_from_St_Magdalena%2C_Trentino-Alto_Adige%2C_Italy%2C_2025_October.jpg/1280px-Val_di_Funes_and_Gruppo_delle_Odle_from_St_Magdalena%2C_Trentino-Alto_Adige%2C_Italy%2C_2025_October.jpg", alt:"Vale de Funes e o grupo das Odle no outono", name:"Val di Funes", credit:"Foto: Ximonic (Simo Räsänen), CC BY-SA 4.0" }],
+    plan:[["8h30","Val di Funes: mirantes de Santa Maddalena e da igrejinha de Ranui",1],["11h30","Passo Gardena"],["13h","Almoço em Corvara"],["14h15","Passo Pordoi e Passo Sella, a volta ao redor do maciço do Sella"],["17h","De volta a Ortisei"]],
+    facts:["−5 a 4 °C","pôr do sol 16h38"], mapNote:"Um dia inteiro de carro pelas montanhas",
+    map:{ legs:["ortisei-funes","funes-gardena","gardena-corvara","corvara-pordoi","pordoi-sella","sella-ortisei"], pad:.16, duration:4200, minLeg:420,
+      stops:[{k:"ortisei",dx:-8,dy:4,a:"end"},{k:"funes",dx:8,dy:-6},{k:"gardena",dx:0,dy:-11,a:"middle",minor:true},{k:"corvara",dx:8,dy:4},{k:"pordoi",dx:8,dy:12,minor:true},{k:"sella",dx:-8,dy:12,a:"end",minor:true}] } },
+  { theme:"lake", n:"23", week:"Segunda-feira", place:"Das Dolomitas a Lugano", sub:"Almoço à beira do Lago di Garda e fim de tarde na Suíça.",
+    shots:[
+      { src:W+"2/20/Castello_Scaligero_lato_Sud_di_Sirmione.jpg/1280px-Castello_Scaligero_lato_Sud_di_Sirmione.jpg", alt:"Castelo Scaligero de Sirmione", name:"Sirmione", credit:"Foto: Wolfgang Moroder, CC BY-SA 4.0" },
+      { src:W+"8/86/Scaligero_Castle_of_Sirmione%2C_town_centre.jpg/1280px-Scaligero_Castle_of_Sirmione%2C_town_centre.jpg", alt:"Torres do castelo no centro de Sirmione", name:"Sirmione", credit:"Foto: Marco Ober, CC BY-SA 4.0" },
+      { src:W+"5/50/Lakefront_Lugano_2022.jpg/1280px-Lakefront_Lugano_2022.jpg", alt:"Bancos vermelhos na orla do Lago de Lugano", name:"Lugano", credit:"Foto: Ivo Kruusamägi, CC BY-SA 4.0" },
+      { src:W+"5/59/Lakefront_Lugano_2017-05-29_12.57.39.jpg/1280px-Lakefront_Lugano_2017-05-29_12.57.39.jpg", alt:"Calçadão arborizado à beira do lago em Lugano", name:"Lugano", credit:"Foto: Chris j wood, CC BY-SA 4.0" }],
+    plan:[["8h30","Saímos de Ortisei de carro"],["11h","Sirmione, no Lago di Garda: centro histórico e almoço",1],["13h","Estrada até Lugano, na Suíça (cerca de 2h45)"],["16h","Orla de Lugano, Parco Ciani, centro antigo e jantar"]],
+    facts:["3 a 10 °C","pôr do sol 16h48"], mapNote:"Carro: montanha, lago e fronteira",
+    map:{ legs:["ortisei-sirmione","sirmione-lugano"], pad:.16,
+      stops:[{k:"ortisei",dx:8,dy:-4},{k:"sirmione",dx:6,dy:15},{k:"lugano",dx:-8,dy:-6,a:"end"}] } },
+  { theme:"lake", n:"24", week:"Terça-feira", place:"Lugano, Como e Roma", sub:"Dois lagos pela manhã e trem de alta velocidade à tarde.",
+    shots:[{ src:W+"7/74/Lugano_from_Sighignola.jpg/1280px-Lugano_from_Sighignola.jpg", alt:"Lugano e o lago vistos do alto da montanha", name:"Lago de Lugano", credit:"Foto: Aconcagua, CC BY-SA 3.0" },
+      { src:W+"6/66/Lake_Como_from_Como_%286%29.jpg/1280px-Lake_Como_from_Como_%286%29.jpg", alt:"Orla de Como com o lago e as colinas ao fundo", name:"Lago di Como", credit:"Foto: Krzysztof Golik, CC BY-SA 4.0" },
+      { src:W+"0/06/Como_cityscape_and_lakefront_from_Monumento_ai_Caduti.jpg/1280px-Como_cityscape_and_lakefront_from_Monumento_ai_Caduti.jpg", alt:"Como e a orla do lago vistas do alto", name:"Como", credit:"Foto: Daniel Case, CC BY-SA 3.0" }],
+    plan:[["9h","Monte Brè, com vista para o Lago de Lugano"],["10h30","Estrada até Como (30 min)"],["11h","Como: orla do lago, Duomo e almoço",1],["12h30","Estrada até Milão e entrega do carro na Milano Centrale"],["15h","Trem de alta velocidade Milão → Roma (3h10)"],["19h30","Jantar em Roma"]],
+    facts:["4 a 11 °C","pôr do sol 16h47"], mapNote:"Carro até Milão, trem até Roma",
+    map:{ legs:["lugano-como","como-milano","milano-roma"], pad:.12, duration:3400, minLeg:600,
+      stops:[{k:"lugano",dx:-8,dy:-4,a:"end"},{k:"como",dx:-8,dy:10,a:"end"},{k:"milano",dx:8,dy:6},{k:"roma",dx:8,dy:5}] } },
+  { theme:"rome", n:"25", week:"Quarta-feira", place:"Hora de voltar", sub:"Arrivederci, Roma. Voltamos com a mala cheia de histórias.",
+    shots:[{ src:W+"5/5b/Colosseum_of_Rome%2C_Italy.jpg/1280px-Colosseum_of_Rome%2C_Italy.jpg", alt:"Coliseu ao entardecer", name:"Arrivederci, Roma", credit:"Foto: Wilfredor, CC0" }],
+    plan:[["8h30","Trem até Fiumicino"],["12h","Voo para casa",1]],
+    facts:["7 a 15 °C","boa viagem!"], mapNote:"Trem até o aeroporto",
+    map:{ legs:["roma-fiumicino"], pad:.35, context:false,
+      stops:[{k:"roma",dx:8,dy:5},{k:"fiumicino",dx:-8,dy:16,a:"end"}] } }
+];
+
+const ICON_T = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 14.8V4.5a2 2 0 1 0-4 0v10.3a4 4 0 1 0 4 0z"/></svg>`;
+const ICON_S = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h16M7 14a5 5 0 0 1 10 0M12 4v3M5.2 7.2l1.6 1.6M18.8 7.2l-1.6 1.6"/></svg>`;
+
+const deck = document.getElementById("deck");
+const practical = deck.querySelector(".practical");
+const maps = new Map();   // slide element -> map controller
+
+DAYS.forEach((d, i) => {
+  const sec = document.createElement("section");
+  sec.className = "slide day";
+  sec.dataset.theme = d.theme;
+  sec.dataset.label = `${d.week.split("-")[0]} ${d.n} nov, ${d.place}`;
+  sec.setAttribute("aria-label", `Dia ${i + 1}: ${d.week}, ${d.n} de novembro, ${d.place}`);
+  const shots = d.shots.map((s, k) => `<figure class="shot kb${k ? "" : " on"}" data-src="${s.src}" data-alt="${s.alt}" data-name="${s.name}" data-credit="${s.credit}"></figure>`).join("");
+  const dots = d.shots.length > 1 ? `<div class="gdots">${d.shots.map((s, k) => `<button type="button" class="gdot${k ? "" : " on"}" aria-label="Foto ${k + 1} de ${d.shots.length}: ${s.name}"></button>`).join("")}</div>` : "";
+  sec.innerHTML = `
+    <div class="day-media gallery">${shots}${dots}</div>
+    <div class="day-info">
+      <header class="day-head">
+        <span class="day-num" aria-hidden="true">${d.n}</span>
+        <span class="day-count">Dia ${i + 1} de 7</span>
+        <span class="day-week">${d.week},<br>novembro</span>
+      </header>
+      <div>
+        <h2 class="day-place">${d.place}</h2>
+        <p class="day-sub">${d.sub}</p>
+      </div>
+      <ol class="timeline">${d.plan.map(([t, x, em]) => `<li><time>${t}</time><span${em ? ' class="em"' : ""}>${x}</span></li>`).join("")}</ol>
+      <div class="facts"><span>${ICON_T}${d.facts[0]}</span><span>${ICON_S}${d.facts[1]}</span></div>
+      <figure class="minimap"><figcaption>${d.mapNote}</figcaption></figure>
+    </div>`;
+  deck.insertBefore(sec, practical);
+  const m = buildMap({ ...d.map, label: `Mapa do dia ${i + 1}: ${d.mapNote}` });
+  sec.querySelector(".minimap").prepend(m.el);
+  maps.set(sec, m);
+});
+
+/* ---------- Overview map + leg list ---------- */
+const GROUPS = [
+  { t:"Roma → Bolzano", mode:"train", d:"≈ 4h30", legs:["roma-bolzano"] },
+  { t:"Bolzano → Carezza → Ortisei", mode:"car", d:"≈ 2h", legs:["bolzano-carezza","carezza-ortisei"] },
+  { t:"Volta pelas Dolomitas", mode:"car", d:"o dia todo", legs:["ortisei-funes","funes-gardena","gardena-corvara","corvara-pordoi","pordoi-sella","sella-ortisei"] },
+  { t:"Ortisei → Sirmione", mode:"car", d:"≈ 2h30", legs:["ortisei-sirmione"] },
+  { t:"Sirmione → Lugano", mode:"car", d:"≈ 2h45", legs:["sirmione-lugano"] },
+  { t:"Lugano → Como → Milão", mode:"car", d:"≈ 1h30", legs:["lugano-como","como-milano"] },
+  { t:"Milão → Roma", mode:"train", d:"3h10", legs:["milano-roma"] }
+];
+// Leg index where each group starts: step k means groups [0, k) are drawn.
+const GSTART = [0]; GROUPS.forEach(g => GSTART.push(GSTART[GSTART.length - 1] + g.legs.length));
+const ovList = document.getElementById("ovLegs");
+ovList.innerHTML = GROUPS.map((g, i) => `<li><button type="button" class="leg-btn"><b>${i + 1}</b><span>${g.t}</span><span class="t">${g.mode === "train" ? "trem" : "carro"}, ${g.d}</span></button></li>`).join("");
+const ovItems = [...ovList.children];
+const ovSlide = deck.querySelector(".overview");
+const ovMap = buildMap({
+  bounds: [[40.55, 6.5], [47.45, 15.9]], pad: 0.02,
+  legs: TRIP, label: "Mapa da Itália e sul da Suíça com o roteiro completo",
+  stops: [
+    {k:"roma",dx:9,dy:5},{k:"bolzano",dx:-8,dy:2,a:"end"},{k:"carezza",label:false,minor:true},
+    {k:"ortisei",dx:8,dy:-8,name:"Dolomitas"},{k:"funes",label:false,minor:true},{k:"corvara",label:false,minor:true},
+    {k:"sirmione",dx:7,dy:15},{k:"lugano",dx:-8,dy:-6,a:"end"},{k:"como",dx:-8,dy:14,a:"end"},{k:"milano",dx:9,dy:10}
+  ],
+  onResize: () => ovMap.showUpTo(GSTART[ovStep])
+});
+document.getElementById("ovMap").appendChild(ovMap.el);
+let ovStep = 0;
+const ovHint = document.getElementById("ovHint");
+// Each "next" on this slide draws one group of legs, like advancing a slide.
+function ovSet(k, animate) {
+  ovStep = Math.max(0, Math.min(GROUPS.length, k));
+  ovItems.forEach((li, i) => { li.classList.toggle("on", i === ovStep - 1); li.classList.toggle("done", i < ovStep - 1); });
+  if (animate && ovStep > 0) {
+    const g = GROUPS[ovStep - 1];
+    ovMap.run(GSTART[ovStep - 1], GSTART[ovStep], g.mode === "train" ? 3200 : 2600 + g.legs.length * 250, 450, 0);
+  } else ovMap.showUpTo(GSTART[ovStep]);
+  ovHint.textContent = ovStep === 0 ? "Avance para seguir o trajeto, trecho a trecho."
+    : ovStep < GROUPS.length ? `Trecho ${ovStep} de ${GROUPS.length}. Avance para continuar.`
+    : "Trajeto completo! Avance para ver cada dia.";
+  updateLabel();
+}
+ovItems.forEach((li, i) => li.querySelector("button").addEventListener("click", () => ovSet(i + 1, true)));
+document.getElementById("replay").addEventListener("click", () => ovSet(0, false));
+const steppers = new Map([[ovSlide, {
+  count: GROUPS.length, get step() { return ovStep; },
+  enter: forward => ovSet(forward ? 0 : GROUPS.length, false),
+  to: (k, animate) => ovSet(k, animate),
+  label: () => ovStep ? `O roteiro, trecho ${ovStep} de ${GROUPS.length}` : "O roteiro"
+}]]);
+
+/* ---------- Travel times on practical slide ---------- */
+const MODE_SVG = {
+  train: `<svg viewBox="0 0 26 10" aria-hidden="true"><line x1="2" y1="5" x2="24" y2="5" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/></svg>`,
+  car: `<svg viewBox="0 0 26 10" aria-hidden="true"><line x1="2" y1="5" x2="24" y2="5" stroke="var(--route)" stroke-width="2.4" stroke-dasharray="5 4" stroke-linecap="round"/></svg>`
+};
+const TIMES = [
+  ["Fiumicino → Roma","train","≈ 30 min"],["Roma → Bolzano","train","≈ 4h30"],["Bolzano → Carezza → Ortisei","car","≈ 2h"],
+  ["Ortisei → Sirmione","car","≈ 2h30"],["Sirmione → Lugano","car","≈ 2h45"],["Lugano → Como","car","≈ 30 min"],
+  ["Como → Milão","car","≈ 1h"],["Milão → Roma","train","3h10"],["Roma → Fiumicino","train","≈ 30 min"]
+];
+document.getElementById("times").innerHTML = TIMES.map(([t, m, d]) => `<li><span>${MODE_SVG[m]}${t}</span><b>${d}</b></li>`).join("");
+
+/* ---------- Photo galleries on day slides ---------- */
+let gTimer = 0;
+function showPhoto(g, k) {
+  const shots = [...g.querySelectorAll(".shot")], dots = [...g.querySelectorAll(".gdot")];
+  if (!shots.length) return;
+  k = (k + shots.length) % shots.length;
+  shots.forEach((f, i) => f.classList.toggle("on", i === k));
+  dots.forEach((b, i) => { b.classList.toggle("on", i === k); b.setAttribute("aria-pressed", i === k); });
+  g.dataset.k = k;
+}
+function startGallery(slide) {
+  clearInterval(gTimer);
+  const g = slide.querySelector(".gallery");
+  if (!g) return;
+  showPhoto(g, 0);
+  if (g.querySelectorAll(".shot").length < 2 || REDUCED.matches) return;
+  gTimer = setInterval(() => showPhoto(g, +g.dataset.k + 1), 5500);
+}
+document.querySelectorAll(".gallery").forEach(g => {
+  g.querySelectorAll(".gdot").forEach((b, i) => b.addEventListener("click", () => { clearInterval(gTimer); showPhoto(g, i); }));
+  // Tapping the photo itself shows the next one.
+  g.addEventListener("click", e => { if (e.target.closest(".gdot")) return; if (g.querySelectorAll(".shot").length > 1) { clearInterval(gTimer); showPhoto(g, +g.dataset.k + 1); } });
+});
+
+/* =========================================================
+   Navigation
+   ========================================================= */
+const slides = [...deck.querySelectorAll(".slide")];
+const segs = document.getElementById("segs");
+const plabel = document.getElementById("plabel"), pnum = document.getElementById("pnum");
+const prevB = document.getElementById("prev"), nextB = document.getElementById("next");
+const ACCENT = { rome:"#E8925E", dolo:"#8DB8D6", lake:"#A9CB86", night:"#E9B97F" };
+slides.forEach((s, i) => {
+  const b = document.createElement("button");
+  b.className = "seg"; b.type = "button";
+  b.style.setProperty("--c", ACCENT[s.dataset.theme]);
+  b.setAttribute("aria-label", `Ir para o slide ${i + 1}: ${s.dataset.label}`);
+  b.addEventListener("click", () => go(i));
+  segs.appendChild(b);
+});
+let cur = -1;
+
+function updateLabel() {
+  const s = slides[cur]; if (!s) return;
+  const st = steppers.get(s);
+  plabel.textContent = st ? st.label() : s.dataset.label;
+}
+function go(n) {
+  n = Math.max(0, Math.min(slides.length - 1, n));
+  if (n === cur) return;
+  const forward = n > cur;
+  const old = slides[cur];
+  if (old && maps.has(old) && !steppers.has(old)) maps.get(old).reset();
+  slides.forEach((s, i) => {
+    const on = i === n;
+    s.classList.toggle("is-active", on);
+    s.classList.toggle("is-before", i < n);
+    s.setAttribute("aria-hidden", on ? "false" : "true");
+    if (on) s.removeAttribute("inert"); else s.setAttribute("inert", "");
+  });
+  const s = slides[n];
+  s.scrollTop = 0; s.querySelectorAll(".day-info,.ov-body").forEach(x => x.scrollTop = 0);
+  document.body.dataset.theme = s.dataset.theme;
+  [n, n + 1, n - 1].forEach(k => slides[k] && slides[k].querySelectorAll(".shot").forEach(hydrateShot));
+  [...segs.children].forEach((b, i) => { b.classList.toggle("cur", i === n); b.classList.toggle("done", i < n); b.setAttribute("aria-current", i === n ? "step" : "false"); });
+  pnum.textContent = `${n + 1}/${slides.length}`;
+  prevB.disabled = n === 0; nextB.disabled = n === slides.length - 1;
+  cur = n;
+  if (steppers.has(s)) steppers.get(s).enter(forward);
+  else if (maps.has(s)) maps.get(s).play(REDUCED.matches ? 0 : 550);
+  updateLabel();
+  startGallery(s);
+  try { history.replaceState(null, "", "#" + (n + 1)); } catch (e) {}
+}
+function next() {
+  const st = steppers.get(slides[cur]);
+  if (st && st.step < st.count) st.to(st.step + 1, true); else go(cur + 1);
+}
+function prev() {
+  const st = steppers.get(slides[cur]);
+  if (st && st.step > 0) st.to(st.step - 1, false); else go(cur - 1);
+}
+prevB.addEventListener("click", prev);
+nextB.addEventListener("click", next);
+document.getElementById("again").addEventListener("click", () => go(0));
+
+document.addEventListener("keydown", e => {
+  if (e.altKey || e.ctrlKey || e.metaKey) return;
+  const onBtn = e.target.closest && e.target.closest("button");
+  switch (e.key) {
+    case "ArrowRight": case "PageDown": next(); e.preventDefault(); break;
+    case "ArrowLeft": case "PageUp": prev(); e.preventDefault(); break;
+    case " ": if (onBtn) return; (e.shiftKey ? prev : next)(); e.preventDefault(); break;
+    case "Home": go(0); e.preventDefault(); break;
+    case "End": go(slides.length - 1); e.preventDefault(); break;
+  }
+});
+
+// Swipe: horizontal gestures navigate, vertical ones scroll the slide.
+let sx = 0, sy = 0, st = 0, tracking = false;
+deck.addEventListener("touchstart", e => {
+  if (e.touches.length !== 1) { tracking = false; return; }
+  sx = e.touches[0].clientX; sy = e.touches[0].clientY; st = Date.now(); tracking = true;
+}, { passive: true });
+deck.addEventListener("touchend", e => {
+  if (!tracking) return; tracking = false;
+  const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4 && Date.now() - st < 900) (dx < 0 ? next : prev)();
+}, { passive: true });
+
+window.addEventListener("hashchange", () => { const h = parseInt(location.hash.slice(1), 10); if (h) go(h - 1); });
+REDUCED.addEventListener && REDUCED.addEventListener("change", () => { const s = slides[cur]; if (maps.has(s)) maps.get(s).finish(); });
+
+const start = parseInt((location.hash || "").slice(1), 10);
+go(start >= 1 && start <= slides.length ? start - 1 : 0);
+// Warm the rest of the images after first paint so later slides open instantly.
+setTimeout(() => document.querySelectorAll(".shot").forEach(hydrateShot), 1200);
+})();
+</script>
+</body>
+</html>
