@@ -250,6 +250,27 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
 .cost thead th { font-size: .8rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
 .cost tfoot th, .cost tfoot td { font-weight: 600; border-bottom: 0; border-top: 1.5px solid color-mix(in srgb, var(--ink) 45%, transparent); }
 
+/* ---------- Plan B slide ---------- */
+.planb .alert { margin: 1.6rem 0 0; }
+.pb-h { font: italic 500 1.5rem/1.1 var(--serif); color: var(--accent); margin: 2.2rem 0 .7rem; }
+.vt { width: 100%; border-collapse: collapse; font-size: .95rem; font-variant-numeric: lining-nums tabular-nums; }
+.vt th, .vt td { padding: .5rem .5rem .5rem 0; text-align: left; vertical-align: top; border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
+.vt thead th { font-size: .78rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.vt td:first-child { white-space: nowrap; font-weight: 500; }
+.vt.sum td:nth-child(2) { font-weight: 500; }
+.vt .sn { font: italic 500 1.05rem/1.3 var(--serif); color: var(--accent); }
+.vars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; margin-top: 2.4rem; }
+.var { padding: 1.3rem 1.4rem 1.4rem; border-radius: 14px; background: color-mix(in srgb, var(--ink) 6%, transparent); display: flex; flex-direction: column; gap: .9rem; }
+.var header { display: flex; align-items: baseline; gap: .7rem; }
+.var-n { font: italic 400 2.2rem/1 var(--serif); color: var(--accent); }
+.var h3 { font: 500 1.35rem/1.15 var(--serif); }
+.var-meta { color: var(--muted); font-size: .95rem; }
+.var-meta b { color: var(--ink); font-weight: 600; }
+.var .vt { font-size: .9rem; }
+.var .vc { font-size: .92rem; }
+.var-pc { list-style: none; padding: 0; display: grid; gap: .45rem; font-size: .95rem; }
+.var-pc b { color: var(--accent); font-weight: 600; }
+
 /* ---------- Closing ---------- */
 .closing .shot { position: absolute; inset: 0; }
 .closing .veil { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(40,14,8,.35), rgba(40,14,8,.85) 75%); }
@@ -329,6 +350,17 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
   .climate { grid-template-columns: 1fr 1fr; }
   .pr-cols, .cost-cols { grid-template-columns: 1fr; }
   .cost { font-size: .92rem; }
+  .vars { grid-template-columns: minmax(0, 1fr); }
+  .var { padding: 1.1rem 1rem 1.2rem; }
+  .vt.sum thead { display: none; }
+  .vt.sum, .vt.sum tbody { display: block; }
+  .vt.sum tr { display: grid; grid-template-columns: 1.8rem minmax(0, 1fr); column-gap: .4rem; padding: .6rem 0; border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
+  .vt.sum td { border: 0; padding: .1rem 0; grid-column: 2; font-size: .9rem; }
+  .vt.sum td.sn { grid-column: 1; grid-row: 1 / span 4; }
+  .vt.sum td:nth-child(3)::before { content: "Transporte: "; color: var(--muted); }
+  .vt.sum td:nth-child(4)::before { content: "Diferença: "; color: var(--muted); }
+  .vt.sum td:nth-child(5)::before { content: "Ao volante: "; color: var(--muted); }
+  .vt th, .vt td { padding-right: .4rem; }
   .title-copy .hint { display: none; }
   .nav::before {
     content: ""; position: absolute; inset: -28px 0 0; z-index: -1; pointer-events: none;
@@ -486,6 +518,82 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
       <p>Sete dias, dois países, oito pessoas. Agora é só fazer as malas e contar os dias.</p>
       <button class="again" type="button" id="again">Ver desde o começo</button>
 
+    </div>
+  </section>
+
+  <!-- Plan B -->
+  <section class="slide practical planb" data-theme="night" data-label="Plano B" aria-label="Plano B: variações do Plano A">
+    <div class="pr-wrap">
+      <h2>Plano B</h2>
+      <p class="lede">Variações do Plano A. Todas mantêm os mesmos destinos e os dias 19 e 20 em Roma; muda o transporte e a distribuição das noites entre 21 e 24. Valores de transporte para o grupo de 8 pessoas, câmbio €1 = R$ 5,80.</p>
+      <p class="alert"><b>Referência, Plano A.</b> Roma → Verona (trem) → Bolzano/Val Gardena (van) → Verona → Milão (trem) → Lugano bate-volta (trem) → Milão → Roma (trem). Transporte: ~€1.150 (~€1.220 contando os táxis em Verona). Hospedagem: Roma 2 noites, Bolzano 1, Milão 2, Roma 1.</p>
+      <h3 class="pb-h">Resumo</h3>
+      <table class="vt sum">
+        <thead><tr><th scope="col">#</th><th scope="col">Variação</th><th scope="col">Transporte (grupo)</th><th scope="col">Diferença para o Plano A</th><th scope="col">Horas ao volante</th></tr></thead>
+        <tbody><tr><td class="sn">1</td><td>Plano B: Milão só na segunda</td><td>Parecido, com 1 diária a mais de van</td><td>~igual</td><td>~5h</td></tr><tr><td class="sn">2</td><td>Dormir em Lugano na segunda</td><td>~€1.150</td><td>igual</td><td>~5h</td></tr><tr><td class="sn">3</td><td>Bolzano de trem, van só em Bolzano</td><td>~€1.300–1.500 (estimativa)</td><td>+€150–350</td><td>~2h30</td></tr><tr><td class="sn">4</td><td>Van Bolzano → Milão</td><td>~€1.420–1.520</td><td>+€200–300</td><td>~7h depois das Dolomitas</td></tr><tr><td class="sn">5</td><td>Van Bolzano → Roma</td><td>~€1.200–1.300</td><td>~igual</td><td>~16h</td></tr><tr><td class="sn">6</td><td>Van Roma → Roma (tudo de carro)</td><td>~€880</td><td>−€340</td><td>~23h</td></tr></tbody>
+      </table>
+      <div class="vars">
+        <article class="var">
+          <header><span class="var-n">1</span><h3>Plano B: Milão só na segunda</h3></header>
+          <p class="var-meta"><b>Noites:</b> Bolzano 2 (21 e 22), Milão 1 (23), Roma 1 (24). Van por 3 diárias.</p>
+          <table class="vt"><thead><tr><th scope="col">Dia</th><th scope="col">Dorme em</th><th scope="col">Programa</th></tr></thead><tbody><tr><td>Sáb 21</td><td>Bolzano</td><td>Trem 08:50 → Verona, van, Lago di Carezza</td></tr><tr><td>Dom 22</td><td>Bolzano</td><td>Dolomitas o dia todo, sem hora para sair</td></tr><tr><td>Seg 23</td><td>Milão</td><td>Manhã e almoço nas Dolomitas ou em Bolzano; saída 15:15; van devolvida em Verona 17:45; trem 19:43; Milão 21:35</td></tr><tr><td>Ter 24</td><td>Roma</td><td>Trem 08:10 para Lugano; passeio até 15:30; volta a Milão; trem 18:00; Roma ~21:15</td></tr></tbody></table>
+          <ul class="var-pc">
+            <li><b>Ponto forte:</b> quase 2 dias nas Dolomitas; domingo tranquilo.</li>
+            <li><b>Ponto fraco:</b> terça com três trens na véspera do voo; Lugano com ~6 horas e hora marcada; sem a manhã em Milão.</li>
+            <li><b>Custo:</b> refazer a cotação da van para 3 diárias.</li>
+          </ul>
+        </article>
+        <article class="var">
+          <header><span class="var-n">2</span><h3>Dormir em Lugano na segunda</h3></header>
+          <p class="var-meta"><b>Noites:</b> Bolzano 1 (21), Milão 1 (22), Lugano 1 (23), Roma 1 (24).</p>
+          <table class="vt"><thead><tr><th scope="col">Dia</th><th scope="col">Dorme em</th><th scope="col">Programa</th></tr></thead><tbody><tr><td>Sáb 21</td><td>Bolzano</td><td>Como no Plano A</td></tr><tr><td>Dom 22</td><td>Milão</td><td>Como no Plano A</td></tr><tr><td>Seg 23</td><td>Lugano</td><td>Trem cedo com as malas; dia inteiro em Lugano</td></tr><tr><td>Ter 24</td><td>Roma</td><td>Manhã livre em Lugano; trem 12:02 → Milão; trem ~15:00 → Roma ~18:15</td></tr></tbody></table>
+          <ul class="var-pc">
+            <li><b>Ponto forte:</b> uma noite na Suíça; sem volta tarde na segunda.</li>
+            <li><b>Ponto fraco:</b> um hotel a mais; malas até Lugano; sem a manhã no Duomo.</li>
+            <li><b>Custo:</b> igual ao do Plano A.</li>
+          </ul>
+        </article>
+        <article class="var">
+          <header><span class="var-n">3</span><h3>Bolzano de trem, van só em Bolzano</h3></header>
+          <p class="var-meta"><b>Noites:</b> iguais às do Plano A.</p>
+          <table class="vt"><thead><tr><th scope="col">Dia</th><th scope="col">Programa</th></tr></thead><tbody><tr><td>Sáb 21</td><td>Trem direto Roma 08:50 → Bolzano 13:48; retirada da van em Bolzano ~14:15; Lago di Carezza</td></tr><tr><td>Dom 22</td><td>Val Gardena; saída do vale 15:30; devolução da van em Bolzano 16:15; trem ~17:00–17:30 para Milão, com troca em Verona; chegada ~20:15–20:45</td></tr></tbody></table>
+          <ul class="var-pc">
+            <li><b>Ponto forte:</b> ~3h a menos de estrada; saída do vale mais tarde; sem táxis em Verona.</li>
+            <li><b>Ponto fraco:</b> depende de a locadora de Bolzano abrir sábado às 14h e domingo às 16h; uma baldeação com malas.</li>
+            <li><b>Custo:</b> a cotar: trem Roma → Bolzano ~€300–400; van Bolzano–Bolzano; trem Bolzano → Milão ~€200–350.</li>
+          </ul>
+        </article>
+        <article class="var">
+          <header><span class="var-n">4</span><h3>Van Bolzano → Milão (€581)</h3></header>
+          <p class="var-meta">Van de sábado a terça; Milão e Lugano de carro.</p>
+          <table class="cost vc"><thead><tr><th scope="col">Item</th><th scope="col">Valor</th></tr></thead><tbody><tr><td>Trem Roma → Bolzano (estimativa)</td><td>~€300–400</td></tr><tr><td>Trem Milão → Roma</td><td>€227</td></tr><tr><td>Van</td><td>€581</td></tr><tr><td>Combustível e pedágios</td><td>~€140</td></tr><tr><td>Vinheta suíça</td><td>~€43</td></tr><tr><td>Estacionamento em Milão e Lugano</td><td>~€90</td></tr></tbody><tfoot><tr><th scope="row">Total</th><td>~€1.420–1.520</td></tr></tfoot></table>
+          <ul class="var-pc">
+            <li><b>Ponto forte:</b> porta a porta; chegada a Milão ~18:30 no domingo.</li>
+            <li><b>Ponto fraco:</b> mais caro; estacionar uma van de 2 m de altura em Milão; dirigir na Suíça; retirada em Bolzano no sábado à tarde a confirmar.</li>
+            
+          </ul>
+        </article>
+        <article class="var">
+          <header><span class="var-n">5</span><h3>Van Bolzano → Roma (€489)</h3></header>
+          <p class="var-meta">Como a variação 4, com a volta a Roma também de carro (sem o trem Milão → Roma).</p>
+          <table class="cost vc"><thead><tr><th scope="col">Item</th><th scope="col">Valor</th></tr></thead><tbody><tr><td>Trem Roma → Bolzano (estimativa)</td><td>~€300–400</td></tr><tr><td>Van</td><td>€489</td></tr><tr><td>Combustível e pedágios</td><td>~€275</td></tr><tr><td>Vinheta suíça</td><td>~€43</td></tr><tr><td>Estacionamento em Milão e Lugano</td><td>~€90</td></tr></tbody><tfoot><tr><th scope="row">Total</th><td>~€1.200–1.300</td></tr></tfoot></table>
+          <ul class="var-pc">
+            <li><b>Ponto forte:</b> sem trens depois de Bolzano; devolvendo no aeroporto na quarta, economiza o trem do aeroporto (~€85).</li>
+            <li><b>Ponto fraco:</b> ~16h ao volante; 570 km (~6–7h) na terça, véspera do voo; sem a manhã em Milão; pede 2 motoristas.</li>
+            
+          </ul>
+        </article>
+        <article class="var">
+          <header><span class="var-n">6</span><h3>Van Roma → Roma (€333), tudo de carro</h3></header>
+          
+          <table class="cost vc"><thead><tr><th scope="col">Item</th><th scope="col">Valor</th></tr></thead><tbody><tr><td>Van</td><td>€333</td></tr><tr><td>Combustível e pedágios (~1.850 km)</td><td>~€410</td></tr><tr><td>Vinheta suíça</td><td>~€43</td></tr><tr><td>Estacionamento em Milão e Lugano</td><td>~€90</td></tr></tbody><tfoot><tr><th scope="row">Total</th><td>~€880 (~R$ 5.100)</td></tr></tfoot></table><table class="vt"><thead><tr><th scope="col">Dia</th><th scope="col">Como fica</th></tr></thead><tbody><tr><td>Sáb 21</td><td>~7h de estrada (8h ou mais com paradas); chegada a Bolzano no fim da tarde, sem o lago</td></tr><tr><td>Dom 22</td><td>Dolomitas até ~14:30; chegada a Milão ~18:30</td></tr><tr><td>Seg 23</td><td>Lugano de carro</td></tr><tr><td>Ter 24</td><td>~6h de estrada (7h ou mais com paradas) até Roma</td></tr></tbody></table>
+          <ul class="var-pc">
+            <li><b>Ponto forte:</b> a mais barata, ~€340 a menos que o Plano A.</li>
+            <li><b>Ponto fraco:</b> ~23h ao volante; sábado e terça viram dias de estrada; Dolomitas só no domingo; pede 2 motoristas.</li>
+            
+          </ul>
+        </article>
+      </div>
     </div>
   </section>
 </main>
