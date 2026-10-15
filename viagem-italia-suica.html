@@ -257,6 +257,23 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
 .cost thead th { font-size: .8rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
 .cost tfoot th, .cost tfoot td { font-weight: 600; border-bottom: 0; border-top: 1.5px solid color-mix(in srgb, var(--ink) 45%, transparent); }
 
+/* ---------- Plan B slide ---------- */
+.planb .alert { margin: 1.6rem 0 0; }
+.vt { width: 100%; border-collapse: collapse; font-size: .9rem; font-variant-numeric: lining-nums tabular-nums; }
+.vt th, .vt td { padding: .5rem .5rem .5rem 0; text-align: left; vertical-align: top; border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
+.vt thead th { font-size: .78rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.vt td:first-child { white-space: nowrap; font-weight: 500; }
+.vars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; margin-top: 2.4rem; }
+.var { padding: 1.3rem 1.4rem 1.4rem; border-radius: 14px; background: color-mix(in srgb, var(--ink) 6%, transparent); display: flex; flex-direction: column; gap: .9rem; }
+.var header { display: flex; align-items: baseline; gap: .7rem; }
+.var-n { font: italic 400 2.2rem/1 var(--serif); color: var(--accent); }
+.var h3 { font: 500 1.35rem/1.15 var(--serif); }
+.var-meta { color: var(--muted); font-size: .95rem; }
+.var-meta b { color: var(--ink); font-weight: 600; }
+.var-pc { list-style: none; padding: 0; display: grid; gap: .45rem; font-size: .95rem; }
+.var-pc b { color: var(--accent); font-weight: 600; }
+.combo { margin-top: 1.2rem; }
+
 /* ---------- Closing ---------- */
 .closing .shot { position: absolute; inset: 0; }
 .closing .veil { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(40,14,8,.35), rgba(40,14,8,.85) 75%); }
@@ -336,6 +353,9 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
   .climate { grid-template-columns: 1fr 1fr; }
   .pr-cols, .cost-cols, .pr-road ul { grid-template-columns: minmax(0, 1fr); }
   .cost-cols > div { overflow-x: auto; }
+  .vars { grid-template-columns: minmax(0, 1fr); }
+  .var { padding: 1.1rem 1rem 1.2rem; }
+  .vt td:first-child { white-space: normal; }
   .cost.eur th:nth-child(2), .cost.eur td:nth-child(2) { display: none; }
   .cost { font-size: .9rem; }
   .cost th, .cost td { padding-left: .25rem; padding-right: .25rem; }
@@ -502,6 +522,45 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
       <p>Sete dias, dois países, oito pessoas. Agora é só fazer as malas e contar os dias.</p>
       <button class="again" type="button" id="again">Ver desde o começo</button>
 
+    </div>
+  </section>
+
+  <!-- Plan B -->
+  <section class="slide practical planb" data-theme="night" data-label="Plano B" aria-label="Plano B: variações do plano">
+    <div class="pr-wrap">
+      <h2>Plano B</h2>
+      <p class="lede">Duas variações do plano, ainda tudo de van, de sábado a terça. Os dias 19 e 20 em Roma e o sábado até Bolzano não mudam; muda a distribuição das noites entre 22 e 24.</p>
+      <p class="alert"><b>Referência, plano atual.</b> Bolzano 1 noite (21), Milão 2 (22 e 23), Roma 1 (24). Domingo: Dolomitas e estrada até Milão; segunda: Lugano bate-volta; terça: Duomo e estrada até Roma. ~22h a 23h ao volante.</p>
+      <div class="vars">
+        <article class="var">
+          <header><span class="var-n">1</span><h3>Dormir nas Dolomitas no domingo</h3></header>
+          <p class="var-meta"><b>Noites:</b> Bolzano 2 (21 e 22), Milão 1 (23), Roma 1 (24).</p>
+          <table class="vt"><thead><tr><th scope="col">Dia</th><th scope="col">Programa</th></tr></thead><tbody>
+            <tr><td>Dom 22</td><td>Carezza, passos Costalunga e Sella, Selva e Ortisei sem hora para sair; volta a Bolzano antes de escurecer</td></tr>
+            <tr><td>Seg 23</td><td>Saída 7h30 direto para Lugano (~3h45, ~370 km); Monte Brè, almoço e orla; 16h30 estrada até Milão (~1h15)</td></tr>
+            <tr><td>Ter 24</td><td>Como no plano atual: Duomo de metrô e estrada até Roma</td></tr>
+          </tbody></table>
+          <ul class="var-pc">
+            <li><b>Ponto forte:</b> o domingo inteiro nas Dolomitas, com luz do dia; sem a estrada de domingo à noite até Milão.</li>
+            <li><b>Ponto fraco:</b> segunda começa cedo, com ~5h ao volante no dia; Lugano chega mais tarde (~11h30).</li>
+            <li><b>Custo:</b> parecido: 1 noite a mais em Bolzano (~R$ 1.689) e 1 a menos em Milão (~R$ 1.550–1.650).</li>
+          </ul>
+        </article>
+        <article class="var">
+          <header><span class="var-n">2</span><h3>Dormir em Lugano na segunda</h3></header>
+          <p class="var-meta"><b>Noites:</b> Bolzano 1 (21), Milão 1 (22), Lugano 1 (23), Roma 1 (24).</p>
+          <table class="vt"><thead><tr><th scope="col">Dia</th><th scope="col">Programa</th></tr></thead><tbody>
+            <tr><td>Seg 23</td><td>Saída de Milão com as malas; dia inteiro em Lugano, sem volta à noite</td></tr>
+            <tr><td>Ter 24</td><td>Saída 8h de Lugano para Roma (~7h, ~690 km; 8h com paradas); devolução da van no fim da tarde</td></tr>
+          </tbody></table>
+          <ul class="var-pc">
+            <li><b>Ponto forte:</b> uma noite na Suíça; Lugano sem pressa, inclusive à noite.</li>
+            <li><b>Ponto fraco:</b> terça mais longa ao volante, na véspera do voo; sem a manhã no Duomo de Milão.</li>
+            <li><b>Custo:</b> hospedagem em Lugano a cotar (costuma ser mais cara que Milão); 1 noite a menos de estacionamento em Milão.</li>
+          </ul>
+        </article>
+      </div>
+      <p class="alert combo"><b>As duas juntas.</b> Bolzano 2 noites (21 e 22), Lugano 1 (23), Roma 1 (24): domingo nas Dolomitas, segunda cedo direto para Lugano, terça de Lugano até Roma. Milão sai do roteiro; ~21h ao volante.</p>
     </div>
   </section>
 
