@@ -234,6 +234,12 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
 .times b { font: italic 500 1.05rem/1.4 var(--serif); font-variant-numeric: lining-nums; white-space: nowrap; }
 .pack li { padding-left: 1rem; position: relative; }
 .pack li::before { content: ""; position: absolute; left: 0; top: .62rem; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.times li.sum { border-bottom: 0; font-weight: 600; }
+.pr-road { margin-top: 2.6rem; }
+.pr-road h3 { font: italic 500 1.5rem/1.1 var(--serif); color: var(--accent); margin-bottom: .9rem; }
+.pr-road ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem clamp(1.5rem, 3vw, 3rem); }
+.pr-road b { font-weight: 600; }
+.cost-note { margin-top: 1.6rem; color: var(--muted); font-size: .95rem; max-width: 80ch; }
 .alert { margin: -1rem 0 2rem; padding: .8rem 1.1rem; border-left: 3px solid var(--accent); background: color-mix(in srgb, var(--ink) 7%, transparent); border-radius: 0 10px 10px 0; max-width: 70ch; }
 .alert b { color: var(--accent); font-weight: 600; }
 
@@ -241,6 +247,7 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
 .cost-total { margin: 1.8rem 0 2.2rem; display: grid; gap: .2rem; }
 .cost-total small { font-size: .9rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
 .cost-total b { font: 400 clamp(2.4rem, 5vw, 4.2rem)/1 var(--serif); color: var(--accent); font-variant-numeric: lining-nums; }
+.cost-total span { font-size: 1.15rem; margin-top: .3rem; }
 .cost-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 4rem); }
 .cost-cols h3 { font: italic 500 1.5rem/1.1 var(--serif); color: var(--accent); margin-bottom: .7rem; }
 .cost { width: 100%; border-collapse: collapse; font-variant-numeric: lining-nums tabular-nums; }
@@ -249,27 +256,6 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
 .cost td:not(:first-child) { white-space: nowrap; }
 .cost thead th { font-size: .8rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
 .cost tfoot th, .cost tfoot td { font-weight: 600; border-bottom: 0; border-top: 1.5px solid color-mix(in srgb, var(--ink) 45%, transparent); }
-
-/* ---------- Plan B slide ---------- */
-.planb .alert { margin: 1.6rem 0 0; }
-.pb-h { font: italic 500 1.5rem/1.1 var(--serif); color: var(--accent); margin: 2.2rem 0 .7rem; }
-.vt { width: 100%; border-collapse: collapse; font-size: .95rem; font-variant-numeric: lining-nums tabular-nums; }
-.vt th, .vt td { padding: .5rem .5rem .5rem 0; text-align: left; vertical-align: top; border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
-.vt thead th { font-size: .78rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-.vt td:first-child { white-space: nowrap; font-weight: 500; }
-.vt.sum td:nth-child(2) { font-weight: 500; }
-.vt .sn { font: italic 500 1.05rem/1.3 var(--serif); color: var(--accent); }
-.vars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; margin-top: 2.4rem; }
-.var { padding: 1.3rem 1.4rem 1.4rem; border-radius: 14px; background: color-mix(in srgb, var(--ink) 6%, transparent); display: flex; flex-direction: column; gap: .9rem; }
-.var header { display: flex; align-items: baseline; gap: .7rem; }
-.var-n { font: italic 400 2.2rem/1 var(--serif); color: var(--accent); }
-.var h3 { font: 500 1.35rem/1.15 var(--serif); }
-.var-meta { color: var(--muted); font-size: .95rem; }
-.var-meta b { color: var(--ink); font-weight: 600; }
-.var .vt { font-size: .9rem; }
-.var .vc { font-size: .92rem; }
-.var-pc { list-style: none; padding: 0; display: grid; gap: .45rem; font-size: .95rem; }
-.var-pc b { color: var(--accent); font-weight: 600; }
 
 /* ---------- Closing ---------- */
 .closing .shot { position: absolute; inset: 0; }
@@ -348,19 +334,11 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
   .timeline li { grid-template-columns: 3.4rem 1fr; gap: 1rem; }
   .timeline li::before { left: calc(3.9rem - 4px); }
   .climate { grid-template-columns: 1fr 1fr; }
-  .pr-cols, .cost-cols { grid-template-columns: 1fr; }
-  .cost { font-size: .92rem; }
-  .vars { grid-template-columns: minmax(0, 1fr); }
-  .var { padding: 1.1rem 1rem 1.2rem; }
-  .vt.sum thead { display: none; }
-  .vt.sum, .vt.sum tbody { display: block; }
-  .vt.sum tr { display: grid; grid-template-columns: 1.8rem minmax(0, 1fr); column-gap: .4rem; padding: .6rem 0; border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
-  .vt.sum td { border: 0; padding: .1rem 0; grid-column: 2; font-size: .9rem; }
-  .vt.sum td.sn { grid-column: 1; grid-row: 1 / span 4; }
-  .vt.sum td:nth-child(3)::before { content: "Transporte: "; color: var(--muted); }
-  .vt.sum td:nth-child(4)::before { content: "Diferença: "; color: var(--muted); }
-  .vt.sum td:nth-child(5)::before { content: "Ao volante: "; color: var(--muted); }
-  .vt th, .vt td { padding-right: .4rem; }
+  .pr-cols, .cost-cols, .pr-road ul { grid-template-columns: minmax(0, 1fr); }
+  .cost-cols > div { overflow-x: auto; }
+  .cost.eur th:nth-child(2), .cost.eur td:nth-child(2) { display: none; }
+  .cost { font-size: .9rem; }
+  .cost th, .cost td { padding-left: .25rem; padding-right: .25rem; }
   .title-copy .hint { display: none; }
   .nav::before {
     content: ""; position: absolute; inset: -28px 0 0; z-index: -1; pointer-events: none;
@@ -397,7 +375,7 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
       <p class="kicker">Viagem em família, 8 pessoas</p>
       <h1>De Roma <em>aos Alpes</em></h1>
       <p class="dates">19 a 25 de novembro de 2026</p>
-      <p class="route"><span>Roma</span><i>→</i><span>Verona</span><i>→</i><span>Dolomitas</span><i>→</i><span>Milão</span><i>→</i><span>Lugano</span><i>→</i><span>Roma</span></p>
+      <p class="route"><span>Roma</span><i>→</i><span>Veneza</span><i>→</i><span>Dolomitas</span><i>→</i><span>Milão</span><i>→</i><span>Lugano</span><i>→</i><span>Roma</span></p>
       <p class="hint">Use as setas do teclado, deslize ou toque nos botões para avançar.</p>
     </div>
   </section>
@@ -406,13 +384,12 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
   <section class="slide overview" data-theme="night" data-label="O roteiro" aria-label="O roteiro no mapa">
       <div class="ov-head">
         <h2>O roteiro</h2>
-        <p class="lede">Sete dias, dois países e oito pessoas, de trem pela Itália e de van pelas Dolomitas.</p>
+        <p class="lede">Sete dias, dois países e oito pessoas, tudo de van: de Roma a Veneza, aos Alpes e de volta.</p>
       </div>
       <div class="ov-map" id="ovMap"></div>
       <div class="ov-body">
         <div class="legend">
-          <span><svg viewBox="0 0 44 12" aria-hidden="true"><line x1="2" y1="6" x2="42" y2="6" stroke="var(--accent)" stroke-width="3.2" stroke-linecap="round"/></svg>Trem</span>
-          <span><svg viewBox="0 0 44 12" aria-hidden="true"><line x1="2" y1="6" x2="42" y2="6" stroke="var(--route)" stroke-width="2.6" stroke-dasharray="6 5" stroke-linecap="round"/></svg>Van</span>
+          <span><svg viewBox="0 0 44 12" aria-hidden="true"><line x1="2" y1="6" x2="42" y2="6" stroke="var(--route)" stroke-width="2.6" stroke-dasharray="6 5" stroke-linecap="round"/></svg>Van, de sábado a terça, ~2.000 km</span>
         </div>
         <ol class="legs" id="ovLegs"></ol>
         <p class="ov-hint" id="ovHint" aria-live="polite"></p>
@@ -433,28 +410,26 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
         <div><b>3 a 10 °C</b><small>Milão e Lugano, úmido e frio</small></div>
         <div><b>16h40</b><small>Já escurece por volta desse horário</small></div>
       </div>
-      <p class="alert"><b>Neve nos passos.</b> Os passos Sella e Gardena podem fechar com neve. Se fecharem, o dia fica entre Ortisei e Selva, sem subir.</p>
+      <p class="alert"><b>Neve nos passos.</b> Costalunga e Sella podem fechar com neve; checar a condição das estradas no domingo de manhã. Alternativa: Lago di Carezza e Val Gardena pelo vale.</p>
       <div class="pr-cols">
         <div>
           <h3>Reservas</h3>
           <ul class="checks">
+            <li>Traslado do aeroporto de Fiumicino (qui, 9h)</li>
             <li>Museus Vaticanos e Capela Sistina (sex, 8h)</li>
             <li>Concerto da Orquestra de Santa Cecilia (sex, 20h)</li>
-            <li>Trem Roma → Verona (sáb, 8h50)</li>
-            <li>Van Ford Tourneo, 9 lugares: retirada e devolução no aeroporto de Verona</li>
-            <li>Trem Verona → Milão (dom, reserva no trem das 20h43)</li>
-            <li>Trens Milão ↔ Lugano (seg, 7h10 e 20h30)</li>
-            <li>Trem Milão → Roma (ter, 18h)</li>
-            <li>Hospedagem em Roma, Bolzano, Milão e Roma (ao lado da Termini)</li>
+            <li>Van de 9 lugares, sáb a ter, retirada e devolução em Roma: dois motoristas, pneus de inverno ou correntes, cadeirinhas e autorização para entrar na Suíça</li>
+            <li>Hospedagem em Roma, Bolzano, Milão (com vaga para a van) e Roma (ao lado da Termini)</li>
           </ul>
         </div>
         <div>
-          <h3>Tempos de viagem</h3>
+          <h3>Horas ao volante</h3>
           <ul class="times" id="times"></ul>
         </div>
         <div>
           <h3>Na mala</h3>
           <ul class="pack">
+            <li>CNH, Permissão Internacional para Dirigir e cartão de crédito no nome do motorista</li>
             <li>Passaportes de todos no dia de Lugano</li>
             <li>Roupas de inverno para todos, em camadas</li>
             <li>Gorro e luvas para as crianças</li>
@@ -466,6 +441,17 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
           </ul>
         </div>
       </div>
+      <div class="pr-road">
+        <h3>Na estrada</h3>
+        <ul class="checks">
+          <li><span><b>Dois motoristas</b> são praticamente obrigatórios; incluir os dois no aluguel.</span></li>
+          <li><span><b>Pneus de inverno ou correntes</b> são obrigatórios nas Dolomitas a partir de 15/11.</span></li>
+          <li><span><b>Zonas restritas (ZTL):</b> não entrar de van nos centros de Roma, Milão e Bolzano; há multa por câmera.</span></li>
+          <li><span><b>Estacionamento:</b> em Veneza, só o Tronchetto aceita vans; em Milão, vaga para uma van de ~2 m de altura.</span></li>
+          <li><span><b>Suíça:</b> vinheta comprada na fronteira; passaportes de todos, sem carimbo na fronteira.</span></li>
+          <li><span><b>Terça é véspera do voo:</b> saída de Milão às 10h para ter margem em caso de trânsito.</span></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -473,39 +459,37 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
   <section class="slide practical costs" data-theme="night" data-label="Custos" aria-label="Custos de transporte e hospedagem">
     <div class="pr-wrap">
       <h2>Custos</h2>
-      <p class="lede">Valores para o grupo todo, com câmbio de €1 = R$ 5,80.</p>
-      <div class="cost-total"><small>Total geral</small><b>R$ 15.271 a 16.471</b></div>
+      <p class="lede">Valores para o grupo todo e por pessoa (dividido por 6), com câmbio de €1 = R$ 5,80.</p>
+      <div class="cost-total"><small>Total geral</small><b>R$ 14.047 a 15.247</b><span>R$ 2.342 a 2.542 por pessoa</span></div>
       <div class="cost-cols">
         <div>
           <h3>Transporte</h3>
-          <table class="cost">
-            <thead><tr><th scope="col">Trecho</th><th scope="col">Euro</th><th scope="col">Real</th></tr></thead>
+          <table class="cost eur">
+            <thead><tr><th scope="col">Item</th><th scope="col">Euro</th><th scope="col">Real</th><th scope="col">Por pessoa</th></tr></thead>
             <tbody>
-              <tr><td>Trem Roma → Verona</td><td>€224</td><td>R$ 1.299</td></tr>
-              <tr><td>Trem Verona → Milão</td><td>€96</td><td>R$ 557</td></tr>
-              <tr><td>Trem Milão → Lugano</td><td>€158</td><td>R$ 916</td></tr>
-              <tr><td>Trem Lugano → Milão</td><td>€174</td><td>R$ 1.009</td></tr>
-              <tr><td>Trem Milão → Roma</td><td>€227</td><td>R$ 1.317</td></tr>
-              <tr><td>Van, 2 dias</td><td>€183</td><td>R$ 1.061</td></tr>
-              <tr><td>Combustível e pedágios (estimativa)</td><td>€90</td><td>R$ 522</td></tr>
+              <tr><td>Van de 9 lugares, Roma → Roma</td><td>€333</td><td>R$ 1.931</td><td>R$ 322</td></tr>
+              <tr><td>Combustível e pedágios, ~2.000 km (estimativa)</td><td>~€450</td><td>R$ 2.610</td><td>R$ 435</td></tr>
+              <tr><td>Vinheta suíça</td><td>~€43</td><td>R$ 249</td><td>R$ 42</td></tr>
+              <tr><td>Estacionamentos: Veneza, Milão (2 noites) e Lugano (estimativa)</td><td>~€115</td><td>R$ 667</td><td>R$ 111</td></tr>
             </tbody>
-            <tfoot><tr><th scope="row">Total transporte</th><td>€1.152</td><td>R$ 6.682</td></tr></tfoot>
+            <tfoot><tr><th scope="row">Total transporte</th><td>~€941</td><td>R$ 5.458</td><td>R$ 910</td></tr></tfoot>
           </table>
         </div>
         <div>
           <h3>Hospedagem</h3>
           <table class="cost">
-            <thead><tr><th scope="col">Cidade e noites</th><th scope="col">Real</th></tr></thead>
+            <thead><tr><th scope="col">Cidade e noites</th><th scope="col">Real</th><th scope="col">Por pessoa</th></tr></thead>
             <tbody>
-              <tr><td>Roma, 19 e 20 nov (2 noites)</td><td>R$ 2.600–3.600</td></tr>
-              <tr><td>Bolzano, 21 nov (1 noite)</td><td>R$ 1.689</td></tr>
-              <tr><td>Milão, 22 e 23 nov (2 noites)</td><td>R$ 3.100–3.300</td></tr>
-              <tr><td>Roma, 24 nov (1 noite)</td><td>R$ 1.200</td></tr>
+              <tr><td>Roma, 19 e 20 nov (2 noites)</td><td>R$ 2.600–3.600</td><td>R$ 433–600</td></tr>
+              <tr><td>Bolzano, 21 nov (1 noite)</td><td>R$ 1.689</td><td>R$ 282</td></tr>
+              <tr><td>Milão, 22 e 23 nov (2 noites)</td><td>R$ 3.100–3.300</td><td>R$ 517–550</td></tr>
+              <tr><td>Roma, 24 nov (1 noite)</td><td>R$ 1.200</td><td>R$ 200</td></tr>
             </tbody>
-            <tfoot><tr><th scope="row">Total hospedagem</th><td>R$ 8.589–9.789</td></tr></tfoot>
+            <tfoot><tr><th scope="row">Total hospedagem</th><td>R$ 8.589–9.789</td><td>R$ 1.432–1.632</td></tr></tfoot>
           </table>
         </div>
       </div>
+      <p class="cost-note">O valor da van é de uma cotação anterior; refazer para sábado a terça, com correntes e cadeirinhas. Fora da conta: cadeirinhas, traslados do aeroporto de Roma, ingressos (Museus Vaticanos, Monte Brè) e o concerto.</p>
     </div>
   </section>
 
@@ -521,81 +505,6 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
     </div>
   </section>
 
-  <!-- Plan B -->
-  <section class="slide practical planb" data-theme="night" data-label="Plano B" aria-label="Plano B: variações do Plano A">
-    <div class="pr-wrap">
-      <h2>Plano B</h2>
-      <p class="lede">Variações do Plano A. Todas mantêm os mesmos destinos e os dias 19 e 20 em Roma; muda o transporte e a distribuição das noites entre 21 e 24. Valores de transporte para o grupo de 8 pessoas, câmbio €1 = R$ 5,80.</p>
-      <p class="alert"><b>Referência, Plano A.</b> Roma → Verona (trem) → Bolzano/Val Gardena (van) → Verona → Milão (trem) → Lugano bate-volta (trem) → Milão → Roma (trem). Transporte: ~€1.150 (~€1.220 contando os táxis em Verona). Hospedagem: Roma 2 noites, Bolzano 1, Milão 2, Roma 1.</p>
-      <h3 class="pb-h">Resumo</h3>
-      <table class="vt sum">
-        <thead><tr><th scope="col">#</th><th scope="col">Variação</th><th scope="col">Transporte (grupo)</th><th scope="col">Diferença para o Plano A</th><th scope="col">Horas ao volante</th></tr></thead>
-        <tbody><tr><td class="sn">1</td><td>Plano B: Milão só na segunda</td><td>Parecido, com 1 diária a mais de van</td><td>~igual</td><td>~5h</td></tr><tr><td class="sn">2</td><td>Dormir em Lugano na segunda</td><td>~€1.150</td><td>igual</td><td>~5h</td></tr><tr><td class="sn">3</td><td>Bolzano de trem, van só em Bolzano</td><td>~€1.300–1.500 (estimativa)</td><td>+€150–350</td><td>~2h30</td></tr><tr><td class="sn">4</td><td>Van Bolzano → Milão</td><td>~€1.420–1.520</td><td>+€200–300</td><td>~7h depois das Dolomitas</td></tr><tr><td class="sn">5</td><td>Van Bolzano → Roma</td><td>~€1.200–1.300</td><td>~igual</td><td>~16h</td></tr><tr><td class="sn">6</td><td>Van Roma → Roma (tudo de carro)</td><td>~€880</td><td>−€340</td><td>~23h</td></tr></tbody>
-      </table>
-      <div class="vars">
-        <article class="var">
-          <header><span class="var-n">1</span><h3>Plano B: Milão só na segunda</h3></header>
-          <p class="var-meta"><b>Noites:</b> Bolzano 2 (21 e 22), Milão 1 (23), Roma 1 (24). Van por 3 diárias.</p>
-          <table class="vt"><thead><tr><th scope="col">Dia</th><th scope="col">Dorme em</th><th scope="col">Programa</th></tr></thead><tbody><tr><td>Sáb 21</td><td>Bolzano</td><td>Trem 08:50 → Verona, van, Lago di Carezza</td></tr><tr><td>Dom 22</td><td>Bolzano</td><td>Dolomitas o dia todo, sem hora para sair</td></tr><tr><td>Seg 23</td><td>Milão</td><td>Manhã e almoço nas Dolomitas ou em Bolzano; saída 15:15; van devolvida em Verona 17:45; trem 19:43; Milão 21:35</td></tr><tr><td>Ter 24</td><td>Roma</td><td>Trem 08:10 para Lugano; passeio até 15:30; volta a Milão; trem 18:00; Roma ~21:15</td></tr></tbody></table>
-          <ul class="var-pc">
-            <li><b>Ponto forte:</b> quase 2 dias nas Dolomitas; domingo tranquilo.</li>
-            <li><b>Ponto fraco:</b> terça com três trens na véspera do voo; Lugano com ~6 horas e hora marcada; sem a manhã em Milão.</li>
-            <li><b>Custo:</b> refazer a cotação da van para 3 diárias.</li>
-          </ul>
-        </article>
-        <article class="var">
-          <header><span class="var-n">2</span><h3>Dormir em Lugano na segunda</h3></header>
-          <p class="var-meta"><b>Noites:</b> Bolzano 1 (21), Milão 1 (22), Lugano 1 (23), Roma 1 (24).</p>
-          <table class="vt"><thead><tr><th scope="col">Dia</th><th scope="col">Dorme em</th><th scope="col">Programa</th></tr></thead><tbody><tr><td>Sáb 21</td><td>Bolzano</td><td>Como no Plano A</td></tr><tr><td>Dom 22</td><td>Milão</td><td>Como no Plano A</td></tr><tr><td>Seg 23</td><td>Lugano</td><td>Trem cedo com as malas; dia inteiro em Lugano</td></tr><tr><td>Ter 24</td><td>Roma</td><td>Manhã livre em Lugano; trem 12:02 → Milão; trem ~15:00 → Roma ~18:15</td></tr></tbody></table>
-          <ul class="var-pc">
-            <li><b>Ponto forte:</b> uma noite na Suíça; sem volta tarde na segunda.</li>
-            <li><b>Ponto fraco:</b> um hotel a mais; malas até Lugano; sem a manhã no Duomo.</li>
-            <li><b>Custo:</b> igual ao do Plano A.</li>
-          </ul>
-        </article>
-        <article class="var">
-          <header><span class="var-n">3</span><h3>Bolzano de trem, van só em Bolzano</h3></header>
-          <p class="var-meta"><b>Noites:</b> iguais às do Plano A.</p>
-          <table class="vt"><thead><tr><th scope="col">Dia</th><th scope="col">Programa</th></tr></thead><tbody><tr><td>Sáb 21</td><td>Trem direto Roma 08:50 → Bolzano 13:48; retirada da van em Bolzano ~14:15; Lago di Carezza</td></tr><tr><td>Dom 22</td><td>Val Gardena; saída do vale 15:30; devolução da van em Bolzano 16:15; trem ~17:00–17:30 para Milão, com troca em Verona; chegada ~20:15–20:45</td></tr></tbody></table>
-          <ul class="var-pc">
-            <li><b>Ponto forte:</b> ~3h a menos de estrada; saída do vale mais tarde; sem táxis em Verona.</li>
-            <li><b>Ponto fraco:</b> depende de a locadora de Bolzano abrir sábado às 14h e domingo às 16h; uma baldeação com malas.</li>
-            <li><b>Custo:</b> a cotar: trem Roma → Bolzano ~€300–400; van Bolzano–Bolzano; trem Bolzano → Milão ~€200–350.</li>
-          </ul>
-        </article>
-        <article class="var">
-          <header><span class="var-n">4</span><h3>Van Bolzano → Milão (€581)</h3></header>
-          <p class="var-meta">Van de sábado a terça; Milão e Lugano de carro.</p>
-          <table class="cost vc"><thead><tr><th scope="col">Item</th><th scope="col">Valor</th></tr></thead><tbody><tr><td>Trem Roma → Bolzano (estimativa)</td><td>~€300–400</td></tr><tr><td>Trem Milão → Roma</td><td>€227</td></tr><tr><td>Van</td><td>€581</td></tr><tr><td>Combustível e pedágios</td><td>~€140</td></tr><tr><td>Vinheta suíça</td><td>~€43</td></tr><tr><td>Estacionamento em Milão e Lugano</td><td>~€90</td></tr></tbody><tfoot><tr><th scope="row">Total</th><td>~€1.420–1.520</td></tr></tfoot></table>
-          <ul class="var-pc">
-            <li><b>Ponto forte:</b> porta a porta; chegada a Milão ~18:30 no domingo.</li>
-            <li><b>Ponto fraco:</b> mais caro; estacionar uma van de 2 m de altura em Milão; dirigir na Suíça; retirada em Bolzano no sábado à tarde a confirmar.</li>
-            
-          </ul>
-        </article>
-        <article class="var">
-          <header><span class="var-n">5</span><h3>Van Bolzano → Roma (€489)</h3></header>
-          <p class="var-meta">Como a variação 4, com a volta a Roma também de carro (sem o trem Milão → Roma).</p>
-          <table class="cost vc"><thead><tr><th scope="col">Item</th><th scope="col">Valor</th></tr></thead><tbody><tr><td>Trem Roma → Bolzano (estimativa)</td><td>~€300–400</td></tr><tr><td>Van</td><td>€489</td></tr><tr><td>Combustível e pedágios</td><td>~€275</td></tr><tr><td>Vinheta suíça</td><td>~€43</td></tr><tr><td>Estacionamento em Milão e Lugano</td><td>~€90</td></tr></tbody><tfoot><tr><th scope="row">Total</th><td>~€1.200–1.300</td></tr></tfoot></table>
-          <ul class="var-pc">
-            <li><b>Ponto forte:</b> sem trens depois de Bolzano; devolvendo no aeroporto na quarta, economiza o trem do aeroporto (~€85).</li>
-            <li><b>Ponto fraco:</b> ~16h ao volante; 570 km (~6–7h) na terça, véspera do voo; sem a manhã em Milão; pede 2 motoristas.</li>
-            
-          </ul>
-        </article>
-        <article class="var">
-          <header><span class="var-n">6</span><h3>Van Roma → Roma (€333), tudo de carro</h3></header>
-          
-          <table class="cost vc"><thead><tr><th scope="col">Item</th><th scope="col">Valor</th></tr></thead><tbody><tr><td>Van</td><td>€333</td></tr><tr><td>Combustível e pedágios (~1.850 km)</td><td>~€410</td></tr><tr><td>Vinheta suíça</td><td>~€43</td></tr><tr><td>Estacionamento em Milão e Lugano</td><td>~€90</td></tr></tbody><tfoot><tr><th scope="row">Total</th><td>~€880 (~R$ 5.100)</td></tr></tfoot></table><table class="vt"><thead><tr><th scope="col">Dia</th><th scope="col">Como fica</th></tr></thead><tbody><tr><td>Sáb 21</td><td>~7h de estrada (8h ou mais com paradas); chegada a Bolzano no fim da tarde, sem o lago</td></tr><tr><td>Dom 22</td><td>Dolomitas até ~14:30; chegada a Milão ~18:30</td></tr><tr><td>Seg 23</td><td>Lugano de carro</td></tr><tr><td>Ter 24</td><td>~6h de estrada (7h ou mais com paradas) até Roma</td></tr></tbody></table>
-          <ul class="var-pc">
-            <li><b>Ponto forte:</b> a mais barata, ~€340 a menos que o Plano A.</li>
-            <li><b>Ponto fraco:</b> ~23h ao volante; sábado e terça viram dias de estrada; Dolomitas só no domingo; pede 2 motoristas.</li>
-            
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
 </main>
 
 <nav class="nav" aria-label="Navegação dos slides">
@@ -663,8 +572,8 @@ const LAKES = {
 const TIBER = [[41.94,12.466],[41.927,12.469],[41.9195,12.4675],[41.9165,12.4705],[41.9115,12.4745],[41.906,12.474],[41.9035,12.472],[41.9017,12.4663],[41.8995,12.4645],[41.8955,12.4655],[41.8925,12.4705],[41.8905,12.4735],[41.8907,12.4775],[41.8887,12.4795],[41.8845,12.477],[41.8805,12.4735],[41.875,12.468],[41.86,12.47]];
 
 const P = {
-  roma:[41.90,12.50,"Roma"], verona:[45.44,10.99,"Verona"], bolzano:[46.50,11.35,"Bolzano"],
-  carezza:[46.41,11.57,"Lago di Carezza"], ortisei:[46.57,11.67,"Ortisei"], selva:[46.56,11.76,"Selva"],
+  roma:[41.90,12.50,"Roma"], veneza:[45.44,12.32,"Veneza"], bolzano:[46.50,11.35,"Bolzano"],
+  carezza:[46.41,11.57,"Lago di Carezza"], canazei:[46.48,11.77,"Canazei"], ortisei:[46.57,11.67,"Ortisei"], selva:[46.56,11.76,"Selva"],
   sella:[46.51,11.76,"Passo Sella"], milano:[45.48,9.20,"Milão"], lugano:[46.00,8.95,"Lugano"], fiumicino:[41.80,12.25,"Fiumicino"],
   trevi:[41.9009,12.4833,"Fontana di Trevi"], pantheon:[41.8986,12.4769,"Panteão"], navona:[41.8992,12.4731,"Piazza Navona"],
   musei:[41.9065,12.4536,"Museus Vaticanos"], sanpietro:[41.9022,12.4539,"São Pedro"], prati:[41.9068,12.4625,"Prati"],
@@ -672,18 +581,17 @@ const P = {
 };
 
 const LEGS = {
-  "roma-verona":      { mode:"train", from:"roma", to:"verona", via:[[43.77,11.25],[44.49,11.34]] },
-  "verona-bolzano":   { mode:"car", from:"verona", to:"bolzano", via:[[45.70,10.98],[46.07,11.12],[46.30,11.25]] },
+  "roma-veneza":      { mode:"car", from:"roma", to:"veneza", via:[[42.72,12.11],[43.77,11.25],[44.49,11.34],[45.00,11.78],[45.41,11.92]] },
+  "veneza-bolzano":   { mode:"car", from:"veneza", to:"bolzano", via:[[45.47,11.90],[45.50,11.35],[45.70,10.98],[46.07,11.12],[46.30,11.25]] },
   "bolzano-carezza":  { mode:"car", from:"bolzano", to:"carezza", via:[[46.46,11.46]] },
-  "carezza-bolzano":  { mode:"car", from:"carezza", to:"bolzano", via:[[46.44,11.43]] },
-  "bolzano-ortisei":  { mode:"car", from:"bolzano", to:"ortisei", via:[[46.55,11.45],[46.59,11.56]] },
-  "ortisei-sella":    { mode:"car", from:"ortisei", to:"sella", via:[[46.565,11.72],[46.555,11.76],[46.53,11.765]] },
+  "carezza-canazei":  { mode:"car", from:"carezza", to:"canazei", via:[[46.405,11.61],[46.42,11.68]] },
+  "canazei-sella":    { mode:"car", from:"canazei", to:"sella", via:[[46.495,11.775]] },
   "sella-selva":      { mode:"car", from:"sella", to:"selva", via:[[46.535,11.775]] },
-  "selva-verona":     { mode:"car", from:"selva", to:"verona", via:[[46.565,11.70],[46.59,11.57],[46.55,11.44],[46.50,11.35],[46.07,11.12],[45.70,10.98]] },
-  "verona-milano":    { mode:"train", from:"verona", to:"milano", via:[[45.54,10.22],[45.52,9.70]] },
-  "milano-lugano":    { mode:"train", from:"milano", to:"lugano", via:[[45.60,9.27],[45.81,9.08],[45.88,9.00]] },
-  "lugano-milano":    { mode:"train", from:"lugano", to:"milano", via:[[45.87,8.98],[45.80,9.05],[45.58,9.24]] },
-  "milano-roma":      { mode:"train", from:"milano", to:"roma", via:[[44.80,10.33],[44.45,11.47],[43.73,11.40],[42.72,12.24]] },
+  "selva-ortisei":    { mode:"car", from:"selva", to:"ortisei", via:[[46.565,11.72]] },
+  "ortisei-milano":   { mode:"car", from:"ortisei", to:"milano", via:[[46.59,11.57],[46.55,11.44],[46.50,11.35],[46.07,11.12],[45.70,10.98],[45.46,10.80],[45.54,10.22],[45.52,9.70]] },
+  "milano-lugano":    { mode:"car", from:"milano", to:"lugano", via:[[45.60,9.27],[45.81,9.08],[45.88,9.00]] },
+  "lugano-milano":    { mode:"car", from:"lugano", to:"milano", via:[[45.87,8.98],[45.80,9.05],[45.58,9.24]] },
+  "milano-roma":      { mode:"car", from:"milano", to:"roma", via:[[44.80,10.33],[44.45,11.47],[43.73,11.40],[42.72,12.24]] },
   "roma-fiumicino":   { mode:"train", from:"roma", to:"fiumicino", via:[[41.87,12.46],[41.83,12.36]] },
   "w-trevi-pantheon": { mode:"walk", from:"trevi", to:"pantheon", via:[] },
   "w-pantheon-navona":{ mode:"walk", from:"pantheon", to:"navona", via:[] },
@@ -691,8 +599,8 @@ const LEGS = {
   "w-sanpietro-prati":{ mode:"walk", from:"sanpietro", to:"prati", via:[[41.9045,12.459]] },
   "prati-auditorium": { mode:"car", from:"prati", to:"auditorium", via:[[41.9150,12.4660],[41.9230,12.4700]] }
 };
-const TRIP = ["roma-verona","verona-bolzano","bolzano-carezza","carezza-bolzano","bolzano-ortisei","ortisei-sella",
-  "sella-selva","selva-verona","verona-milano","milano-lugano","lugano-milano","milano-roma"];
+const TRIP = ["roma-veneza","veneza-bolzano","bolzano-carezza","carezza-canazei","canazei-sella",
+  "sella-selva","selva-ortisei","ortisei-milano","milano-lugano","lugano-milano","milano-roma"];
 
 /* =========================================================
    Projection + path helpers
@@ -934,54 +842,56 @@ const DAYS = [
   { theme:"rome", n:"19", week:"Quinta-feira", place:"Roma", sub:"Chegada à Cidade Eterna e um primeiro passeio pelo centro histórico.",
     shots:[{ src:W+"6/66/Fontaine_Trevi_-_Rome.jpg/1280px-Fontaine_Trevi_-_Rome.jpg", alt:"Fontana di Trevi", name:"Fontana di Trevi", credit:"Foto: Wilfredor, CC0" },
       { src:W+"c/c7/Fa%C3%A7ade_of_the_Pantheon%2C_Rome%2C_Italy.jpg/1280px-Fa%C3%A7ade_of_the_Pantheon%2C_Rome%2C_Italy.jpg", alt:"Fachada do Panteão", name:"Panteão", credit:"Foto: Julian Lupyan, CC0" }],
-    plan:[["9h","Chegada ao aeroporto de Fiumicino"],["12h30","Almoço perto da hospedagem"],["14h","Check-in e descanso"],["16h30","Fontana di Trevi, Panteão e Piazza Navona",1],["18h30","Jantar cedo"]],
+    plan:[["9h","Chegada ao aeroporto de Fiumicino; traslado até a hospedagem perto do Vaticano"],["12h30","Almoço perto da hospedagem"],["14h","Check-in e descanso"],["16h30","Fontana di Trevi, Panteão e Piazza Navona",1],["18h30","Jantar cedo"]],
     facts:["7 a 15 °C","pôr do sol 16h43"], mapNote:"A pé pelo centro histórico",
     map:{ legs:["w-trevi-pantheon","w-pantheon-navona"], tiber:true, context:false, pad:.4,
       stops:[{k:"trevi",dx:8,dy:-6},{k:"pantheon",dx:4,dy:16},{k:"navona",dx:-8,dy:-6,a:"end"}] } },
   { theme:"rome", n:"20", week:"Sexta-feira", place:"Vaticano e Roma", sub:"Michelangelo de manhã, Tchaikovsky à noite.",
     shots:[{ src:W+"f/f5/Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg/1280px-Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg", alt:"Fachada da Basílica de São Pedro", name:"São Pedro", credit:"Foto: Alvesgaspar, CC BY-SA 4.0" },
       { src:W+"3/3c/01_St_Peter%27s_Basilica_Facade.jpg/1280px-01_St_Peter%27s_Basilica_Facade.jpg", alt:"Praça e fachada da Basílica de São Pedro", name:"Praça São Pedro", credit:"Foto: NateBergin, CC BY 4.0" },
-      { src:W+"5/53/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg/1280px-Colosseum_in_Rome%2C_Italy_-_April_2007.jpg", alt:"Coliseu iluminado no fim da tarde", name:"Coliseu", credit:"Foto: Diliff, CC BY-SA 2.5" },
       { src:W+"d/dc/Auditorium_Parco_della_Musica_a_Parioli.JPG/1280px-Auditorium_Parco_della_Musica_a_Parioli.JPG", alt:"Salas do Auditorium Parco della Musica", name:"Auditorium Parco della Musica", credit:"Foto: LPLT, CC BY-SA 3.0" }],
-    plan:[["8h","Museus Vaticanos e Capela Sistina"],["11h30","Basílica e Praça de São Pedro"],["13h","Almoço em Prati"],["15h","Coliseu (opcional) ou descanso"],
+    plan:[["8h","Museus Vaticanos e Capela Sistina"],["11h30","Basílica e Praça de São Pedro"],["13h","Almoço em Prati"],["15h","Descanso e malas prontas (o sábado começa cedo)"],
       ["20h","Concerto da Orquestra de Santa Cecilia no Auditorium Parco della Musica, regência de Antonio Pappano: Petrassi, Salmo IX, e Tchaikovsky, Sinfonia nº 6",1]],
     facts:["7 a 15 °C","pôr do sol 16h42"], mapNote:"Vaticano a pé; à noite, o Auditorium",
     map:{ legs:["w-musei-sanpietro","w-sanpietro-prati","prati-auditorium"], tiber:true, context:false, pad:.2,
       stops:[{k:"musei",dx:-8,dy:-6,a:"end"},{k:"sanpietro",dx:-8,dy:14,a:"end"},{k:"prati",dx:8,dy:6},{k:"auditorium",dx:-8,dy:-6,a:"end"}] } },
-  { theme:"dolo", n:"21", week:"Sábado", place:"Rumo às Dolomitas", sub:"Trem até Verona, van até as montanhas e pôr do sol no Lago di Carezza.",
+  { theme:"dolo", n:"21", week:"Sábado", place:"Veneza e Bolzano", sub:"Dia de estrada: de Roma a Veneza, uma foto no Grand Canal e subida até Bolzano.",
+    shots:[{ src:W+"a/a3/Canal_Grande_Chiesa_della_Salute_e_Dogana_dal_ponte_dell_Accademia.jpg/1280px-Canal_Grande_Chiesa_della_Salute_e_Dogana_dal_ponte_dell_Accademia.jpg", alt:"Grand Canal com a Basílica della Salute ao fundo", name:"Grand Canal", credit:"Foto: Wolfgang Moroder, CC BY-SA 3.0" },
+      { src:W+"8/80/Grand_Canal_%2850443979376%29.jpg/1280px-Grand_Canal_%2850443979376%29.jpg", alt:"Grand Canal diante da igreja dos Scalzi, ao lado da estação Santa Lucia", name:"Santa Lucia", credit:"Foto: Kent Wang, CC BY-SA 2.0" }],
+    plan:[["7h30","Retirada da van em Roma (estação Termini ou aeroporto)"],["8h","Estrada Roma → Veneza (~5h30, 530 km), com parada para almoço perto de Bolonha"],
+      ["14h15","Veneza: van no estacionamento do Tronchetto; foto no Grand Canal, a ~10 min a pé, perto da estação Santa Lucia",1],
+      ["15h15","Estrada Veneza → Bolzano (~2h50); escurece às 16h35"],["18h15","Chegada e jantar em Bolzano"]],
+    facts:["−3 a 6 °C","pôr do sol 16h35"], mapNote:"De van: Roma, Veneza e Bolzano",
+    map:{ legs:["roma-veneza","veneza-bolzano"], pad:.12, duration:4200,
+      stops:[{k:"roma",dx:8,dy:5},{k:"veneza",dx:8,dy:12},{k:"bolzano",dx:-8,dy:2,a:"end"}] } },
+  { theme:"dolo", n:"22", week:"Domingo", place:"Dolomitas e Milão", sub:"Lago di Carezza, os passos Costalunga e Sella, almoço em Selva, café em Ortisei e estrada até Milão.",
     shots:[{ src:W+"3/3a/Lago_di_Carezza_and_Latemar%2C_Carezza%2C_Trentino-Alto_Adige%2C_Italy%2C_2025_October.jpg/1280px-Lago_di_Carezza_and_Latemar%2C_Carezza%2C_Trentino-Alto_Adige%2C_Italy%2C_2025_October.jpg", alt:"Águas verdes do Lago di Carezza com o maciço do Latemar", name:"Lago di Carezza", credit:"Foto: Ximonic (Simo Räsänen), CC BY-SA 4.0" },
-      { src:W+"5/54/Karersee_HDR.jpg/1280px-Karersee_HDR.jpg", alt:"Lago di Carezza com o Latemar ao fundo", name:"Lago di Carezza", credit:"Foto: Afrank99, CC BY-SA 3.0" },
-      { src:W+"4/4c/Lake_Carezza%2C_view_heading_West_02.jpg/1280px-Lake_Carezza%2C_view_heading_West_02.jpg", alt:"Floresta refletida no Lago di Carezza", name:"Lago di Carezza", credit:"Foto: Marco Ober, CC BY-SA 4.0" }],
-    plan:[["8h50","Trem Roma Termini → Verona Porta Nuova (chegada 12h08)"],["12h45","Retirada da van no aeroporto de Verona (Ford Tourneo, 9 lugares)"],["13h15","Estrada até Bolzano (cerca de 1h30)"],
-      ["14h45","Chegada a Bolzano, malas na hospedagem"],["15h30","Lago di Carezza, com pôr do sol às 16h35",1],["18h30","Jantar em Bolzano"]],
-    facts:["−3 a 6 °C","pôr do sol 16h35"], mapNote:"Trem até Verona, depois van",
-    map:{ legs:["roma-verona","verona-bolzano","bolzano-carezza","carezza-bolzano"], pad:.12, duration:3800,
-      stops:[{k:"roma",dx:8,dy:5},{k:"verona",dx:-8,dy:4,a:"end"},{k:"bolzano",dx:-8,dy:2,a:"end"},{k:"carezza",dx:8,dy:14,minor:true,name:"Carezza"}] } },
-  { theme:"dolo", n:"22", week:"Domingo", place:"Val Gardena e Milão", sub:"Manhã em Ortisei, almoço sob os paredões do Sella e trem até Milão à noite.",
-    shots:[{ src:W+"a/ac/Sassolungo_Langkofel_Val_Gardena_S%C3%BCdtirol_Alto_Adige_Italia_Italy_%282010.10.20%29.jpg/1280px-Sassolungo_Langkofel_Val_Gardena_S%C3%BCdtirol_Alto_Adige_Italia_Italy_%282010.10.20%29.jpg", alt:"O Sassolungo acima da Val Gardena", name:"Sassolungo", credit:"Foto: Geir Hval, CC BY-SA 4.0" },
+      { src:W+"a/ac/Sassolungo_Langkofel_Val_Gardena_S%C3%BCdtirol_Alto_Adige_Italia_Italy_%282010.10.20%29.jpg/1280px-Sassolungo_Langkofel_Val_Gardena_S%C3%BCdtirol_Alto_Adige_Italia_Italy_%282010.10.20%29.jpg", alt:"O Sassolungo acima da Val Gardena", name:"Sassolungo", credit:"Foto: Geir Hval, CC BY-SA 4.0" },
       { src:"https://upload.wikimedia.org/wikipedia/commons/e/e7/Passo_Sella_-_verso_il_Sassolungo.jpg", alt:"Vista do Passo Sella em direção ao Sassolungo", name:"Passo Sella", credit:"Foto: Llorenzi, CC BY-SA 3.0" },
       { src:W+"4/48/Urtij%C3%ABi_Plajes_Saslonch.jpg/1280px-Urtij%C3%ABi_Plajes_Saslonch.jpg", alt:"Ortisei com o Sassolungo ao fundo", name:"Ortisei", credit:"Foto: Wolfgang Moroder, CC BY-SA 3.0" },
       { src:W+"0/0f/S%C3%ABlva_Wolkenstein_Selva_di_Val_Gardena_Sella_Saslonch.jpg/1280px-S%C3%ABlva_Wolkenstein_Selva_di_Val_Gardena_Sella_Saslonch.jpg", alt:"Selva di Val Gardena entre o Sella e o Sassolungo", name:"Selva di Val Gardena", credit:"Foto: Wolfgang Moroder, CC BY-SA 3.0" }],
-    plan:[["9h","Saída de Bolzano"],["9h45","Ortisei: rua de pedestres, café e parquinho"],["11h30","Subida por Santa Cristina e Selva, com vista do Sassolungo"],
-      ["12h15","Passo Sella ou Passo Gardena (2.200 m): paredões de rocha e neve",1],["13h15","Almoço em Selva di Val Gardena"],["14h45","Estrada até Verona (cerca de 2h30)"],
-      ["17h45","Devolução da van no aeroporto de Verona"],["19h43","Trem regional Verona Porta Nuova → Milano Centrale, chegada 21h35 (reserva: trem das 20h43)"]],
-    facts:["−5 a 4 °C","pôr do sol 16h38"], mapNote:"Van pelas montanhas, trem até Milão",
-    map:{ legs:["bolzano-ortisei","ortisei-sella","sella-selva","selva-verona","verona-milano"], pad:.1, duration:4600, minLeg:450,
-      stops:[{k:"bolzano",dx:-8,dy:2,a:"end"},{k:"ortisei",dx:-6,dy:-8,a:"end",minor:true},{k:"selva",dx:8,dy:-6,minor:true},{k:"sella",dx:8,dy:12,minor:true},{k:"verona",dx:8,dy:12},{k:"milano",dx:-8,dy:14,a:"end"}] } },
-  { theme:"lake", n:"23", week:"Segunda-feira", place:"Lugano, Suíça", sub:"Bate-volta de trem: funicular, lago e centro antigo. Passaportes na mão!",
+    plan:[["8h30","Saída de Bolzano"],["9h","Lago di Carezza"],["10h","Passo Costalunga e Val di Fassa até Canazei"],
+      ["11h45","Passo Sella (2.200 m): paredões de rocha e neve",1],["12h30","Almoço em Selva di Val Gardena"],["14h15","Ortisei: rua de pedestres, café e parquinho"],
+      ["16h30","Estrada até Milão (~3h30; trânsito de domingo à noite)"],["20h","Chegada a Milão, hospedagem perto da estação Centrale, com vaga para a van"]],
+    facts:["−5 a 4 °C","pôr do sol 16h38"], mapNote:"Van pelos passos; à tarde, estrada até Milão",
+    map:{ legs:["bolzano-carezza","carezza-canazei","canazei-sella","sella-selva","selva-ortisei"], pad:.15, duration:4600, minLeg:450,
+      stops:[{k:"bolzano",dx:-8,dy:2,a:"end"},{k:"carezza",dx:-6,dy:14,a:"end",minor:true,name:"Lago di Carezza"},{k:"canazei",dx:8,dy:12,minor:true},{k:"sella",dx:10,dy:4,minor:true},{k:"selva",dx:8,dy:-6,minor:true},{k:"ortisei",dx:-6,dy:-8,a:"end",minor:true}] } },
+  { theme:"lake", n:"23", week:"Segunda-feira", place:"Lugano, Suíça", sub:"Bate-volta de van: funicular, lago e centro antigo. Passaportes na mão!",
     shots:[
       { src:W+"5/50/Lakefront_Lugano_2022.jpg/1280px-Lakefront_Lugano_2022.jpg", alt:"Bancos vermelhos na orla do Lago de Lugano", name:"Lugano", credit:"Foto: Ivo Kruusamägi, CC BY-SA 4.0" },
       { src:W+"b/b3/View_of_Lake_Lugano_and_Monte_Br%C3%A8_02.jpg/1280px-View_of_Lake_Lugano_and_Monte_Br%C3%A8_02.jpg", alt:"Lago de Lugano e o Monte Brè", name:"Monte Brè", credit:"Foto: John Samuel, CC BY-SA 4.0" },
       { src:W+"5/59/Lakefront_Lugano_2017-05-29_12.57.39.jpg/1280px-Lakefront_Lugano_2017-05-29_12.57.39.jpg", alt:"Calçadão arborizado à beira do lago em Lugano", name:"Lugano", credit:"Foto: Chris j wood, CC BY-SA 4.0" }],
-    plan:[["7h10","Trem Milano Centrale → Lugano, chegada 8h28 (levar passaportes)",1],["9h30","Monte Brè de funicular"],["12h30","Almoço e Via Nassa"],["14h30","Orla do lago e Parco Ciani"],["20h30","Trem Lugano → Milano Centrale, chegada 21h50"]],
-    facts:["3 a 10 °C","pôr do sol 16h48"], mapNote:"Trem de ida e volta",
+    plan:[["9h","Estrada Milão → Lugano (~1h15); vinheta suíça na fronteira; levar passaportes"],["10h30","Monte Brè de funicular",1],["12h30","Almoço e Via Nassa"],
+      ["14h30","Orla do lago e Parco Ciani (pôr do sol às 16h40)"],["17h","Volta a Milão (chegada ~18h15)"],["19h30","Jantar em Milão"]],
+    facts:["3 a 10 °C","pôr do sol 16h40"], mapNote:"Van de ida e volta",
     map:{ legs:["milano-lugano","lugano-milano"], pad:.25, minLeg:900,
       stops:[{k:"milano",dx:8,dy:6},{k:"lugano",dx:-8,dy:-6,a:"end"}] } },
-  { theme:"night", n:"24", week:"Terça-feira", place:"Milão e Roma", sub:"Duomo pela manhã e trem de volta a Roma no fim da tarde.",
+  { theme:"night", n:"24", week:"Terça-feira", place:"Milão e Roma", sub:"Duomo cedo, de metrô, e estrada de volta a Roma.",
     shots:[{ src:W+"5/5b/Milan_Cathedral%2C_Fa%C3%A7ade%2C_2025.jpg/1280px-Milan_Cathedral%2C_Fa%C3%A7ade%2C_2025.jpg", alt:"Fachada do Duomo de Milão", name:"Duomo de Milão", credit:"Foto: Julian Lupyan, CC0" },
       { src:W+"9/98/Galleria_Vittorio_Emanuele_Interno.jpg/1280px-Galleria_Vittorio_Emanuele_Interno.jpg", alt:"Interior da Galleria Vittorio Emanuele II", name:"Galleria Vittorio Emanuele II", credit:"Foto: Maurizio Moro5153, CC BY-SA 4.0" }],
-    plan:[["9h","Café da manhã e check-out"],["10h","Duomo e Galleria Vittorio Emanuele II",1],["13h","Almoço"],["18h","Trem Milano Centrale → Roma Termini, chegada por volta de 21h15"],["21h15","Hotel ao lado da estação Termini"]],
-    facts:["4 a 11 °C","pôr do sol 16h44"], mapNote:"Trem de Milão a Roma",
+    plan:[["8h30","Duomo e Galleria Vittorio Emanuele II, de metrô (não entrar de van no centro: Área C)",1],["10h","Estrada Milão → Roma (~6h, 575 km; 7h com paradas)"],
+      ["13h","Almoço no caminho, perto de Florença"],["17h30","Devolução da van em Roma"],["19h30","Último jantar; hotel ao lado da estação Termini"]],
+    facts:["4 a 11 °C","pôr do sol 16h44"], mapNote:"Van de Milão a Roma",
     map:{ legs:["milano-roma"], pad:.12,
       stops:[{k:"milano",dx:8,dy:6},{k:"roma",dx:8,dy:5}] } },
   { theme:"rome", n:"25", week:"Quarta-feira", place:"Hora de voltar", sub:"Arrivederci, Roma. Voltamos com a mala cheia de histórias.",
@@ -1031,12 +941,12 @@ DAYS.forEach((d, i) => {
 
 /* ---------- Overview map + leg list ---------- */
 const GROUPS = [
-  { t:"Roma → Verona", mode:"train", d:"3h18", legs:["roma-verona"] },
-  { t:"Verona → Bolzano → Carezza", mode:"car", d:"≈ 3h", legs:["verona-bolzano","bolzano-carezza","carezza-bolzano"] },
-  { t:"Val Gardena → Verona", mode:"car", d:"o dia todo", legs:["bolzano-ortisei","ortisei-sella","sella-selva","selva-verona"] },
-  { t:"Verona → Milão", mode:"train", d:"1h52", legs:["verona-milano"] },
-  { t:"Milão ↔ Lugano", mode:"train", d:"bate-volta", legs:["milano-lugano","lugano-milano"] },
-  { t:"Milão → Roma", mode:"train", d:"≈ 3h15", legs:["milano-roma"] }
+  { t:"Roma → Veneza", mode:"car", d:"≈ 5h30", legs:["roma-veneza"] },
+  { t:"Veneza → Bolzano", mode:"car", d:"≈ 2h50", legs:["veneza-bolzano"] },
+  { t:"Carezza, Sella e Val Gardena", mode:"car", d:"domingo cedo", legs:["bolzano-carezza","carezza-canazei","canazei-sella","sella-selva","selva-ortisei"] },
+  { t:"Ortisei → Milão", mode:"car", d:"≈ 3h30", legs:["ortisei-milano"] },
+  { t:"Milão ↔ Lugano", mode:"car", d:"bate-volta", legs:["milano-lugano","lugano-milano"] },
+  { t:"Milão → Roma", mode:"car", d:"≈ 6h", legs:["milano-roma"] }
 ];
 // Leg index where each group starts: step k means groups [0, k) are drawn.
 const GSTART = [0]; GROUPS.forEach(g => GSTART.push(GSTART[GSTART.length - 1] + g.legs.length));
@@ -1048,8 +958,8 @@ const ovMap = buildMap({
   bounds: [[40.55, 6.5], [47.45, 15.9]], pad: 0.02,
   legs: TRIP, label: "Mapa da Itália e sul da Suíça com o roteiro completo",
   stops: [
-    {k:"roma",dx:9,dy:5},{k:"verona",dx:-8,dy:14,a:"end"},{k:"bolzano",dx:-8,dy:2,a:"end"},{k:"carezza",label:false,minor:true},
-    {k:"ortisei",label:false,minor:true},{k:"selva",dx:8,dy:-8,name:"Val Gardena"},{k:"sella",label:false,minor:true},
+    {k:"roma",dx:9,dy:5},{k:"veneza",dx:9,dy:5},{k:"bolzano",dx:-8,dy:2,a:"end"},{k:"carezza",label:false,minor:true},{k:"canazei",label:false,minor:true},
+    {k:"ortisei",label:false,minor:true},{k:"selva",dx:8,dy:-8,name:"Dolomitas"},{k:"sella",label:false,minor:true},
     {k:"milano",dx:9,dy:12},{k:"lugano",dx:-8,dy:-6,a:"end"}
   ],
   onResize: () => ovMap.showUpTo(GSTART[ovStep])
@@ -1085,11 +995,11 @@ const MODE_SVG = {
   car: `<svg viewBox="0 0 26 10" aria-hidden="true"><line x1="2" y1="5" x2="24" y2="5" stroke="var(--route)" stroke-width="2.4" stroke-dasharray="5 4" stroke-linecap="round"/></svg>`
 };
 const TIMES = [
-  ["Roma → Verona","train","3h18"],["Verona → Bolzano","car","≈ 1h30"],["Bolzano → Ortisei","car","≈ 45 min"],
-  ["Selva → Verona","car","≈ 2h30"],["Verona → Milão","train","1h52"],["Milão → Lugano","train","1h18"],
-  ["Lugano → Milão","train","1h20"],["Milão → Roma","train","≈ 3h15"],["Roma → Fiumicino","train","≈ 30 min"]
+  ["Sáb 21: Roma → Veneza → Bolzano","car","≈ 8h30"],["Dom 22: passos das Dolomitas → Milão","car","≈ 5h"],
+  ["Seg 23: Milão ↔ Lugano","car","≈ 2h30"],["Ter 24: Milão → Roma","car","≈ 6h a 7h"],
+  ["Qua 25: Roma → Fiumicino, de trem","train","≈ 30 min"],["Total ao volante","sum","≈ 22h a 23h"]
 ];
-document.getElementById("times").innerHTML = TIMES.map(([t, m, d]) => `<li><span>${MODE_SVG[m]}${t}</span><b>${d}</b></li>`).join("");
+document.getElementById("times").innerHTML = TIMES.map(([t, m, d]) => `<li${m === "sum" ? ' class="sum"' : ""}><span>${MODE_SVG[m] || ""}${t}</span><b>${d}</b></li>`).join("");
 
 /* ---------- Photo galleries on day slides ---------- */
 let gTimer = 0;
