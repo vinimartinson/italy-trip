@@ -256,23 +256,8 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
 .cost td:not(:first-child) { white-space: nowrap; }
 .cost thead th { font-size: .8rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
 .cost tfoot th, .cost tfoot td { font-weight: 600; border-bottom: 0; border-top: 1.5px solid color-mix(in srgb, var(--ink) 45%, transparent); }
-
-/* ---------- Plan B slide ---------- */
-.planb .alert { margin: 1.6rem 0 0; }
-.vt { width: 100%; border-collapse: collapse; font-size: .9rem; font-variant-numeric: lining-nums tabular-nums; }
-.vt th, .vt td { padding: .5rem .5rem .5rem 0; text-align: left; vertical-align: top; border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
-.vt thead th { font-size: .78rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-.vt td:first-child { white-space: nowrap; font-weight: 500; }
-.vars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; margin-top: 2.4rem; }
-.var { padding: 1.3rem 1.4rem 1.4rem; border-radius: 14px; background: color-mix(in srgb, var(--ink) 6%, transparent); display: flex; flex-direction: column; gap: .9rem; }
-.var header { display: flex; align-items: baseline; gap: .7rem; }
-.var-n { font: italic 400 2.2rem/1 var(--serif); color: var(--accent); }
-.var h3 { font: 500 1.35rem/1.15 var(--serif); }
-.var-meta { color: var(--muted); font-size: .95rem; }
-.var-meta b { color: var(--ink); font-weight: 600; }
-.var-pc { list-style: none; padding: 0; display: grid; gap: .45rem; font-size: .95rem; }
-.var-pc b { color: var(--accent); font-weight: 600; }
-.combo { margin-top: 1.2rem; }
+.cost a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+.cost a:hover { color: var(--accent); }
 
 /* ---------- Closing ---------- */
 .closing .shot { position: absolute; inset: 0; }
@@ -353,9 +338,6 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
   .climate { grid-template-columns: 1fr 1fr; }
   .pr-cols, .cost-cols, .pr-road ul { grid-template-columns: minmax(0, 1fr); }
   .cost-cols > div { overflow-x: auto; }
-  .vars { grid-template-columns: minmax(0, 1fr); }
-  .var { padding: 1.1rem 1rem 1.2rem; }
-  .vt td:first-child { white-space: normal; }
   .cost.eur th:nth-child(2), .cost.eur td:nth-child(2) { display: none; }
   .cost { font-size: .9rem; }
   .cost th, .cost td { padding-left: .25rem; padding-right: .25rem; }
@@ -388,14 +370,14 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
     <div class="strips">
       <div class="strip"><figure class="shot kb" data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg/1280px-Colosseum_in_Rome%2C_Italy_-_April_2007.jpg" data-alt="Coliseu iluminado à noite" data-name="Roma"></figure></div>
       <div class="strip"><figure class="shot kb" data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Lago_di_Carezza_and_Latemar%2C_Carezza%2C_Trentino-Alto_Adige%2C_Italy%2C_2025_October.jpg/1280px-Lago_di_Carezza_and_Latemar%2C_Carezza%2C_Trentino-Alto_Adige%2C_Italy%2C_2025_October.jpg" data-alt="Lago di Carezza diante do maciço do Latemar" data-name="Dolomitas"></figure></div>
-      <div class="strip"><figure class="shot kb" data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Lakefront_Lugano_2022.jpg/1280px-Lakefront_Lugano_2022.jpg" data-alt="Bancos vermelhos na orla de Lugano" data-name="Lugano"></figure></div>
+      <div class="strip"><figure class="shot kb" data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/RhB_ABe_8-12_with_Bernina_Express_at_Lago_Bianco.jpg/1280px-RhB_ABe_8-12_with_Bernina_Express_at_Lago_Bianco.jpg" data-alt="Bernina Express à beira do Lago Bianco" data-name="Bernina Express"></figure></div>
     </div>
     <div class="veil"></div>
     <div class="title-copy">
       <p class="kicker">Viagem em família, 8 pessoas</p>
       <h1>De Roma <em>aos Alpes</em></h1>
       <p class="dates">19 a 25 de novembro de 2026</p>
-      <p class="route"><span>Roma</span><i>→</i><span>Veneza</span><i>→</i><span>Dolomitas</span><i>→</i><span>Milão</span><i>→</i><span>Lugano</span><i>→</i><span>Roma</span></p>
+      <p class="route"><span>Roma</span><i>→</i><span>Veneza</span><i>→</i><span>Dolomitas</span><i>→</i><span>Bernina Express</span><i>→</i><span>Florença</span><i>→</i><span>Roma</span></p>
       <p class="hint">Use as setas do teclado, deslize ou toque nos botões para avançar.</p>
     </div>
   </section>
@@ -404,12 +386,13 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
   <section class="slide overview" data-theme="night" data-label="O roteiro" aria-label="O roteiro no mapa">
       <div class="ov-head">
         <h2>O roteiro</h2>
-        <p class="lede">Sete dias, dois países e oito pessoas, tudo de van: de Roma a Veneza, aos Alpes e de volta.</p>
+        <p class="lede">Sete dias, dois países e oito pessoas: de van até Veneza, Dolomitas e Florença, e de trem pelo Bernina Express até St. Moritz.</p>
       </div>
       <div class="ov-map" id="ovMap"></div>
       <div class="ov-body">
         <div class="legend">
-          <span><svg viewBox="0 0 44 12" aria-hidden="true"><line x1="2" y1="6" x2="42" y2="6" stroke="var(--route)" stroke-width="2.6" stroke-dasharray="6 5" stroke-linecap="round"/></svg>Van, de sábado a terça, ~2.000 km</span>
+          <span><svg viewBox="0 0 44 12" aria-hidden="true"><line x1="2" y1="6" x2="42" y2="6" stroke="var(--route)" stroke-width="2.6" stroke-dasharray="6 5" stroke-linecap="round"/></svg>Van, de sábado a quarta, ~1.900 km</span>
+          <span><svg viewBox="0 0 44 12" aria-hidden="true"><line x1="2" y1="6" x2="42" y2="6" stroke="var(--accent)" stroke-width="3.4" stroke-linecap="round"/></svg>Trem Bernina Express</span>
         </div>
         <ol class="legs" id="ovLegs"></ol>
         <p class="ov-hint" id="ovHint" aria-live="polite"></p>
@@ -426,11 +409,11 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
       <p class="lede">O essencial para curtir o fim de novembro sem sustos: frio, dias curtos e montanha.</p>
       <div class="climate">
         <div><b>7 a 15 °C</b><small>Roma, dias frescos e chuva possível</small></div>
-        <div><b>abaixo de 0 °C</b><small>Passos das Dolomitas, pode nevar</small></div>
-        <div><b>3 a 10 °C</b><small>Milão e Lugano, úmido e frio</small></div>
+        <div><b>abaixo de 0 °C</b><small>Passos das Dolomitas e St. Moritz, pode nevar</small></div>
+        <div><b>5 a 13 °C</b><small>Florença, fresco e úmido</small></div>
         <div><b>16h40</b><small>Já escurece por volta desse horário</small></div>
       </div>
-      <p class="alert"><b>Neve nos passos.</b> Costalunga e Sella podem fechar com neve; checar a condição das estradas no domingo de manhã. Alternativa: Lago di Carezza e Val Gardena pelo vale.</p>
+      <p class="alert"><b>Neve nos passos.</b> Costalunga, Sella e Tonale podem fechar com neve; checar a condição das estradas no domingo de manhã. Com previsão de neve, ir a Tirano pela rota baixa (Verona, Bergamo e Lecco, ~5h), saindo do Val Gardena às 17h.</p>
       <div class="pr-cols">
         <div>
           <h3>Reservas</h3>
@@ -438,8 +421,9 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
             <li>Traslado do aeroporto de Fiumicino (qui, 9h)</li>
             <li>Museus Vaticanos e Capela Sistina (sex, 8h)</li>
             <li>Concerto da Orquestra de Santa Cecilia (sex, 20h)</li>
-            <li>Van de 9 lugares, sáb a ter, retirada e devolução em Roma: dois motoristas, pneus de inverno ou correntes, cadeirinhas e autorização para entrar na Suíça</li>
-            <li>Hospedagem em Roma, Bolzano, Milão (com vaga para a van) e Roma (ao lado da Termini)</li>
+            <li>Bernina Express Tirano ↔ St. Moritz (seg); confirmar os horários no bilhete</li>
+            <li>Van de 9 lugares, sáb a qua, retirada em Roma e devolução no aeroporto de Fiumicino: dois motoristas, pneus de inverno ou correntes e cadeirinhas</li>
+            <li>Hospedagem em Roma, Bolzano, Tirano, Florença e Fiumicino, com vaga para a van</li>
           </ul>
         </div>
         <div>
@@ -450,26 +434,25 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
           <h3>Na mala</h3>
           <ul class="pack">
             <li>CNH, Permissão Internacional para Dirigir e cartão de crédito no nome do motorista</li>
-            <li>Passaportes de todos no dia de Lugano</li>
+            <li>Passaportes de todos no dia do Bernina Express</li>
             <li>Roupas de inverno para todos, em camadas</li>
             <li>Gorro e luvas para as crianças</li>
             <li>Bota com sola antiderrapante para neve e gelo</li>
             <li>Tênis confortável para as ruas de pedra de Roma</li>
             <li>Ombros e joelhos cobertos para entrar no Vaticano</li>
             <li>Guarda-chuva pequeno e óculos de sol (a neve reflete)</li>
-            <li>Adaptador de tomada (a Suíça usa um padrão diferente da Itália)</li>
           </ul>
         </div>
       </div>
       <div class="pr-road">
         <h3>Na estrada</h3>
         <ul class="checks">
-          <li><span><b>Dois motoristas</b> são praticamente obrigatórios; incluir os dois no aluguel.</span></li>
+          <li><span><b>Dois motoristas</b> são praticamente obrigatórios; incluir os dois no aluguel e revezar nas viagens noturnas de domingo e segunda.</span></li>
           <li><span><b>Pneus de inverno ou correntes</b> são obrigatórios nas Dolomitas a partir de 15/11.</span></li>
-          <li><span><b>Zonas restritas (ZTL):</b> não entrar de van nos centros de Roma, Milão e Bolzano; há multa por câmera.</span></li>
-          <li><span><b>Estacionamento:</b> em Veneza, só o Tronchetto aceita vans; em Milão, vaga para uma van de ~2 m de altura.</span></li>
-          <li><span><b>Suíça:</b> vinheta comprada na fronteira; passaportes de todos, sem carimbo na fronteira.</span></li>
-          <li><span><b>Terça é véspera do voo:</b> saída de Milão às 10h para ter margem em caso de trânsito.</span></li>
+          <li><span><b>Zonas restritas (ZTL):</b> não entrar de van nos centros de Roma, Bolzano e Florença; há multa por câmera. Em Florença, confirmar com o anfitrião onde estacionar.</span></li>
+          <li><span><b>Estacionamento:</b> Tirano, Florença e Fiumicino precisam de vaga para uma van de ~2 m de altura; em Veneza, só o Tronchetto aceita vans.</span></li>
+          <li><span><b>Suíça:</b> a van fica em Tirano e não entra na Suíça, então não precisa de vinheta; passaportes de todos no trem, sem carimbo na fronteira.</span></li>
+          <li><span><b>Check-in tarde:</b> Tirano no domingo (~22h) e Florença na segunda (~22h); avisar os anfitriões.</span></li>
         </ul>
       </div>
     </div>
@@ -479,37 +462,38 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
   <section class="slide practical costs" data-theme="night" data-label="Custos" aria-label="Custos de transporte e hospedagem">
     <div class="pr-wrap">
       <h2>Custos</h2>
-      <p class="lede">Valores para o grupo todo e por pessoa (dividido por 6), com câmbio de €1 = R$ 5,80.</p>
-      <div class="cost-total"><small>Total geral</small><b>R$ 14.047 a 15.247</b><span>R$ 2.342 a 2.542 por pessoa</span></div>
+      <p class="lede">Valores para o grupo todo, com câmbio de €1 = R$ 5,80.</p>
+      <div class="cost-total"><small>Total geral</small><b>R$ 17.285</b><span>Transporte R$ 8.833 e hospedagem R$ 8.452</span></div>
       <div class="cost-cols">
         <div>
           <h3>Transporte</h3>
           <table class="cost eur">
-            <thead><tr><th scope="col">Item</th><th scope="col">Euro</th><th scope="col">Real</th><th scope="col">Por pessoa</th></tr></thead>
+            <thead><tr><th scope="col">Item</th><th scope="col">Euro</th><th scope="col">Real</th></tr></thead>
             <tbody>
-              <tr><td>Van de 9 lugares, Roma → Roma</td><td>€333</td><td>R$ 1.931</td><td>R$ 322</td></tr>
-              <tr><td>Combustível e pedágios, ~2.000 km (estimativa)</td><td>~€450</td><td>R$ 2.610</td><td>R$ 435</td></tr>
-              <tr><td>Vinheta suíça</td><td>~€43</td><td>R$ 249</td><td>R$ 42</td></tr>
-              <tr><td>Estacionamentos: Veneza, Milão (2 noites) e Lugano (estimativa)</td><td>~€115</td><td>R$ 667</td><td>R$ 111</td></tr>
+              <tr><td>Van de 9 lugares, Roma → Fiumicino</td><td>€433</td><td>R$ 2.511</td></tr>
+              <tr><td>Combustível e pedágios, ~1.900 km (estimativa)</td><td>~€420</td><td>R$ 2.436</td></tr>
+              <tr><td>Estacionamentos: Veneza, Tirano e Florença (estimativa)</td><td>~€70</td><td>R$ 406</td></tr>
+              <tr><td>Bernina Express, Tirano ↔ St. Moritz</td><td>€600</td><td>R$ 3.480</td></tr>
             </tbody>
-            <tfoot><tr><th scope="row">Total transporte</th><td>~€941</td><td>R$ 5.458</td><td>R$ 910</td></tr></tfoot>
+            <tfoot><tr><th scope="row">Total transporte</th><td>~€1.523</td><td>R$ 8.833</td></tr></tfoot>
           </table>
         </div>
         <div>
           <h3>Hospedagem</h3>
           <table class="cost">
-            <thead><tr><th scope="col">Cidade e noites</th><th scope="col">Real</th><th scope="col">Por pessoa</th></tr></thead>
+            <thead><tr><th scope="col">Cidade e noites</th><th scope="col">Real</th></tr></thead>
             <tbody>
-              <tr><td>Roma, 19 e 20 nov (2 noites)</td><td>R$ 2.600–3.600</td><td>R$ 433–600</td></tr>
-              <tr><td>Bolzano, 21 nov (1 noite)</td><td>R$ 1.689</td><td>R$ 282</td></tr>
-              <tr><td>Milão, 22 e 23 nov (2 noites)</td><td>R$ 3.100–3.300</td><td>R$ 517–550</td></tr>
-              <tr><td>Roma, 24 nov (1 noite)</td><td>R$ 1.200</td><td>R$ 200</td></tr>
+              <tr><td><a href="https://www.airbnb.com.br/rooms/1648466020083221670?adults=6&amp;check_in=2026-11-19&amp;check_out=2026-11-21&amp;children=1&amp;guests=7&amp;infants=1&amp;search_mode=regular_search&amp;source_impression_id=p3_1792201785_P3QTDTXi_urQutzY&amp;previous_page_section_name=1001&amp;federated_search_id=113f036e-2489-42a9-8876-5c2ed43d6cad" target="_blank" rel="noopener">Roma</a>, 19 e 20 nov (2 noites)</td><td>R$ 2.600</td></tr>
+              <tr><td><a href="https://www.airbnb.com.br/s/Bolzano--Trentino~Alto-%C3%81dige--It%C3%A1lia/homes?search_type=autocomplete_click&amp;adults=6&amp;checkin=2026-11-21&amp;checkout=2026-11-22&amp;children=1&amp;date_picker_type=calendar&amp;guests=7&amp;infants=1&amp;ref_fsid=f6b58fe4-57c4-4825-bf7f-df1d95966fef&amp;ref_search_session_id=450eef2a-a2d6-4d2a-a629-eb1ba43bbe65&amp;refinement_paths%5B%5D=%2Fhomes&amp;flexible_trip_lengths%5B%5D=one_week&amp;monthly_start_date=2026-11-01&amp;monthly_length=3&amp;monthly_end_date=2027-02-01&amp;price_filter_input_type=2&amp;price_filter_num_nights=1&amp;channel=EXPLORE&amp;place_id=ChIJSXCeQSucgkcRKkOLNE9pK2U&amp;location_bb=QjoPzkE2FyJCOdonQTUEyA%3D%3D&amp;acp_id=dea7670a-be67-40ef-873f-44af4303b047" target="_blank" rel="noopener">Bolzano</a>, 21 nov (1 noite)</td><td>R$ 1.700</td></tr>
+              <tr><td><a href="https://www.airbnb.com.br/s/Tirano-Bernina-express-train-station--Tirano--Sondrio--It%C3%A1lia/homes?search_type=autocomplete_click&amp;adults=6&amp;checkin=2026-11-22&amp;checkout=2026-11-23&amp;children=1&amp;date_picker_type=calendar&amp;guests=7&amp;infants=1&amp;ref_fsid=113f036e-2489-42a9-8876-5c2ed43d6cad&amp;ref_search_session_id=6fed5d17-7c2c-4168-a077-0309288d9624&amp;refinement_paths%5B%5D=%2Fhomes&amp;flexible_trip_lengths%5B%5D=one_week&amp;monthly_start_date=2026-11-01&amp;monthly_length=3&amp;monthly_end_date=2027-02-01&amp;price_filter_input_type=2&amp;price_filter_num_nights=2&amp;channel=EXPLORE&amp;place_id=ChIJyefAfgC9g0cRYccwu16mYWU&amp;location_bb=QjjeO0EisXFCONt4QSKmZA%3D%3D&amp;acp_id=t-g-ChIJyefAfgC9g0cRYccwu16mYWU" target="_blank" rel="noopener">Tirano</a>, 22 nov (1 noite)</td><td>R$ 1.600</td></tr>
+              <tr><td><a href="https://www.airbnb.com.br/s/Floren%C3%A7a--It%C3%A1lia/homes?ref_fsid=50f6602d-0770-48d9-8a14-744f6ddb9523&amp;ref_search_session_id=fadfddb3-02a1-4599-92cd-328457c8a0e5&amp;place_id=ChIJrdbSgKZWKhMRAyrH7xd51ZM&amp;refinement_paths%5B%5D=%2Fhomes&amp;checkin=2026-11-23&amp;checkout=2026-11-24&amp;date_picker_type=calendar&amp;adults=6&amp;children=1&amp;infants=1&amp;guests=7&amp;search_type=AUTOSUGGEST" target="_blank" rel="noopener">Florença</a>, 23 nov (1 noite)</td><td>R$ 1.600</td></tr>
+              <tr><td><a href="https://www.airbnb.com.br/s/Aeroporto-Internacional-Leonardo-da-Vinci-FCO--Fiumicino--L%C3%A1cio--It%C3%A1lia/homes?acp_id=3a05240c-8996-4152-a9a5-e36a937f2915&amp;adults=6&amp;checkin=2026-11-24&amp;checkout=2026-11-25&amp;children=1&amp;date_picker_type=calendar&amp;guests=7&amp;infants=1&amp;ref_fsid=50f6602d-0770-48d9-8a14-744f6ddb9523&amp;ref_search_session_id=fadfddb3-02a1-4599-92cd-328457c8a0e5&amp;place_id=ChIJHxSYOHnwJRMRbzFY47QT5a8&amp;refinement_paths%5B%5D=%2Fhomes&amp;flexible_trip_lengths%5B%5D=one_week&amp;monthly_start_date=2026-11-01&amp;monthly_length=3&amp;monthly_end_date=2027-02-01&amp;search_mode=regular_search&amp;price_filter_input_type=2&amp;price_filter_num_nights=1&amp;channel=EXPLORE&amp;search_type=user_map_move&amp;zoom_level=12.349610164427045&amp;ne_lat=41.87282920490253&amp;ne_lng=12.383253808189124&amp;sw_lat=41.732434035627826&amp;sw_lng=12.1790447841897&amp;zoom=12.349610164427045&amp;search_by_map=true" target="_blank" rel="noopener">Fiumicino</a>, 24 nov (1 noite), perto do aeroporto</td><td>R$ 952</td></tr>
             </tbody>
-            <tfoot><tr><th scope="row">Total hospedagem</th><td>R$ 8.589–9.789</td><td>R$ 1.432–1.632</td></tr></tfoot>
+            <tfoot><tr><th scope="row">Total hospedagem (6 noites)</th><td>R$ 8.452</td></tr></tfoot>
           </table>
         </div>
       </div>
-      <p class="cost-note">O valor da van é de uma cotação anterior; refazer para sábado a terça, com correntes e cadeirinhas. Fora da conta: cadeirinhas, traslados do aeroporto de Roma, ingressos (Museus Vaticanos, Monte Brè) e o concerto.</p>
+      <p class="cost-note">Van cotada em €432,85, já com as cadeirinhas das crianças; confirmar se a cotação cobre até quarta às 9h, com devolução no aeroporto de Fiumicino, e se inclui correntes ou pneus de inverno. O link de Roma é de um anúncio específico; os de Bolzano, Tirano, Florença e Fiumicino são de buscas no Airbnb. Fora da conta: traslado do aeroporto no dia 19, ingressos (Museus Vaticanos) e o concerto.</p>
     </div>
   </section>
 
@@ -522,45 +506,6 @@ h1, h2, h3, p, ol, ul, figure { margin: 0; }
       <p>Sete dias, dois países, oito pessoas. Agora é só fazer as malas e contar os dias.</p>
       <button class="again" type="button" id="again">Ver desde o começo</button>
 
-    </div>
-  </section>
-
-  <!-- Plan B -->
-  <section class="slide practical planb" data-theme="night" data-label="Plano B" aria-label="Plano B: variações do plano">
-    <div class="pr-wrap">
-      <h2>Plano B</h2>
-      <p class="lede">Duas variações do plano, ainda tudo de van, de sábado a terça. Os dias 19 e 20 em Roma e o sábado até Bolzano não mudam; muda a distribuição das noites entre 22 e 24.</p>
-      <p class="alert"><b>Referência, plano atual.</b> Bolzano 1 noite (21), Milão 2 (22 e 23), Roma 1 (24). Domingo: Dolomitas e estrada até Milão; segunda: Lugano bate-volta; terça: Duomo e estrada até Roma. ~22h a 23h ao volante.</p>
-      <div class="vars">
-        <article class="var">
-          <header><span class="var-n">1</span><h3>Dormir nas Dolomitas no domingo</h3></header>
-          <p class="var-meta"><b>Noites:</b> Bolzano 2 (21 e 22), Milão 1 (23), Roma 1 (24).</p>
-          <table class="vt"><thead><tr><th scope="col">Dia</th><th scope="col">Programa</th></tr></thead><tbody>
-            <tr><td>Dom 22</td><td>Carezza, passos Costalunga e Sella, Selva e Ortisei sem hora para sair; volta a Bolzano antes de escurecer</td></tr>
-            <tr><td>Seg 23</td><td>Saída 7h30 direto para Lugano (~3h45, ~370 km); Monte Brè, almoço e orla; 16h30 estrada até Milão (~1h15)</td></tr>
-            <tr><td>Ter 24</td><td>Como no plano atual: Duomo de metrô e estrada até Roma</td></tr>
-          </tbody></table>
-          <ul class="var-pc">
-            <li><b>Ponto forte:</b> o domingo inteiro nas Dolomitas, com luz do dia; sem a estrada de domingo à noite até Milão.</li>
-            <li><b>Ponto fraco:</b> segunda começa cedo, com ~5h ao volante no dia; Lugano chega mais tarde (~11h30).</li>
-            <li><b>Custo:</b> parecido: 1 noite a mais em Bolzano (~R$ 1.689) e 1 a menos em Milão (~R$ 1.550–1.650).</li>
-          </ul>
-        </article>
-        <article class="var">
-          <header><span class="var-n">2</span><h3>Dormir em Lugano na segunda</h3></header>
-          <p class="var-meta"><b>Noites:</b> Bolzano 1 (21), Milão 1 (22), Lugano 1 (23), Roma 1 (24).</p>
-          <table class="vt"><thead><tr><th scope="col">Dia</th><th scope="col">Programa</th></tr></thead><tbody>
-            <tr><td>Seg 23</td><td>Saída de Milão com as malas; dia inteiro em Lugano, sem volta à noite</td></tr>
-            <tr><td>Ter 24</td><td>Saída 8h de Lugano para Roma (~7h, ~690 km; 8h com paradas); devolução da van no fim da tarde</td></tr>
-          </tbody></table>
-          <ul class="var-pc">
-            <li><b>Ponto forte:</b> uma noite na Suíça; Lugano sem pressa, inclusive à noite.</li>
-            <li><b>Ponto fraco:</b> terça mais longa ao volante, na véspera do voo; sem a manhã no Duomo de Milão.</li>
-            <li><b>Custo:</b> hospedagem em Lugano a cotar (costuma ser mais cara que Milão); 1 noite a menos de estacionamento em Milão.</li>
-          </ul>
-        </article>
-      </div>
-      <p class="alert combo"><b>As duas juntas.</b> Bolzano 2 noites (21 e 22), Lugano 1 (23), Roma 1 (24): domingo nas Dolomitas, segunda cedo direto para Lugano, terça de Lugano até Roma. Milão sai do roteiro; ~21h ao volante.</p>
     </div>
   </section>
 
@@ -633,7 +578,8 @@ const TIBER = [[41.94,12.466],[41.927,12.469],[41.9195,12.4675],[41.9165,12.4705
 const P = {
   roma:[41.90,12.50,"Roma"], veneza:[45.44,12.32,"Veneza"], bolzano:[46.50,11.35,"Bolzano"],
   carezza:[46.41,11.57,"Lago di Carezza"], canazei:[46.48,11.77,"Canazei"], ortisei:[46.57,11.67,"Ortisei"], selva:[46.56,11.76,"Selva"],
-  sella:[46.51,11.76,"Passo Sella"], milano:[45.48,9.20,"Milão"], lugano:[46.00,8.95,"Lugano"], fiumicino:[41.80,12.25,"Fiumicino"],
+  sella:[46.51,11.76,"Passo Sella"], tirano:[46.22,10.17,"Tirano"], stmoritz:[46.50,9.84,"St. Moritz"],
+  firenze:[43.77,11.25,"Florença"], fiumicino:[41.79,12.24,"Fiumicino"],
   trevi:[41.9009,12.4833,"Fontana di Trevi"], pantheon:[41.8986,12.4769,"Panteão"], navona:[41.8992,12.4731,"Piazza Navona"],
   musei:[41.9065,12.4536,"Museus Vaticanos"], sanpietro:[41.9022,12.4539,"São Pedro"], prati:[41.9068,12.4625,"Prati"],
   auditorium:[41.9290,12.4745,"Auditorium"]
@@ -647,11 +593,11 @@ const LEGS = {
   "canazei-sella":    { mode:"car", from:"canazei", to:"sella", via:[[46.495,11.775]] },
   "sella-selva":      { mode:"car", from:"sella", to:"selva", via:[[46.535,11.775]] },
   "selva-ortisei":    { mode:"car", from:"selva", to:"ortisei", via:[[46.565,11.72]] },
-  "ortisei-milano":   { mode:"car", from:"ortisei", to:"milano", via:[[46.59,11.57],[46.55,11.44],[46.50,11.35],[46.07,11.12],[45.70,10.98],[45.46,10.80],[45.54,10.22],[45.52,9.70]] },
-  "milano-lugano":    { mode:"car", from:"milano", to:"lugano", via:[[45.60,9.27],[45.81,9.08],[45.88,9.00]] },
-  "lugano-milano":    { mode:"car", from:"lugano", to:"milano", via:[[45.87,8.98],[45.80,9.05],[45.58,9.24]] },
-  "milano-roma":      { mode:"car", from:"milano", to:"roma", via:[[44.80,10.33],[44.45,11.47],[43.73,11.40],[42.72,12.24]] },
-  "roma-fiumicino":   { mode:"train", from:"roma", to:"fiumicino", via:[[41.87,12.46],[41.83,12.36]] },
+  "ortisei-tirano":   { mode:"car", from:"ortisei", to:"tirano", via:[[46.59,11.57],[46.55,11.44],[46.50,11.35],[46.43,11.22],[46.36,11.03],[46.30,10.80],[46.26,10.58],[46.17,10.35],[46.15,10.15]] },
+  "tirano-stmoritz":  { mode:"train", from:"tirano", to:"stmoritz", via:[[46.26,10.12],[46.32,10.06],[46.375,10.03],[46.41,10.02],[46.49,9.90]] },
+  "stmoritz-tirano":  { mode:"train", from:"stmoritz", to:"tirano", via:[[46.49,9.90],[46.41,10.02],[46.375,10.03],[46.32,10.06],[46.26,10.12]] },
+  "tirano-firenze":   { mode:"car", from:"tirano", to:"firenze", via:[[46.17,9.87],[46.14,9.55],[45.85,9.39],[45.60,9.45],[45.10,9.70],[44.80,10.33],[44.50,11.20],[44.05,11.25]] },
+  "firenze-fiumicino":{ mode:"car", from:"firenze", to:"fiumicino", via:[[43.45,11.60],[43.00,11.95],[42.55,12.25],[42.10,12.35],[41.90,12.30]] },
   "w-trevi-pantheon": { mode:"walk", from:"trevi", to:"pantheon", via:[] },
   "w-pantheon-navona":{ mode:"walk", from:"pantheon", to:"navona", via:[] },
   "w-musei-sanpietro":{ mode:"walk", from:"musei", to:"sanpietro", via:[[41.9045,12.4555]] },
@@ -659,7 +605,7 @@ const LEGS = {
   "prati-auditorium": { mode:"car", from:"prati", to:"auditorium", via:[[41.9150,12.4660],[41.9230,12.4700]] }
 };
 const TRIP = ["roma-veneza","veneza-bolzano","bolzano-carezza","carezza-canazei","canazei-sella",
-  "sella-selva","selva-ortisei","ortisei-milano","milano-lugano","lugano-milano","milano-roma"];
+  "sella-selva","selva-ortisei","ortisei-tirano","tirano-stmoritz","stmoritz-tirano","tirano-firenze","firenze-fiumicino"];
 
 /* =========================================================
    Projection + path helpers
@@ -917,48 +863,52 @@ const DAYS = [
   { theme:"dolo", n:"21", week:"Sábado", place:"Veneza e Bolzano", sub:"Dia de estrada: de Roma a Veneza, uma foto no Grand Canal e subida até Bolzano.",
     shots:[{ src:W+"a/a3/Canal_Grande_Chiesa_della_Salute_e_Dogana_dal_ponte_dell_Accademia.jpg/1280px-Canal_Grande_Chiesa_della_Salute_e_Dogana_dal_ponte_dell_Accademia.jpg", alt:"Grand Canal com a Basílica della Salute ao fundo", name:"Grand Canal", credit:"Foto: Wolfgang Moroder, CC BY-SA 3.0" },
       { src:W+"8/80/Grand_Canal_%2850443979376%29.jpg/1280px-Grand_Canal_%2850443979376%29.jpg", alt:"Grand Canal diante da igreja dos Scalzi, ao lado da estação Santa Lucia", name:"Santa Lucia", credit:"Foto: Kent Wang, CC BY-SA 2.0" }],
-    plan:[["7h30","Retirada da van em Roma (estação Termini ou aeroporto)"],["8h","Estrada Roma → Veneza (~5h30, 530 km), com parada para almoço perto de Bolonha"],
+    plan:[["7h30","Retirada da van em Roma"],["8h","Estrada Roma → Veneza (~5h30, 530 km), com parada para almoço perto de Bolonha"],
       ["14h15","Veneza: van no estacionamento do Tronchetto; foto no Grand Canal, a ~10 min a pé, perto da estação Santa Lucia",1],
       ["15h15","Estrada Veneza → Bolzano (~2h50); escurece às 16h35"],["18h15","Chegada e jantar em Bolzano"]],
     facts:["−3 a 6 °C","pôr do sol 16h35"], mapNote:"De van: Roma, Veneza e Bolzano",
     map:{ legs:["roma-veneza","veneza-bolzano"], pad:.12, duration:4200,
       stops:[{k:"roma",dx:8,dy:5},{k:"veneza",dx:8,dy:12},{k:"bolzano",dx:-8,dy:2,a:"end"}] } },
-  { theme:"dolo", n:"22", week:"Domingo", place:"Dolomitas e Milão", sub:"Lago di Carezza, os passos Costalunga e Sella, almoço em Selva, café em Ortisei e estrada até Milão.",
+  { theme:"dolo", n:"22", week:"Domingo", place:"Dolomitas e Tirano", sub:"Lago di Carezza, os passos Costalunga e Sella, almoço longo em Selva, Val Gardena até o pôr do sol e estrada até Tirano.",
     shots:[{ src:W+"3/3a/Lago_di_Carezza_and_Latemar%2C_Carezza%2C_Trentino-Alto_Adige%2C_Italy%2C_2025_October.jpg/1280px-Lago_di_Carezza_and_Latemar%2C_Carezza%2C_Trentino-Alto_Adige%2C_Italy%2C_2025_October.jpg", alt:"Águas verdes do Lago di Carezza com o maciço do Latemar", name:"Lago di Carezza", credit:"Foto: Ximonic (Simo Räsänen), CC BY-SA 4.0" },
       { src:W+"a/ac/Sassolungo_Langkofel_Val_Gardena_S%C3%BCdtirol_Alto_Adige_Italia_Italy_%282010.10.20%29.jpg/1280px-Sassolungo_Langkofel_Val_Gardena_S%C3%BCdtirol_Alto_Adige_Italia_Italy_%282010.10.20%29.jpg", alt:"O Sassolungo acima da Val Gardena", name:"Sassolungo", credit:"Foto: Geir Hval, CC BY-SA 4.0" },
       { src:"https://upload.wikimedia.org/wikipedia/commons/e/e7/Passo_Sella_-_verso_il_Sassolungo.jpg", alt:"Vista do Passo Sella em direção ao Sassolungo", name:"Passo Sella", credit:"Foto: Llorenzi, CC BY-SA 3.0" },
       { src:W+"4/48/Urtij%C3%ABi_Plajes_Saslonch.jpg/1280px-Urtij%C3%ABi_Plajes_Saslonch.jpg", alt:"Ortisei com o Sassolungo ao fundo", name:"Ortisei", credit:"Foto: Wolfgang Moroder, CC BY-SA 3.0" },
       { src:W+"0/0f/S%C3%ABlva_Wolkenstein_Selva_di_Val_Gardena_Sella_Saslonch.jpg/1280px-S%C3%ABlva_Wolkenstein_Selva_di_Val_Gardena_Sella_Saslonch.jpg", alt:"Selva di Val Gardena entre o Sella e o Sassolungo", name:"Selva di Val Gardena", credit:"Foto: Wolfgang Moroder, CC BY-SA 3.0" }],
-    plan:[["8h30","Saída de Bolzano"],["9h","Lago di Carezza"],["10h","Passo Costalunga e Val di Fassa até Canazei"],
-      ["11h45","Passo Sella (2.200 m): paredões de rocha e neve",1],["12h30","Almoço em Selva di Val Gardena"],["14h15","Ortisei: rua de pedestres, café e parquinho"],
-      ["16h30","Estrada até Milão (~3h30; trânsito de domingo à noite)"],["20h","Chegada a Milão, hospedagem perto da estação Centrale, com vaga para a van"]],
-    facts:["−5 a 4 °C","pôr do sol 16h38"], mapNote:"Van pelos passos; à tarde, estrada até Milão",
+    plan:[["8h30","Saída de Bolzano"],["9h","Lago di Carezza"],["9h45","Passo Costalunga e Val di Fassa"],
+      ["11h","Passo Sella (2.200 m): paredões de rocha e neve",1],["12h","Almoço longo em Selva di Val Gardena"],["14h","Ortisei e Val Gardena até o pôr do sol (16h35)"],
+      ["17h","Jantar cedo no Val Gardena"],
+      ["18h","Estrada até Tirano (~4h pelo Passo del Tonale; com previsão de neve, rota baixa por Verona, Bergamo e Lecco, ~5h, saindo às 17h)"],["22h","Chegada a Tirano"]],
+    facts:["−5 a 4 °C","pôr do sol 16h35"], mapNote:"Van pelos passos; à noite, estrada até Tirano",
     map:{ legs:["bolzano-carezza","carezza-canazei","canazei-sella","sella-selva","selva-ortisei"], pad:.15, duration:4600, minLeg:450,
       stops:[{k:"bolzano",dx:-8,dy:2,a:"end"},{k:"carezza",dx:-6,dy:14,a:"end",minor:true,name:"Lago di Carezza"},{k:"canazei",dx:8,dy:12,minor:true},{k:"sella",dx:10,dy:4,minor:true},{k:"selva",dx:8,dy:-6,minor:true},{k:"ortisei",dx:-6,dy:-8,a:"end",minor:true}] } },
-  { theme:"lake", n:"23", week:"Segunda-feira", place:"Lugano, Suíça", sub:"Bate-volta de van: funicular, lago e centro antigo. Passaportes na mão!",
+  { theme:"lake", n:"23", week:"Segunda-feira", place:"Bernina Express", sub:"De trem pelos Alpes até St. Moritz e de volta a Tirano; à tarde, estrada até Florença. Passaportes na mão!",
     shots:[
-      { src:W+"5/50/Lakefront_Lugano_2022.jpg/1280px-Lakefront_Lugano_2022.jpg", alt:"Bancos vermelhos na orla do Lago de Lugano", name:"Lugano", credit:"Foto: Ivo Kruusamägi, CC BY-SA 4.0" },
-      { src:W+"b/b3/View_of_Lake_Lugano_and_Monte_Br%C3%A8_02.jpg/1280px-View_of_Lake_Lugano_and_Monte_Br%C3%A8_02.jpg", alt:"Lago de Lugano e o Monte Brè", name:"Monte Brè", credit:"Foto: John Samuel, CC BY-SA 4.0" },
-      { src:W+"5/59/Lakefront_Lugano_2017-05-29_12.57.39.jpg/1280px-Lakefront_Lugano_2017-05-29_12.57.39.jpg", alt:"Calçadão arborizado à beira do lago em Lugano", name:"Lugano", credit:"Foto: Chris j wood, CC BY-SA 4.0" }],
-    plan:[["9h","Estrada Milão → Lugano (~1h15); vinheta suíça na fronteira; levar passaportes"],["10h30","Monte Brè de funicular",1],["12h30","Almoço e Via Nassa"],
-      ["14h30","Orla do lago e Parco Ciani (pôr do sol às 16h40)"],["17h","Volta a Milão (chegada ~18h15)"],["19h30","Jantar em Milão"]],
-    facts:["3 a 10 °C","pôr do sol 16h40"], mapNote:"Van de ida e volta",
-    map:{ legs:["milano-lugano","lugano-milano"], pad:.25, minLeg:900,
-      stops:[{k:"milano",dx:8,dy:6},{k:"lugano",dx:-8,dy:-6,a:"end"}] } },
-  { theme:"night", n:"24", week:"Terça-feira", place:"Milão e Roma", sub:"Duomo cedo, de metrô, e estrada de volta a Roma.",
-    shots:[{ src:W+"5/5b/Milan_Cathedral%2C_Fa%C3%A7ade%2C_2025.jpg/1280px-Milan_Cathedral%2C_Fa%C3%A7ade%2C_2025.jpg", alt:"Fachada do Duomo de Milão", name:"Duomo de Milão", credit:"Foto: Julian Lupyan, CC0" },
-      { src:W+"9/98/Galleria_Vittorio_Emanuele_Interno.jpg/1280px-Galleria_Vittorio_Emanuele_Interno.jpg", alt:"Interior da Galleria Vittorio Emanuele II", name:"Galleria Vittorio Emanuele II", credit:"Foto: Maurizio Moro5153, CC BY-SA 4.0" }],
-    plan:[["8h30","Duomo e Galleria Vittorio Emanuele II, de metrô (não entrar de van no centro: Área C)",1],["10h","Estrada Milão → Roma (~6h, 575 km; 7h com paradas)"],
-      ["13h","Almoço no caminho, perto de Florença"],["17h30","Devolução da van em Roma"],["19h30","Último jantar; hotel ao lado da estação Termini"]],
-    facts:["4 a 11 °C","pôr do sol 16h44"], mapNote:"Van de Milão a Roma",
-    map:{ legs:["milano-roma"], pad:.12,
-      stops:[{k:"milano",dx:8,dy:6},{k:"roma",dx:8,dy:5}] } },
-  { theme:"rome", n:"25", week:"Quarta-feira", place:"Hora de voltar", sub:"Arrivederci, Roma. Voltamos com a mala cheia de histórias.",
+      { src:W+"0/0b/RhB_ABe_8-12_with_Bernina_Express_at_Lago_Bianco.jpg/1280px-RhB_ABe_8-12_with_Bernina_Express_at_Lago_Bianco.jpg", alt:"Bernina Express à beira do Lago Bianco", name:"Bernina Express", credit:"Foto: Kabelleger / David Gubler, CC BY-SA 4.0" },
+      { src:W+"4/46/Valposchiavo-Brusio_spiral_viaduct-02E.jpg/1280px-Valposchiavo-Brusio_spiral_viaduct-02E.jpg", alt:"Viaduto helicoidal de Brusio", name:"Viaduto de Brusio", credit:"Foto: Rikki Mitterer, CC BY-SA 4.0" },
+      { src:W+"e/e1/Bernina-Express-Station_Alp_Gr%C3%BCm_-_panoramio.jpg/1280px-Bernina-Express-Station_Alp_Gr%C3%BCm_-_panoramio.jpg", alt:"Estação de Alp Grüm", name:"Alp Grüm", credit:"Foto: giggel, CC BY 3.0" },
+      { src:W+"7/78/Lake_St._Moritz_and_St._Moritz_town.jpg/1280px-Lake_St._Moritz_and_St._Moritz_town.jpg", alt:"Lago e vila de St. Moritz", name:"St. Moritz", credit:"Foto: Etiaetia1020, CC BY-SA 3.0" }],
+    plan:[["~10h","Bernina Express Tirano → St. Moritz (~2h20); a van fica estacionada em Tirano; levar passaportes",1],["~12h20","St. Moritz: lago, vila e almoço"],
+      ["~14h","Bernina Express St. Moritz → Tirano (chega ~16h20), com a descida pelo Passo Bernina, Alp Grüm e o viaduto de Brusio ainda com luz"],
+      ["16h45","Estrada Tirano → Florença (~5h)"],["~22h","Chegada a Florença"]],
+    facts:["−6 a 3 °C","pôr do sol 16h45"], mapNote:"Trem de ida e volta; horários a confirmar no bilhete",
+    map:{ legs:["tirano-stmoritz","stmoritz-tirano"], pad:.3, minLeg:1200,
+      stops:[{k:"tirano",dx:8,dy:6},{k:"stmoritz",dx:8,dy:16}] } },
+  { theme:"rome", n:"24", week:"Terça-feira", place:"Florença e Fiumicino", sub:"Manhã no centro de Florença e estrada até a última noite, perto do aeroporto.",
+    shots:[{ src:W+"7/77/Florence_Duomo_from_Michelangelo_hill.jpg/1280px-Florence_Duomo_from_Michelangelo_hill.jpg", alt:"O Duomo de Florença visto do alto", name:"Duomo de Florença", credit:"Foto: Petar Milošević, CC BY-SA 4.0" },
+      { src:W+"2/2f/Ponte_Vecchio_from_Ponte_Santa_Trinita_Blue_hour.jpg/1280px-Ponte_Vecchio_from_Ponte_Santa_Trinita_Blue_hour.jpg", alt:"Ponte Vecchio sobre o rio Arno ao anoitecer", name:"Ponte Vecchio", credit:"Foto: Commonists, CC BY-SA 4.0" }],
+    plan:[["9h","Duomo, Batistério, Ponte Vecchio e Piazza della Signoria",1],["12h30","Almoço em Florença"],["14h","Estrada Florença → Fiumicino (~3h)"],
+      ["17h30","Chegada à hospedagem perto do aeroporto"],["19h30","Jantar de frutos do mar na cidade de Fiumicino"]],
+    facts:["5 a 13 °C","pôr do sol 16h45"], mapNote:"Van de Florença a Fiumicino",
+    map:{ legs:["firenze-fiumicino"], pad:.12,
+      stops:[{k:"firenze",dx:8,dy:5},{k:"fiumicino",dx:-8,dy:14,a:"end"}] } },
+  { theme:"rome", n:"25", week:"Quarta-feira", place:"Hora de voltar", sub:"Arrivederci, Itália. Voltamos com a mala cheia de histórias.",
     shots:[{ src:W+"5/5b/Colosseum_of_Rome%2C_Italy.jpg/1280px-Colosseum_of_Rome%2C_Italy.jpg", alt:"Coliseu ao entardecer", name:"Arrivederci, Roma", credit:"Foto: Wilfredor, CC0" }],
-    plan:[["8h30","Trem Leonardo Express até o aeroporto de Fiumicino"],["12h","Voo de volta ao Brasil",1]],
-    facts:["7 a 15 °C","boa viagem!"], mapNote:"Trem até o aeroporto",
-    map:{ legs:["roma-fiumicino"], pad:.35, context:false,
-      stops:[{k:"roma",dx:8,dy:5},{k:"fiumicino",dx:-8,dy:16,a:"end"}] } }
+    plan:[["9h","Devolução da van no aeroporto de Fiumicino"],["12h","Voo de volta ao Brasil",1]],
+    facts:["7 a 15 °C","boa viagem!"], mapNote:"O trajeto completo",
+    map:{ legs:TRIP, pad:.06, duration:5200, minLeg:250, context:false,
+      stops:[{k:"roma",dx:9,dy:5},{k:"veneza",dx:9,dy:5},{k:"bolzano",dx:8,dy:-6},{k:"tirano",dx:6,dy:14},{k:"stmoritz",dx:-8,dy:-6,a:"end"},
+        {k:"firenze",dx:9,dy:5},{k:"fiumicino",dx:-8,dy:12,a:"end"}] } }
 ];
 
 const ICON_T = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 14.8V4.5a2 2 0 1 0-4 0v10.3a4 4 0 1 0 4 0z"/></svg>`;
@@ -1003,9 +953,10 @@ const GROUPS = [
   { t:"Roma → Veneza", mode:"car", d:"≈ 5h30", legs:["roma-veneza"] },
   { t:"Veneza → Bolzano", mode:"car", d:"≈ 2h50", legs:["veneza-bolzano"] },
   { t:"Carezza, Sella e Val Gardena", mode:"car", d:"domingo cedo", legs:["bolzano-carezza","carezza-canazei","canazei-sella","sella-selva","selva-ortisei"] },
-  { t:"Ortisei → Milão", mode:"car", d:"≈ 3h30", legs:["ortisei-milano"] },
-  { t:"Milão ↔ Lugano", mode:"car", d:"bate-volta", legs:["milano-lugano","lugano-milano"] },
-  { t:"Milão → Roma", mode:"car", d:"≈ 6h", legs:["milano-roma"] }
+  { t:"Ortisei → Tirano", mode:"car", d:"≈ 4h", legs:["ortisei-tirano"] },
+  { t:"Tirano ↔ St. Moritz", mode:"train", d:"Bernina Express", legs:["tirano-stmoritz","stmoritz-tirano"] },
+  { t:"Tirano → Florença", mode:"car", d:"≈ 5h", legs:["tirano-firenze"] },
+  { t:"Florença → Fiumicino", mode:"car", d:"≈ 3h", legs:["firenze-fiumicino"] }
 ];
 // Leg index where each group starts: step k means groups [0, k) are drawn.
 const GSTART = [0]; GROUPS.forEach(g => GSTART.push(GSTART[GSTART.length - 1] + g.legs.length));
@@ -1019,7 +970,7 @@ const ovMap = buildMap({
   stops: [
     {k:"roma",dx:9,dy:5},{k:"veneza",dx:9,dy:5},{k:"bolzano",dx:-8,dy:2,a:"end"},{k:"carezza",label:false,minor:true},{k:"canazei",label:false,minor:true},
     {k:"ortisei",label:false,minor:true},{k:"selva",dx:8,dy:-8,name:"Dolomitas"},{k:"sella",label:false,minor:true},
-    {k:"milano",dx:9,dy:12},{k:"lugano",dx:-8,dy:-6,a:"end"}
+    {k:"tirano",dx:7,dy:14},{k:"stmoritz",dx:-8,dy:-6,a:"end"},{k:"firenze",dx:9,dy:5},{k:"fiumicino",dx:-8,dy:12,a:"end"}
   ],
   onResize: () => ovMap.showUpTo(GSTART[ovStep])
 });
@@ -1054,9 +1005,9 @@ const MODE_SVG = {
   car: `<svg viewBox="0 0 26 10" aria-hidden="true"><line x1="2" y1="5" x2="24" y2="5" stroke="var(--route)" stroke-width="2.4" stroke-dasharray="5 4" stroke-linecap="round"/></svg>`
 };
 const TIMES = [
-  ["Sáb 21: Roma → Veneza → Bolzano","car","≈ 8h30"],["Dom 22: passos das Dolomitas → Milão","car","≈ 5h"],
-  ["Seg 23: Milão ↔ Lugano","car","≈ 2h30"],["Ter 24: Milão → Roma","car","≈ 6h a 7h"],
-  ["Qua 25: Roma → Fiumicino, de trem","train","≈ 30 min"],["Total ao volante","sum","≈ 22h a 23h"]
+  ["Sáb 21: Roma → Veneza → Bolzano","car","≈ 8h30"],["Dom 22: passos das Dolomitas → Tirano","car","≈ 5h30"],
+  ["Seg 23: Bernina Express, ida e volta","train","≈ 4h40"],["Seg 23: Tirano → Florença","car","≈ 5h"],
+  ["Ter 24: Florença → Fiumicino","car","≈ 3h"],["Total ao volante","sum","≈ 22h"]
 ];
 document.getElementById("times").innerHTML = TIMES.map(([t, m, d]) => `<li${m === "sum" ? ' class="sum"' : ""}><span>${MODE_SVG[m] || ""}${t}</span><b>${d}</b></li>`).join("");
 
